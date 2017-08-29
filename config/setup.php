@@ -18,9 +18,37 @@ function connect($DB_DSN, $DB_USER, $DB_PASSWORD)
 }
 
 function create_db(PDO $db) {
+    $create_query = "CREATE DATABASE IF NOT EXISTS camagru; USE camagru";
 
-    $create_query = "loll";
-    $db->query($create_query);
+    $user_query = "CREATE TABLE IF NOT EXISTS user (
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+    login VARCHAR(30) NOT NULL,
+    password VARCHAR(30) NOT NULL,
+    email VARCHAR(50) NOT NULL)";
+
+    $image_query = "CREATE TABLE IF NOT EXISTS image (
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id INT(6) UNSIGNED NOT NULL,
+    rating INT(6) NOT NULL,
+    path VARCHAR(100) NOT NULL)";
+
+    $comment_query = "CREATE TABLE IF NOT EXISTS comment (
+    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    image_id INT(6) UNSIGNED NOT NULL,
+    text VARCHAR(300) NOT NULL,
+    date TIMESTAMP)";
+
+    try {
+        $db->exec($create_query);
+        $db->exec($user_query);
+        $db->exec($image_query);
+        $db->exec($comment_query);
+    }
+    catch (PDOException $err) {
+        echo 'Creation failed: ' . $err->getMessage() . PHP_EOL;
+        exit;
+    }
+    print ("Database 'camagru' has been created" . PHP_EOL);
 }
 
 $db = connect($DB_DSN, $DB_USER, $DB_PASSWORD);
@@ -30,7 +58,14 @@ if ($db) {
     print ("Type 're' to re-create the database or press 'Enter' to exit:" . PHP_EOL);
     $r = trim(fgets(STDIN));
     if ($r == "re") {
-        $db->query("");
+        try {
+        $db->exec("DROP DATABASE IF EXISTS camagru");}
+        catch (PDOException $err) {
+            echo 'Deletion failed: ' . $err->getMessage() . PHP_EOL;
+            exit;
+        }
+        print ("Database 'camagru' has been deleted" . PHP_EOL);
+        create_db($db);
     }
 }
 else {
@@ -40,7 +75,7 @@ else {
     } while ($r != 'y' && $r != 'n');
     if ($r == 'n')
         exit;
-    $db = connect(str_replace("dbname=test;", "", $DB_DSN), $DB_USER, $DB_PASSWORD);
+    $db = connect(str_replace("dbname=camagru;", "", $DB_DSN), $DB_USER, $DB_PASSWORD);
     if ($db)
         create_db($db);
 }
