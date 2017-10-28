@@ -1,6 +1,10 @@
 <?php
 
 return array(
-    'gallery' => 'gallery'
-
+    'gallery/([0-9]+)' => 'gallery/view/$1',
+    'gallery' => 'gallery/index',
+    'autentification' => 'autentification/index',
+    'recovery' => 'recovery/index',
+    //'' => 'selfie/index',
+    'selfie' => 'selfie/index'
 );
