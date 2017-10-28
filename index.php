@@ -1,5 +1,6 @@
 <?php
 //Front controller
+echo 'kek';
 
 //General settings
 ini_set('display_errors', 1);
