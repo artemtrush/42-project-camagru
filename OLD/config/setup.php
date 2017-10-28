@@ -69,7 +69,7 @@ if ($db) {
     }
 }
 else {
-    print ("Сreate a database? (y|n):" . PHP_EOL);
+    print ("Create a database? (y|n):" . PHP_EOL);
     do {
         $r = trim(fgets(STDIN));
     } while ($r != 'y' && $r != 'n');

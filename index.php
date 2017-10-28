@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>insta 42</title>
+<?php
+//Front controller
 
-    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
+//General settings
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
-    <link href="./css/reset.css" rel="stylesheet" type="text/css">
-    <link href="./css/style.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-    <?php require_once  "./blocks/header.php"?>
+//Connecting files
+define('ROOT', __DIR__);
+require_once (ROOT.'/components/Router.php');
 
-    <div style="height: 1400px">    </div>
+//Connection to the
 
-    <?php require_once  "./blocks/footer.php"?>
-</body>
-</html>
+//Call Router
+$router = new Router();
+$router->run();
