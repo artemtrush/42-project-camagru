@@ -3,6 +3,7 @@
 class Router
 {
     private $routes;
+    private $request_status = false;
 
     public function __construct()
     {
@@ -10,11 +11,19 @@ class Router
         $this->routes = include($routPath);
     }
 
+    private function  error404()
+    {
+        header("HTTP/1.0 404 Not Found");
+        include(ROOT.'/views/error404.html');
+        exit;
+    }
+
     private function getURI()
     {
         if (!empty($_SERVER['REQUEST_URI'])) {
             return trim($_SERVER['REQUEST_URI'], '/');
         }
+        return null;
     }
 
     public function run()
@@ -24,13 +33,35 @@ class Router
         //Check the value of the request
         foreach ($this->routes as $pattern => $path)
         {
-            echo $uri.PHP_EOL;
-            echo $pattern .PHP_EOL;
-            if (preg_match("~$pattern~", $uri))
-                echo "+";
+            if (preg_match("~{$pattern}/?$~", $uri))
+            {
+                $internalRoute = preg_replace("~{$pattern}~", $path, $uri);
+
+                //Determine controller, action, params
+                $segments = explode('/', $internalRoute);
+
+                $controllerName = ucfirst(array_shift($segments).'Controller');
+                $actionName = 'action'.ucfirst(array_shift($segments));
+                $params = $segments;
+
+                //Connecting controller class
+                $controllerFile = ROOT.'/controllers/'.$controllerName.'.php';
+                if (file_exists($controllerFile))
+                    require_once($controllerFile);
+                else
+                    $this->error404();
+                //Create controller object
+                $controllerObject = new $controllerName;
+
+                //Call controller's action
+                $result = call_user_func_array(array($controllerObject, $actionName), $params);
+                if ($result) {
+                    $this->request_status = true;
+                    break;
+                }
+            }
         }
-
-        //
+        if ($this->request_status == false)
+            $this->error404();
     }
-
 }
