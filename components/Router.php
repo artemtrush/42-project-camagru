@@ -14,7 +14,7 @@ class Router
     private function  error404()
     {
         header("HTTP/1.0 404 Not Found");
-        include(ROOT.'/views/error404.html');
+        include(ROOT . '/views/error/error404.html');
         exit;
     }
 
@@ -30,13 +30,13 @@ class Router
     {
         //Get request string
         $uri = $this->getURI();
+
         //Check the value of the request
         foreach ($this->routes as $pattern => $path)
         {
-            if (preg_match("~{$pattern}/?$~", $uri))
+            if (preg_match("~(/|^){$pattern}/?$~", $uri))
             {
                 $internalRoute = preg_replace("~{$pattern}~", $path, $uri);
-
                 //Determine controller, action, params
                 $segments = explode('/', $internalRoute);
 
@@ -47,7 +47,7 @@ class Router
                 //Connecting controller class
                 $controllerFile = ROOT.'/controllers/'.$controllerName.'.php';
                 if (file_exists($controllerFile))
-                    require_once($controllerFile);
+                    include_once($controllerFile);
                 else
                     $this->error404();
                 //Create controller object

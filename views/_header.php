@@ -1,25 +1,25 @@
 <header>
 
     <div>
-        <a href="#">
+        <a class="menu" href="#">
             Selfie
         </a>
     </div>
 
     <div>
-        <a href="#">
+        <a class="menu" href="#">
             Gallery
         </a>
     </div>
 
     <div>
-        <a href="#">
+        <a class="menu" href="#">
             Search
         </a>
     </div>
 
     <div>
-        <a href="authorization.php">
+        <a class="menu" href="#">
             Sign Out
         </a>
     </div>

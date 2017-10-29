@@ -11,12 +11,12 @@ body {
 
 /*style for header*/
 
-a {
+.menu {
     color: #5F5E5E;
     transition: all.6s ease; /* Скорость анимации наведения */
 }
 
-a:hover {
+.menu:hover {
     color: #FBBA00;
     transition: all.6s ease; /* Скорость анимации наведения */
 }

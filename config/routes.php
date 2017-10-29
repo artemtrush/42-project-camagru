@@ -5,6 +5,6 @@ return array(
     'gallery' => 'gallery/index',
     'autentification' => 'autentification/index',
     'recovery' => 'recovery/index',
-    //'' => 'selfie/index',
-    'selfie' => 'selfie/index'
+    'selfie' => 'selfie/index',
+    '' => 'selfie/index'
 );

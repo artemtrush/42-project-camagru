@@ -1,10 +1,12 @@
 <?php
 
+include_once (ROOT.'/models/Selfie.php');
+
 class SelfieController
 {
     public function actionIndex()
     {
-
-       return true;
+        require_once(ROOT.'/views/selfie/index.php');
+        return true;
     }
 }

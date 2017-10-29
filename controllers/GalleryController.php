@@ -1,5 +1,7 @@
 <?php
 
+include_once (ROOT.'/models/Gallery.php');
+
 class GalleryController
 {
     public function actionIndex()

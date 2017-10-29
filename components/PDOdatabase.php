@@ -1,8 +1,8 @@
 <?php
 
-require_once(ROOT.'/config/database.php');
+include_once(ROOT.'/config/database.php');
 
-class DB
+abstract class DB
 {
     private static $db = null;
     private static $connect_error_mode = true;
@@ -11,13 +11,13 @@ class DB
     {
         if (self::$db == null)
         {
-            /*
-            * ATTR_ERRMODE - Режим сообщений об ошибках.
-            * ERRMODE_EXCEPTION - Выбрасывать исключения.
-            */
             try
             {
                 self::$db = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+                /*
+                * ATTR_ERRMODE - Режим сообщений об ошибках.
+                * ERRMODE_EXCEPTION - Выбрасывать исключения.
+                */
                 self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
             catch (PDOException $error)
