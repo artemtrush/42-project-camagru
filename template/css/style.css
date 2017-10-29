@@ -9,15 +9,6 @@ body {
     font-family: sans-serif;
 }
 
-/*input status*/
-.negative_status {
-    color: red;
-}
-
-.positive_status {
-    color: green;
-}
-
 /*style for header*/
 .menu {
     color: #5F5E5E;

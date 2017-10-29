@@ -13,14 +13,16 @@
     <script src="/template/js/autentification.js"></script>
 </head>
 <body>
-
+<!--Start values-->
 <script type="text/javascript">
-    //action selection
-    var sign_in_string = 'Sign in';
-    var sign_up_string = 'Sign up';
-    var form_status = sign_in_string;
+    //  action selection
+    //  false = sign in
+    //  true = sign up
+    var sign_mode = true;
 </script>
 
+
+<!--Username and Password input-->
 <input type="text" name="login" id="login" placeholder="Enter username"
        onkeyup="checkLogin(this, document.getElementById('login_status'))"
        onblur="isEmpty(this, document.getElementById('login_status'))">
@@ -28,21 +30,26 @@
 <br>
 <input type="password" name="pass" id="pass" placeholder="Enter password">
 <br>
-<input type="button" id="forgot" value="forgot">
+<input type="button" id="forgot" value="Forgot pass">
 <input type="button" id="sign" value="">
-<input type="button" id="switch" value="">
+<input type="button" id="switch" value="" onclick="switch_sign(document.getElementById('sign'),
+        document.getElementById('switch'), document.getElementById('drop_down_sign_up'))">
 <br>
-<input type="email" name="mail" id="mail" placeholder="Enter email">
-<br>
-<input type="password" name="confirm" id="confirm" placeholder="Confirm password">
-<br>
+
+
+<!-- Drop-down sign up-->
+<div style="visibility: hidden;" id="drop_down_sign_up">
+    <input type="email" name="mail" id="mail" placeholder="Enter email">
+    <br>
+    <input type="password" name="confirm" id="confirm" placeholder="Confirm password">
+    <br>
+</div>
 
 <?php require_once (ROOT.'/views/_footer.php')?>
 
 <script>
-    //set default values
-    document.getElementById('sign').value = sign_in_string;
-    document.getElementById('switch').value = sign_up_string;
+    switch_sign(document.getElementById('sign'),
+        document.getElementById('switch'), document.getElementById('drop_down_sign_up'));
     /*
     var request = new XMLHttpRequest();
 
