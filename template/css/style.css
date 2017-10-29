@@ -9,8 +9,16 @@ body {
     font-family: sans-serif;
 }
 
-/*style for header*/
+/*input status*/
+.negative_status {
+    color: red;
+}
 
+.positive_status {
+    color: green;
+}
+
+/*style for header*/
 .menu {
     color: #5F5E5E;
     transition: all.6s ease; /* Скорость анимации наведения */
@@ -49,7 +57,6 @@ header div {
 }
 
 /*style for footer*/
-
 footer {
     width: 100%;
     min-height: 50px;
