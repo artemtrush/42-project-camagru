@@ -6,7 +6,7 @@ class AutentificationController
 {
     public function actionIndex()
     {
-
+        require_once(ROOT.'/views/autentification/index.php');
         return true;
     }
 }

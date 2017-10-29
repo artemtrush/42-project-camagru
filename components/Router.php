@@ -36,10 +36,14 @@ class Router
         {
             if (preg_match("~(/|^){$pattern}/?$~", $uri))
             {
+                //Authentication check
+                session_start();
+                if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id']))
+                    $path =  $this->routes['autentification'];
+
                 $internalRoute = preg_replace("~{$pattern}~", $path, $uri);
                 //Determine controller, action, params
                 $segments = explode('/', $internalRoute);
-
                 $controllerName = ucfirst(array_shift($segments).'Controller');
                 $actionName = 'action'.ucfirst(array_shift($segments));
                 $params = $segments;
