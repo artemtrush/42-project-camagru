@@ -19,6 +19,7 @@ abstract class DB
                 * ERRMODE_EXCEPTION - Выбрасывать исключения.
                 */
                 self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                self::$db->exec("SET NAMES UTF8");
             }
             catch (PDOException $error)
             {

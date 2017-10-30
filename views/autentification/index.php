@@ -19,6 +19,8 @@
     //  false = sign in
     //  true = sign up
     var sign_mode = true;
+    var pos_color = 'green';
+    var neg_color = 'red';
 </script>
 
 
@@ -27,9 +29,13 @@
        onkeyup="checkLogin(this, document.getElementById('login_status'))"
        onblur="isEmpty(this, document.getElementById('login_status'))">
 <span id="login_status"></span>
+
 <br>
+
 <input type="password" name="pass" id="pass" placeholder="Enter password">
+
 <br>
+
 <input type="button" id="forgot" value="Forgot pass">
 <input type="button" id="sign" value="">
 <input type="button" id="switch" value="" onclick="switch_sign(document.getElementById('sign'),
