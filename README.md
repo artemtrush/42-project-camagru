@@ -1,2 +1,2 @@
 # camagru
-camagru project
+camagru project.
