@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('ROOT'))
+    define('ROOT', dirname(__DIR__));
 include_once(ROOT.'/config/database.php');
 
 abstract class DB
@@ -19,6 +21,8 @@ abstract class DB
                 * ERRMODE_EXCEPTION - Выбрасывать исключения.
                 */
                 self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                self::$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+                //отключить клиент-серверную эмуляцию подготавливаемых запросов
                 self::$db->exec("SET NAMES UTF8");
             }
             catch (PDOException $error)
@@ -82,6 +86,16 @@ abstract class DB
             }
         }
         return false;
+    }
+
+    public static function query($query_string, $params = array())
+    {
+        $database = self::get();
+        $request = $database->prepare($query_string);
+        foreach ($params as $item)
+            $item = htmlspecialchars($item);
+        $request->execute($params);
+        return $request->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function get()

@@ -31,8 +31,9 @@ function checkLogin(input, status)
         var request = getXMLHttpRequest();
         request.onreadystatechange = function()
         {
-            if (request.readyState == 4)
+            if (request.readyState === 4)
             {
+                console.log('kek');
                 console.log(request.responseText);
                 /*
                 if (request.responseText)
@@ -47,7 +48,7 @@ function checkLogin(input, status)
                 }
                 */
             }
-        }
+        };
         request.open('POST', '/template/js/autentification.php', true);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         request.send('username=' + string);

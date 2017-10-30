@@ -56,19 +56,7 @@
 <script>
     switch_sign(document.getElementById('sign'),
         document.getElementById('switch'), document.getElementById('drop_down_sign_up'));
-    /*
-    var request = new XMLHttpRequest();
 
-    request.onreadystatechange = function() {
-        if (request.readyState === 4 && request.status === 200)
-            alert(request.responseText);
-    };
-
-    function update(object)
-    {
-
-    }
-    */
 </script>
 
 </body>
