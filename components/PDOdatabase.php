@@ -88,14 +88,16 @@ abstract class DB
         return false;
     }
 
-    public static function query($query_string, $params = array())
+    public static function query($query_string, $params = array(), $fetch_mode = true)
     {
         $database = self::get();
         $request = $database->prepare($query_string);
         foreach ($params as $item)
             $item = htmlspecialchars($item);
         $request->execute($params);
-        return $request->fetchAll(PDO::FETCH_ASSOC);
+        if ($fetch_mode)
+            return $request->fetchAll(PDO::FETCH_ASSOC);
+        return $request;
     }
 
     public static function get()

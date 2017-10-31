@@ -29,34 +29,36 @@ function checkLogin(input, status)
     if (string.match("^[a-z0-9_-]{3,15}$"))
     {
         var request = getXMLHttpRequest();
-        request.onreadystatechange = function()
-        {
-            if (request.readyState === 4)
-            {
-                console.log('kek');
-                console.log(request.responseText);
-                /*
-                if (request.responseText)
-                {
-                    status.innerHTML = '&#10004;';
-                    status.style = 'color: ' + pos_color;
-                }
-                else
-                {
-                    status.innerHTML = '&#10008; User exists';
-                    status.style = 'color: ' + neg_color;
-                }
-                */
-            }
-        };
         request.open('POST', '/template/js/autentification.php', true);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         request.send('username=' + string);
+
+        request.onload = function()
+        {
+            if (request.responseText === 'does not exist')
+            {
+                status.innerHTML = '&#10004;';
+                status.style = 'color: ' + pos_color;
+                return true;
+            }
+            else if (request.responseText === 'exists')
+            {
+                status.innerHTML = '&#10008; User exists';
+                status.style = 'color: ' + neg_color;
+            }
+            else
+            {
+                status.innerHTML = '&#10008; Server error';
+                status.style = 'color: ' + neg_color;
+            }
+            return false;
+        };
     }
     else
     {
         status.innerHTML = '&#10008; Username must be 3 to 15 characters long.';
         status.style = 'color: ' + neg_color;
+        return false;
     }
 }
 
@@ -65,7 +67,12 @@ function isEmpty(input, status)
     var string = input.value;
     if (string === "")
     {
-        status.innerHTML = '&#10008; This field must be filled';
+        status.innerHTML = '&#10008;';
         status.style = 'color: ' + neg_color;
     }
+}
+
+function sign_user(login, password, email, confirm)
+{
+    console.log("login = " + login);
 }

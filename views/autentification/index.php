@@ -13,16 +13,6 @@
     <script src="/template/js/autentification.js"></script>
 </head>
 <body>
-<!--Start values-->
-<script type="text/javascript">
-    //  action selection
-    //  false = sign in
-    //  true = sign up
-    var sign_mode = true;
-    var pos_color = 'green';
-    var neg_color = 'red';
-</script>
-
 
 <!--Username and Password input-->
 <input type="text" name="login" id="login" placeholder="Enter username"
@@ -37,7 +27,15 @@
 <br>
 
 <input type="button" id="forgot" value="Forgot pass">
-<input type="button" id="sign" value="">
+
+
+<input type="button" id="sign" value="" onclick="sign_user(
+    checkLogin(document.getElementById('login'), document.getElementById('login_status')),
+    false,
+    false,
+    false)">
+
+
 <input type="button" id="switch" value="" onclick="switch_sign(document.getElementById('sign'),
         document.getElementById('switch'), document.getElementById('drop_down_sign_up'))">
 <br>
@@ -51,9 +49,12 @@
     <br>
 </div>
 
-<?php require_once (ROOT.'/views/_footer.php')?>
+<?php require_once (ROOT.'/views/_footer.php'); ?>
 
-<script>
+<script type="text/javascript">
+    var sign_mode = true;
+    var pos_color = 'green';
+    var neg_color = 'red';
     switch_sign(document.getElementById('sign'),
         document.getElementById('switch'), document.getElementById('drop_down_sign_up'));
 
