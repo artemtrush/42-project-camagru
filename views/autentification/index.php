@@ -10,55 +10,43 @@
     <link href="/template/css/reset.css" rel="stylesheet" type="text/css">
     <link href="/template/css/style.css" rel="stylesheet" type="text/css">
 
-    <script src="/template/js/autentification.js"></script>
+    <script src="/template/js/autentification/autentification.js"></script>
 </head>
 <body>
 
 <!--Username and Password input-->
-<input type="text" name="login" id="login" placeholder="Enter username"
-       onkeyup="checkLogin(this, document.getElementById('login_status'))"
-       onblur="isEmpty(this, document.getElementById('login_status'))">
+<input type="text" name="login" id="login" placeholder="Enter username">
 <span id="login_status"></span>
 
 <br>
 
 <input type="password" name="pass" id="pass" placeholder="Enter password">
-
+<span id="pass_status"></span>
 <br>
 
 <input type="button" id="forgot" value="Forgot pass">
 
 
-<input type="button" id="sign" value="" onclick="sign_user(
-    checkLogin(document.getElementById('login'), document.getElementById('login_status')),
-    false,
-    false,
-    false)">
+<input type="button" id="sign" value="" onclick="sign_user()">
 
 
-<input type="button" id="switch" value="" onclick="switch_sign(document.getElementById('sign'),
-        document.getElementById('switch'), document.getElementById('drop_down_sign_up'))">
+<input type="button" id="switch" value="" onclick="switch_sign()">
 <br>
 
 
 <!-- Drop-down sign up-->
 <div style="visibility: hidden;" id="drop_down_sign_up">
-    <input type="email" name="mail" id="mail" placeholder="Enter email">
+    <input type="text" name="mail" id="mail" placeholder="Enter email" onkeyup="checkEmail()">
+    <span id="mail_status"></span>
     <br>
-    <input type="password" name="confirm" id="confirm" placeholder="Confirm password">
+    <input type="password" name="confirm" id="confirm" placeholder="Confirm password" onkeyup="checkConfirm()">
+    <span id="confirm_status"></span>
     <br>
 </div>
 
 <?php require_once (ROOT.'/views/_footer.php'); ?>
 
-<script type="text/javascript">
-    var sign_mode = true;
-    var pos_color = 'green';
-    var neg_color = 'red';
-    switch_sign(document.getElementById('sign'),
-        document.getElementById('switch'), document.getElementById('drop_down_sign_up'));
-
-</script>
+<script type="text/javascript">setDefaultValues();</script>
 
 </body>
 </html>
