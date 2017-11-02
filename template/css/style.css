@@ -9,6 +9,15 @@ body {
     font-family: sans-serif;
 }
 
+.autentification_nav {
+    width: 600px;
+    height: 500px;
+}
+
+#loading {
+    background-image: url(/template/img/8.svg);
+}
+
 /*style for header*/
 .menu {
     color: #5F5E5E;

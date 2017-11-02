@@ -4,7 +4,16 @@ function setDefaultValues()
     window.sign_mode = true;
     window.pos_color = 'green';
     window.neg_color = 'red';
+    setDiv('sign_form');
     switch_sign();
+}
+
+function setDiv(div_id)
+{
+    document.getElementById('sign_form').style.display = 'none';
+    document.getElementById('email_code').style.display = 'none';
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById(div_id).style.display = 'block';
 }
 
 function switch_sign()
@@ -24,7 +33,7 @@ function switch_sign()
         menu.style = "visibility: visible;";
         checkEmail();
 
-        login_input.onkeyup = checkLogin;
+        login_input.onkeyup = () => {checkLogin();};
         login_status.style = "visibility: visible;";
         checkLogin();
 
@@ -52,7 +61,7 @@ function switch_sign()
     }
 }
 
-function checkLogin(callback = undefined)
+function checkLogin(async_mode = true)
 {
     const input = document.getElementById('login');
     const status = document.getElementById('login_status');
@@ -60,39 +69,47 @@ function checkLogin(callback = undefined)
     if (string.match(/^[a-z0-9_-]{3,15}$/))
     {
         const request = new XMLHttpRequest();
-        request.open('POST', '/template/js/autentification/check_login.php');
+        request.open('POST', '/template/js/autentification/check_login.php', async_mode);
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         request.send('username=' + string);
 
-        request.onload = function()
+        const action = function()
         {
-            if (request.responseText === 'does not exist')
+            if (request.status === 200)
             {
-                status.innerHTML = '&#10004;';
-                status.style = 'color: ' + pos_color;
-                if (callback !== undefined)
-                    callback();
-            }
-            else if (request.responseText === 'exists')
-            {
-                status.innerHTML = '&#10008; User exists';
-                status.style = 'color: ' + neg_color;
+                if (request.responseText === 'does not exist')
+                {
+                    status.innerHTML = '&#10004;';
+                    status.style = 'color: ' + pos_color;
+                    return true;
+                }
+                else if (request.responseText === 'exists')
+                {
+                    status.innerHTML = '&#10008; User exists';
+                    status.style = 'color: ' + neg_color;
+                }
             }
             else
             {
                 status.innerHTML = '&#10008; Server error';
                 status.style = 'color: ' + neg_color;
             }
+            return false;
         };
+        if (async_mode)
+            request.onload = action;
+        else
+            return action();
     }
     else
     {
         status.innerHTML = '&#10008; Username must be 3 to 15 characters long.';
         status.style = 'color: ' + neg_color;
     }
+    return false;
 }
 
-function checkEmail(callback = undefined)
+function checkEmail(async_mode = true)
 {
     const input = document.getElementById('mail');
     const status = document.getElementById('mail_status');
@@ -104,32 +121,40 @@ function checkEmail(callback = undefined)
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         request.send('usermail=' + string);
 
-        request.onload = function()
+        const action = function()
         {
-            if (request.responseText === 'does not exist')
+            if (request.status === 200)
             {
-                status.innerHTML = '&#10004;';
-                status.style = 'color: ' + pos_color;
-                if (callback !== undefined)
-                    callback();
-            }
-            else if (request.responseText === 'exists')
-            {
-                status.innerHTML = '&#10008; Email exists';
-                status.style = 'color: ' + neg_color;
+                if (request.responseText === 'does not exist')
+                {
+                    status.innerHTML = '&#10004;';
+                    status.style = 'color: ' + pos_color;
+                    return true;
+                }
+                else if (request.responseText === 'exists')
+                {
+                    status.innerHTML = '&#10008; Email exists';
+                    status.style = 'color: ' + neg_color;
+                }
             }
             else
             {
-                status.innerHTML = '&#10008; Server error';
+                status.innerHTML = '&#10008; Server email error';
                 status.style = 'color: ' + neg_color;
             }
+            return false;
         };
+        if (async_mode)
+            request.onload = action;
+        else
+            return action();
     }
     else
     {
         status.innerHTML = '&#10008; Invalid';
         status.style = 'color: ' + neg_color;
     }
+    return false;
 }
 
 function checkPass()
@@ -170,10 +195,32 @@ function checkConfirm()
 
 function sign_user()
 {
+    const login_input = document.getElementById('login');
+    const pass_input = document.getElementById('pass');
     if (window.sign_mode === false)
     {
+        const request = new XMLHttpRequest();
+        request.open('POST', '/template/js/autentification/sign_in.php', false);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send(null);
 
+        if (request.status === 200)
+        {
+
+        }
     }
+    else
+    {
+        if (checkLogin(false) && checkPass() && checkEmail(false) && checkConfirm())
+        {
 
+        }
+        else
+        {
 
+        }
+    }
 }
+
+
+
