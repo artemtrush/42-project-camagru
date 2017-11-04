@@ -1,27 +1,27 @@
 <header>
-
+    <script src="/template/js/header/header.js"></script>
     <div>
-        <a class="menu" href="#">
+        <span class="menu" onclick="selfiePage()">
             Selfie
-        </a>
+        </span>
     </div>
 
     <div>
-        <a class="menu" href="#">
+        <span class="menu" onclick="galleryPage()">
             Gallery
-        </a>
+        </span>
     </div>
 
     <div>
-        <a class="menu" href="#">
+        <span class="menu">
             Search
-        </a>
+        </span>
     </div>
 
     <div>
-        <a class="menu" href="#">
+        <span class="menu" onclick="signOut()">
             Sign Out
-        </a>
+        </span>
     </div>
 
 </header>

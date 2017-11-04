@@ -93,7 +93,7 @@ abstract class DB
         $database = self::get();
         $request = $database->prepare($query_string);
         foreach ($params as $item)
-            $item = htmlspecialchars($item);
+            $item = trim(htmlspecialchars($item));
         $request->execute($params);
         if ($fetch_mode)
             return $request->fetchAll(PDO::FETCH_ASSOC);

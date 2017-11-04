@@ -1,226 +1,218 @@
 
-function setDefaultValues()
-{
-    window.sign_mode = true;
-    window.pos_color = 'green';
-    window.neg_color = 'red';
-    setDiv('sign_form');
-    switch_sign();
-}
+const form = (function () {
+    return {
+        sign_mode: true,
+        pos_color: 'green',
+        neg_color: 'red',
+        res_color: ''
+    };
+}());
 
-function setDiv(div_id)
-{
-    document.getElementById('sign_form').style.display = 'none';
-    document.getElementById('email_code').style.display = 'none';
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById(div_id).style.display = 'block';
-}
+form.initialization = function() {
+    form.login_input = document.getElementById('login');
+    form.pass_input = document.getElementById('pass');
+    form.email_input = document.getElementById('mail');
+    form.confirm_input = document.getElementById('confirm');
+    form.email_input.onkeyup = function() {form.checkEmail();};
+    form.confirm_input.onkeyup = form.checkConfirm;
 
-function switch_sign()
-{
-    const login_input = document.getElementById('login');
-    const login_status = document.getElementById('login_status');
-    const pass_input = document.getElementById('pass');
-    const pass_status = document.getElementById('pass_status');
-    const sign_btn = document.getElementById('sign');
-    const switch_btn = document.getElementById('switch');
-    const menu = document.getElementById('drop_down_sign_up');
+    form.sign_btn = document.getElementById('sign');
+    form.switch_btn = document.getElementById('switch');
 
-    if (sign_mode === false) //if <sign in> now
+    form.sign_btn.onclick = form.signUser;
+    form.switch_btn.onclick = form.switchSign;
+
+    form.setDiv('sign_form');
+    form.switchSign();
+};
+
+form.setDiv = function(div_id) {
+    document.getElementById('sign_form').style.display = (div_id === 'sign_form') ? 'flex' : 'none';
+    document.getElementById('email_code').style.display = (div_id === 'email_code') ? 'block' : 'none';
+    document.getElementById('loading').style.display = (div_id === 'loading') ? 'block' : 'none';
+};
+
+form.switchSign = function() {
+    if (form.sign_mode === false) //if <sign in> now
     {
-        sign_btn.value = 'Sign Up';
-        switch_btn.value = 'I already have an account';
-        menu.style = "visibility: visible;";
-        checkEmail();
+        form.email_input.style.display = 'inline';
+        form.confirm_input.style.display = 'inline';
 
-        login_input.onkeyup = () => {checkLogin();};
-        login_status.style = "visibility: visible;";
-        checkLogin();
+        form.sign_btn.innerText = 'Sign Up';
+        form.switch_btn.innerText = 'I already have an account';
+        form.checkEmail();
 
-        pass_input.onkeyup = checkPass;
-        pass_status.style = "visibility: visible;";
-        checkPass();
+        form.login_input.onkeyup = function() {form.checkLogin();};
+        form.checkLogin();
 
-        window.sign_mode = true;
+        form.pass_input.onkeyup = form.checkPass;
+        form.checkPass();
+
+        form.sign_mode = true;
     }
-    else //if sign up now
+    else //if <sign up> now
     {
-        sign_btn.value = 'Sign In';
-        switch_btn.value = 'I don\'t have an account yet';
-        menu.style = "visibility: hidden;";
+        form.login_input.style.borderColor = form.res_color;
+        form.pass_input.style.borderColor = form.res_color;
+        form.email_input.style.display = 'none';
+        form.confirm_input.style.display = 'none';
 
-        login_input.onkeyup = null;
-        login_input.onblur = null;
-        login_status.style = "visibility: hidden;";
+        form.sign_btn.innerText = 'Sign In';
+        form.switch_btn.innerText = 'I don\'t have an account yet';
 
-        pass_input.onkeyup = null;
-        pass_input.onblur = null;
-        pass_status.style = "visibility: hidden;";
 
-        window.sign_mode = false;
+        form.login_input.onkeyup = null;
+        form.pass_input.onkeyup = null;
+
+        form.sign_mode = false;
     }
-}
+};
 
-function checkLogin(async_mode = true)
-{
-    const input = document.getElementById('login');
-    const status = document.getElementById('login_status');
-    const string = input.value;
+form.checkLogin = function(callback) {
+    const string = form.login_input.value;
     if (string.match(/^[a-z0-9_-]{3,15}$/))
     {
         const request = new XMLHttpRequest();
-        request.open('POST', '/template/js/autentification/check_login.php', async_mode);
+        request.open('POST', '/template/js/autentification/checkLogin.php');
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         request.send('username=' + string);
 
-        const action = function()
+        request.onload = function()
         {
-            if (request.status === 200)
+            if (request.responseText === 'does not exist')
             {
-                if (request.responseText === 'does not exist')
-                {
-                    status.innerHTML = '&#10004;';
-                    status.style = 'color: ' + pos_color;
-                    return true;
-                }
-                else if (request.responseText === 'exists')
-                {
-                    status.innerHTML = '&#10008; User exists';
-                    status.style = 'color: ' + neg_color;
-                }
+                form.login_input.style.borderColor = form.pos_color;
+                if (callback !== undefined)
+                    callback();
+            }
+            else if (request.responseText === 'exists')
+            {
+                form.login_input.style.borderColor = form.neg_color;
             }
             else
             {
-                status.innerHTML = '&#10008; Server error';
-                status.style = 'color: ' + neg_color;
+                //status.innerHTML = '&#10008; Server error';
+                form.login_input.style.borderColor = form.neg_color;
             }
-            return false;
         };
-        if (async_mode)
-            request.onload = action;
-        else
-            return action();
     }
     else
     {
-        status.innerHTML = '&#10008; Username must be 3 to 15 characters long.';
-        status.style = 'color: ' + neg_color;
+        //status.innerHTML = '&#10008; Username must be 3 to 15 characters long.';
+        form.login_input.style.borderColor = form.neg_color;
     }
-    return false;
-}
+};
 
-function checkEmail(async_mode = true)
-{
-    const input = document.getElementById('mail');
-    const status = document.getElementById('mail_status');
-    const string = input.value;
+form.checkEmail = function(callback) {
+    const string = form.email_input.value;
     if (string.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/))
     {
         const request = new XMLHttpRequest();
-        request.open('POST', '/template/js/autentification/check_email.php');
+        request.open('POST', '/template/js/autentification/checkEmail.php');
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         request.send('usermail=' + string);
 
-        const action = function()
+        request.onload = function()
         {
-            if (request.status === 200)
+            if (request.responseText === 'does not exist')
             {
-                if (request.responseText === 'does not exist')
-                {
-                    status.innerHTML = '&#10004;';
-                    status.style = 'color: ' + pos_color;
-                    return true;
-                }
-                else if (request.responseText === 'exists')
-                {
-                    status.innerHTML = '&#10008; Email exists';
-                    status.style = 'color: ' + neg_color;
-                }
+                form.email_input.style.borderColor = form.pos_color;
+                if (callback !== undefined)
+                    callback();
+            }
+            else if (request.responseText === 'exists')
+            {
+               // Email exists';
+                form.email_input.style.borderColor = form.neg_color;
             }
             else
             {
-                status.innerHTML = '&#10008; Server email error';
-                status.style = 'color: ' + neg_color;
+                //status.innerHTML = '&#10008; Server email error';
+                form.email_input.style.borderColor = form.neg_color;
             }
-            return false;
         };
-        if (async_mode)
-            request.onload = action;
-        else
-            return action();
     }
     else
     {
-        status.innerHTML = '&#10008; Invalid';
-        status.style = 'color: ' + neg_color;
+        //status.innerHTML = '&#10008; Invalid';
+        form.email_input.style.borderColor =  form.neg_color;
     }
-    return false;
-}
+};
 
-function checkPass()
-{
-    const input = document.getElementById('pass');
-    const status = document.getElementById('pass_status');
-    checkConfirm();
-
+form.checkPass = function() {
+    form.checkConfirm();
     //Minimum eight characters, at least one uppercase letter, one lowercase letter and one number:
-    if (input.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/))
+    if (form.pass_input.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/))
     {
-        status.innerHTML = '&#10004;';
-        status.style = 'color: ' + pos_color;
+        form.pass_input.style.borderColor = form.pos_color;
         return true;
     }
-    status.innerHTML = '&#10008; Bad pass';
-    status.style = 'color: ' + neg_color;
+    // '&#10008; Bad pass';
+    form.pass_input.style.borderColor = form.neg_color;
     return false;
-}
+};
 
-function checkConfirm()
-{
-    const confirm_input = document.getElementById('confirm');
-    const status = document.getElementById('confirm_status');
-    const pass_input = document.getElementById('pass');
-
-    if (confirm_input.value === pass_input.value &&
-        confirm_input.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/))
+form.checkConfirm = function() {
+    if (form.confirm_input.value === form.pass_input.value &&
+        form.confirm_input.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/))
     {
-        status.innerHTML = '&#10004;';
-        status.style = 'color: ' + pos_color;
+        form.confirm_input.style.borderColor = form.pos_color;
         return true;
     }
-    status.innerHTML = '&#10008; No confirm';
-    status.style = 'color: ' + neg_color;
+    //status.innerHTML = '&#10008; No confirm';
+    form.confirm_input.style.borderColor = form.neg_color;
     return false;
-}
+};
 
-function sign_user()
-{
-    const login_input = document.getElementById('login');
-    const pass_input = document.getElementById('pass');
-    if (window.sign_mode === false)
+form.signUser = function() {
+    form.setDiv('loading');
+    if (form.sign_mode === false)
     {
         const request = new XMLHttpRequest();
-        request.open('POST', '/template/js/autentification/sign_in.php', false);
+        let params = "username=" + form.login_input.value + "&userpass=" + form.pass_input.value;
+        request.open('POST', '/template/js/autentification/signin.php');
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        request.send(null);
+        request.send(params);
 
-        if (request.status === 200)
-        {
-
+        request.onload = function () {
+            if (request.responseText === 'true')
+                location.pathname = "/selfie";
+            else
+                form.setDiv('sign_form');
         }
     }
     else
     {
-        if (checkLogin(false) && checkPass() && checkEmail(false) && checkConfirm())
+        if (form.checkPass() && form.checkPass())
         {
+            form.checkLogin(
+                form.checkEmail(
+                    function() {
+                        const request = new XMLHttpRequest();
+                        let params = "usermail=" + form.email_input.value;
+                        request.open('POST', '/template/js/autentification/emailCode.php');
+                        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                        request.send(params);
 
-        }
-        else
-        {
-
+                        request.onload = function () {
+                            console.log('mail send');
+                            console.log(request.responseText);
+                            form.setDiv('sign_form');
+                        };
+                    }
+                )
+            );
         }
     }
-}
+};
 
-
+/*
+                   const request = new XMLHttpRequest();
+                   let params = "username=" + form.login_input.value +
+                               "&userpass=" + form.pass_input.value +
+                               "&usermail=" + form.email_input.value;
+                   request.open('POST', '/template/js/autentification/sign_in.php');
+                   request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                   request.send(params);
+                   */
 

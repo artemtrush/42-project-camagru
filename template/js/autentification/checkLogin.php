@@ -2,7 +2,7 @@
 define('ROOT', dirname(dirname(dirname(__DIR__))));
 require_once(ROOT.'/components/PDOdatabase.php');
 
-$username = trim($_POST['username']);
+$username = $_POST['username'];
 $query = "SELECT COUNT(login) FROM user WHERE user.login = :name";
 $result = DB::query($query, array(':name' => $username), false);
 $result_array = $result->fetch(PDO::FETCH_ASSOC);

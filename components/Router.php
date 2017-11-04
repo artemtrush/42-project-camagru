@@ -26,6 +26,18 @@ class Router
         return null;
     }
 
+    private function authRedirect($pattern)
+    {
+        session_start();
+        if ($pattern === 'autentification' || $pattern === 'recovery')
+        {
+            if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id']))
+                header("location: /selfie");
+        }
+        else if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id']))
+            header("location: /autentification");
+    }
+
     public function run()
     {
         //Get request string
@@ -37,10 +49,7 @@ class Router
             if (preg_match("~(/|^){$pattern}/?$~", $uri))
             {
                 //Authentication check
-                session_start();
-                if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id']))
-                    $path =  $this->routes['autentification'];
-
+                $this->authRedirect($pattern);
                 $internalRoute = preg_replace("~{$pattern}~", $path, $uri);
                 //Determine controller, action, params
                 $segments = explode('/', $internalRoute);
@@ -65,7 +74,7 @@ class Router
                 }
             }
         }
-        if ($this->request_status == false)
+        if ($this->request_status === false)
             $this->error404();
     }
 }

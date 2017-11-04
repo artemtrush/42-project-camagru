@@ -10,8 +10,15 @@ body {
 }
 
 .autentification_nav {
-    width: 600px;
-    height: 500px;
+    width: 500px;
+    height: 200px;
+}
+
+#sign_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #loading {
@@ -27,6 +34,10 @@ body {
 .menu:hover {
     color: #FBBA00;
     transition: all.6s ease; /* Скорость анимации наведения */
+}
+
+#auth_buttons span {
+    cursor: pointer;
 }
 
 header {
@@ -55,6 +66,11 @@ header div {
     height: 95px;
     line-height: 90px;
 }
+
+header span {
+    cursor: pointer;
+}
+
 
 /*style for footer*/
 footer {

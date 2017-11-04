@@ -11,6 +11,8 @@
 
     <link href="/template/css/reset.css" rel="stylesheet" type="text/css">
     <link href="/template/css/style.css" rel="stylesheet" type="text/css">
+
+    <script src="/template/js/selfie/selfie.js"></script>
 </head>
 <body>
 <?php require_once (ROOT.'/views/_header.php')?>
