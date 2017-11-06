@@ -1,11 +1,19 @@
 <?php
 $usermail = trim($_POST['usermail']);
+$username = $_POST['usermail'];
+$userpass = $_POST['userpass'];
+$code = rand(111111, 999999);
 
-$subject = 'the subject';
-$message = 'hello';
-$headers = 'From: webmaster@example.com' . "\r\n" .
-    'Reply-To: webmaster@example.com' . "\r\n" .
-    'X-Mailer: PHP/' . phpversion();
+session_start();
+$_SESSION['userdata'] = array('username' => $username,
+                            'usermail' => $usermail,
+                            'userpass' => sha1($userpass),
+                            'usercode' => sha1($code));
 
-$res = mail($usermail, $subject, $message, $headers);
-echo $res;
+$subject = "PHP SERVER {$code}";
+$message = "Code: {$code}";
+
+if (mail($usermail, $subject, $message))
+    echo 'true';
+else
+    echo 'false';

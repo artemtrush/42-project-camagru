@@ -91,8 +91,8 @@ form.checkLogin = function(callback) {
             }
             else
             {
-                //status.innerHTML = '&#10008; Server error';
                 form.login_input.style.borderColor = form.neg_color;
+                form.serverError();
             }
         };
     }
@@ -105,7 +105,7 @@ form.checkLogin = function(callback) {
 
 form.checkEmail = function(callback) {
     const string = form.email_input.value;
-    if (string.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/))
+    if (string.match(/^.+@.+$/))
     {
         const request = new XMLHttpRequest();
         request.open('POST', '/template/js/autentification/checkEmail.php');
@@ -127,8 +127,8 @@ form.checkEmail = function(callback) {
             }
             else
             {
-                //status.innerHTML = '&#10008; Server email error';
                 form.email_input.style.borderColor = form.neg_color;
+                form.serverError();
             }
         };
     }
@@ -170,16 +170,20 @@ form.signUser = function() {
     {
         const request = new XMLHttpRequest();
         let params = "username=" + form.login_input.value + "&userpass=" + form.pass_input.value;
-        request.open('POST', '/template/js/autentification/signin.php');
+        request.open('POST', '/template/js/autentification/signIn.php');
         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         request.send(params);
 
-        request.onload = function () {
+        request.onload = function ()
+        {
             if (request.responseText === 'true')
                 location.pathname = "/selfie";
             else
+            {
                 form.setDiv('sign_form');
-        }
+                form.serverError();
+            }
+        };
     }
     else
     {
@@ -189,15 +193,24 @@ form.signUser = function() {
                 form.checkEmail(
                     function() {
                         const request = new XMLHttpRequest();
-                        let params = "usermail=" + form.email_input.value;
+                        let params = "username=" + form.login_input.value +
+                                    "&userpass=" + form.pass_input.value +
+                                    "&usermail=" + form.email_input.value;
                         request.open('POST', '/template/js/autentification/emailCode.php');
                         request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                         request.send(params);
 
-                        request.onload = function () {
-                            console.log('mail send');
-                            console.log(request.responseText);
-                            form.setDiv('sign_form');
+                        request.onload = function ()
+                        {
+                            if (request.responseText === 'true')
+                            {
+                                form.setDiv('email_code');
+                            }
+                            else
+                            {
+                                form.setDiv('sign_form');
+                                form.serverError();
+                            }
                         };
                     }
                 )
@@ -205,6 +218,12 @@ form.signUser = function() {
         }
     }
 };
+
+form.serverError = function ()
+{
+    console.log('error');
+};
+
 
 /*
                    const request = new XMLHttpRequest();

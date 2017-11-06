@@ -17,9 +17,9 @@
 <div id="sign_form" class="autentification_nav">
     <input type="text" name="login" id="login" placeholder="Enter username">
 
-    <input type="password" name="pass" id="pass" placeholder="Enter password">
-
     <input type="text" name="mail" id="mail" placeholder="Enter email">
+
+    <input type="password" name="pass" id="pass" placeholder="Enter password">
 
     <input type="password" name="confirm" id="confirm" placeholder="Confirm password">
 
@@ -34,7 +34,7 @@
 
 <div id="email_code" class="autentification_nav">
     <input type="text" name="code" id="code" placeholder="Enter email code">
-    <span id="kuk"></span>
+    <span id="register">Register</span>
 </div>
 
 <div id="loading" class="autentification_nav"></div>
