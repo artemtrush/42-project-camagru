@@ -15,6 +15,7 @@ form.initialization = function() {
     form.email_input = document.getElementById('mail');
     form.confirm_input = document.getElementById('confirm');
     form.email_input.onkeyup = function() {form.checkEmail();};
+    form.email_input.onblur = function() {form.checkEmail();};
     form.confirm_input.onkeyup = form.checkConfirm;
 
     form.sign_btn = document.getElementById('sign');
@@ -44,6 +45,7 @@ form.switchSign = function() {
         form.checkEmail();
 
         form.login_input.onkeyup = function() {form.checkLogin();};
+        form.login_input.onblur = function() {form.checkLogin();};
         form.checkLogin();
 
         form.pass_input.onkeyup = form.checkPass;
@@ -71,7 +73,7 @@ form.switchSign = function() {
 
 form.checkLogin = function(callback) {
     const string = form.login_input.value;
-    if (string.match(/^[a-z0-9_-]{3,15}$/))
+    if (string.match(/^[a-zA-Z0-9_-]{3,15}$/))
     {
         const request = new XMLHttpRequest();
         let params = 'model=autentification&function=loginVerify' +
@@ -183,7 +185,6 @@ form.signUser = function() {
 
         request.onload = function ()
         {
-                console.log(request.responseText);
             if (request.responseText === 'true')
                 location.pathname = '/selfie';
             else
@@ -228,7 +229,6 @@ form.signUser = function() {
     }
 };
 
-form.serverError = function ()
-{
+form.serverError = function () {
     console.log('error');
 };

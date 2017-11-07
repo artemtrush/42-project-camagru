@@ -45,8 +45,8 @@ abstract class Autentification
 
 	public static function signIn($params)
 	{
-		$username = $_POST['username'];
-		$userpass = $_POST['userpass'];
+		$username = $params['username'];
+		$userpass = $params['userpass'];
 		$query = "SELECT user.id FROM user WHERE user.login = :name  AND user.password = :pass";
 		$result = DB::query($query, array(':name' => $username, ':pass' => $userpass), false);
 		$result_array = $result->fetch(PDO::FETCH_ASSOC);
@@ -64,4 +64,11 @@ abstract class Autentification
 	{
 
 	}
+
+    public static function signOut()
+    {
+        session_start();
+        if (isset($_SESSION['user_id']))
+            unset($_SESSION['user_id']);
+    }
 }
