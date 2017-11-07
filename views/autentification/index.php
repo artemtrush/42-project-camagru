@@ -10,7 +10,7 @@
     <link href="/template/css/reset.css" rel="stylesheet" type="text/css">
     <link href="/template/css/style.css" rel="stylesheet" type="text/css">
 
-    <script src="/template/js/autentification/autentification.js"></script>
+    <script src="/template/js/autentification.js"></script>
 </head>
 <body>
 

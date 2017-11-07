@@ -1,5 +1,5 @@
 <header>
-    <script src="/template/js/header/header.js"></script>
+    <script src="/template/js/header.js"></script>
     <div>
         <span class="menu" onclick="selfiePage()">
             Selfie

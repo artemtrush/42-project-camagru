@@ -4,7 +4,8 @@ const form = (function () {
         sign_mode: true,
         pos_color: 'green',
         neg_color: 'red',
-        res_color: ''
+        res_color: '',
+        ajax_router: '/template/js/ajax.router.php'
     };
 }());
 
@@ -73,19 +74,21 @@ form.checkLogin = function(callback) {
     if (string.match(/^[a-z0-9_-]{3,15}$/))
     {
         const request = new XMLHttpRequest();
-        request.open('POST', '/template/js/autentification/checkLogin.php');
-        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        request.send('username=' + string);
+        let params = 'model=autentification&function=loginVerify' +
+                    '&username=' + string;
+        request.open('POST', form.ajax_router);
+        request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        request.send(params);
 
         request.onload = function()
         {
-            if (request.responseText === 'does not exist')
+            if (request.responseText === 'true')
             {
                 form.login_input.style.borderColor = form.pos_color;
                 if (callback !== undefined)
                     callback();
             }
-            else if (request.responseText === 'exists')
+            else if (request.responseText === 'false')
             {
                 form.login_input.style.borderColor = form.neg_color;
             }
@@ -108,19 +111,21 @@ form.checkEmail = function(callback) {
     if (string.match(/^.+@.+$/))
     {
         const request = new XMLHttpRequest();
-        request.open('POST', '/template/js/autentification/checkEmail.php');
-        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        request.send('usermail=' + string);
+        let params = 'model=autentification&function=emailVerify' +
+                    '&usermail=' + string;
+        request.open('POST', form.ajax_router);
+        request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        request.send(params);
 
         request.onload = function()
         {
-            if (request.responseText === 'does not exist')
+            if (request.responseText === 'true')
             {
                 form.email_input.style.borderColor = form.pos_color;
                 if (callback !== undefined)
                     callback();
             }
-            else if (request.responseText === 'exists')
+            else if (request.responseText === 'false')
             {
                // Email exists';
                 form.email_input.style.borderColor = form.neg_color;
@@ -169,15 +174,18 @@ form.signUser = function() {
     if (form.sign_mode === false)
     {
         const request = new XMLHttpRequest();
-        let params = "username=" + form.login_input.value + "&userpass=" + form.pass_input.value;
-        request.open('POST', '/template/js/autentification/signIn.php');
-        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        let params = 'model=autentification&function=signIn' +
+                    '&username=' + form.login_input.value + 
+                    '&userpass=' + form.pass_input.value;
+        request.open('POST', form.ajax_router);
+        request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         request.send(params);
 
         request.onload = function ()
         {
+                console.log(request.responseText);
             if (request.responseText === 'true')
-                location.pathname = "/selfie";
+                location.pathname = '/selfie';
             else
             {
                 form.setDiv('sign_form');
@@ -193,11 +201,12 @@ form.signUser = function() {
                 form.checkEmail(
                     function() {
                         const request = new XMLHttpRequest();
-                        let params = "username=" + form.login_input.value +
-                                    "&userpass=" + form.pass_input.value +
-                                    "&usermail=" + form.email_input.value;
-                        request.open('POST', '/template/js/autentification/emailCode.php');
-                        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                        let params = 'model=autentification&function=sendCode' +
+                                    '&username=' + form.login_input.value +
+                                    '&userpass=' + form.pass_input.value +
+                                    '&usermail=' + form.email_input.value;
+                        request.open('POST', form.ajax_router);
+                        request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
                         request.send(params);
 
                         request.onload = function ()
@@ -223,15 +232,3 @@ form.serverError = function ()
 {
     console.log('error');
 };
-
-
-/*
-                   const request = new XMLHttpRequest();
-                   let params = "username=" + form.login_input.value +
-                               "&userpass=" + form.pass_input.value +
-                               "&usermail=" + form.email_input.value;
-                   request.open('POST', '/template/js/autentification/sign_in.php');
-                   request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                   request.send(params);
-                   */
-
