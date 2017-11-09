@@ -34,7 +34,13 @@
 
 <div id="email_code" class="autentification_nav">
     <input type="text" name="code" id="code" placeholder="Enter email code">
+    <br>
     <span id="register">Register</span>
+    <br>
+    <span id="repeat">Repeat</span>
+    <br>
+    <span id="return_sign">Back</span>
+    <br>
 </div>
 
 <div id="loading" class="autentification_nav"></div>
