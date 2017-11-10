@@ -79,7 +79,7 @@ form.switchSign = function() {
 
 form.checkLogin = function(callback) {
 	const string = form.login_input.value;
-	if (string.match(/^[a-zA-Z0-9_-]{3,15}$/))
+	if (string.match(/^[a-zA-Z0-9_-]{3,15}$/g))
 	{
 		const request = new XMLHttpRequest();
 		let params = 'model=autentification&function=loginVerify' +
@@ -99,11 +99,15 @@ form.checkLogin = function(callback) {
 			else if (request.responseText === 'false')
 			{
 				form.login_input.style.borderColor = form.neg_color;
+				if (callback !== undefined)
+					form.setDiv('sign_form');
 			}
 			else
 			{
 				form.login_input.style.borderColor = form.neg_color;
 				form.serverError();
+				if (callback !== undefined)
+					form.setDiv('sign_form');
 			}
 		};
 	}
@@ -111,12 +115,14 @@ form.checkLogin = function(callback) {
 	{
 		//status.innerHTML = '&#10008; Username must be 3 to 15 characters long.';
 		form.login_input.style.borderColor = form.neg_color;
+		if (callback !== undefined)
+			form.setDiv('sign_form');
 	}
 };
 
 form.checkEmail = function(callback) {
 	const string = form.email_input.value;
-	if (string.match(/^.+@.+$/))
+	if (string.match(/^.{1,30}@.{1,19}$/g))
 	{
 		const request = new XMLHttpRequest();
 		let params = 'model=autentification&function=emailVerify' +
@@ -137,11 +143,15 @@ form.checkEmail = function(callback) {
 			{
 			   // Email exists';
 				form.email_input.style.borderColor = form.neg_color;
+				if (callback !== undefined)
+					form.setDiv('sign_form');
 			}
 			else
 			{
 				form.email_input.style.borderColor = form.neg_color;
 				form.serverError();
+				if (callback !== undefined)
+					form.setDiv('sign_form');
 			}
 		};
 	}
@@ -149,13 +159,15 @@ form.checkEmail = function(callback) {
 	{
 		//status.innerHTML = '&#10008; Invalid';
 		form.email_input.style.borderColor =  form.neg_color;
+		if (callback !== undefined)
+			form.setDiv('sign_form');
 	}
 };
 
 form.checkPass = function() {
 	form.checkConfirm();
 	//Minimum eight characters, at least one uppercase letter, one lowercase letter and one number:
-	if (form.pass_input.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/))
+	if (form.pass_input.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/g))
 	{
 		form.pass_input.style.borderColor = form.pos_color;
 		return true;
@@ -167,7 +179,7 @@ form.checkPass = function() {
 
 form.checkConfirm = function() {
 	if (form.confirm_input.value === form.pass_input.value &&
-		form.confirm_input.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/))
+		form.confirm_input.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/g))
 	{
 		form.confirm_input.style.borderColor = form.pos_color;
 		return true;
@@ -252,6 +264,7 @@ form.repeatCode = function () {
 	{
 		if (request.responseText === 'true')
 		{
+			form.code_input.value = '';
 			form.setDiv('email_code');
 		}
 		else

@@ -1,5 +1,5 @@
 <?php
-define('ROOT', dirname(dirname(__DIR__)));
+define('ROOT', dirname(dirname(__DIR__)));  include_once(ROOT.'/components/logger/ChromePhp.php');
 $output_mode = '';
 
 function eotrue()

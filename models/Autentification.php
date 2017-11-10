@@ -34,7 +34,7 @@ abstract class Autentification
 	public static function sendCode($params)
 	{
 		$usermail = trim($params['usermail']);
-		$username = $params['usermail'];
+		$username = $params['username'];
 		$userpass = $params['userpass'];
 		$code = rand(111111, 999999);
 		
@@ -43,6 +43,7 @@ abstract class Autentification
                             'usermail' => $usermail,
                             'userpass' => sha1($userpass),
                             'usercode' => sha1($code));
+
 		return self::sendMail($usermail, $code);
 	}
 
@@ -90,13 +91,12 @@ abstract class Autentification
 			$result = DB::query($query, array(':login' => $_SESSION['userdata']['username'],
 											':email' => $_SESSION['userdata']['usermail'],
 										':password' => $_SESSION['userdata']['userpass']));
-			var_dump($result);
+			//ChromePhp::log($result);
 			if (1)
 			{
 				if (self::signIn($_SESSION['userdata']))
 				{
 					unset($_SESSION['userdata']);
-					var_dump($_SESSION);
 					return true;
 				}
 			}
