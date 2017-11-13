@@ -18,9 +18,10 @@ form.initialization = function() {
 
 	form.sign_btn = document.getElementById('sign');
 	form.switch_btn = document.getElementById('switch');
-	form.back_btn = document.getElementById('return_sign');
+	form.back_btn = document.getElementById('return_to_sign');
 	form.repeat_btn = document.getElementById('repeat');
 	form.register_btn = document.getElementById('register');
+	form.forgot_btn =  document.getElementById('forgot');
 
 	form.email_input.onkeyup = function() {form.checkEmail();};
 	form.email_input.onblur = function() {form.checkEmail();};
@@ -30,6 +31,10 @@ form.initialization = function() {
 	form.back_btn.onclick = form.backToForm;
 	form.repeat_btn.onclick = form.repeatCode;
 	form.register_btn.onclick = form.registerUser;
+	form.forgot_btn.onclick = function () {
+        location.pathname = '/recovery';
+    };
+
 	form.setDiv('sign_form');
 	form.switchSign();
 };
@@ -289,7 +294,6 @@ form.registerUser = function () {
 
 		request.onload = function ()
 		{
-			console.log(request.responseText);
 			if (request.responseText === 'true')
 				location.pathname = '/selfie';
 			else

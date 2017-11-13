@@ -37,8 +37,9 @@ abstract class Autentification
 		$username = $params['username'];
 		$userpass = $params['userpass'];
 		$code = rand(111111, 999999);
-		
-		session_start();
+
+        if (!isset($_SESSION))
+		    session_start();
 		$_SESSION['userdata'] = array('username' => $username,
                             'usermail' => $usermail,
                             'userpass' => sha1($userpass),
@@ -49,7 +50,8 @@ abstract class Autentification
 
 	public static function repeatCode()
 	{
-		session_start();
+        if (!isset($_SESSION))
+		    session_start();
 		if (isset($_SESSION['userdata']) && !empty($_SESSION['userdata']))
 		{
 			$userarray = $_SESSION['userdata'];
@@ -63,17 +65,17 @@ abstract class Autentification
 		return false;
 	}
 
-	public static function signIn($params)
+	public static function signIn($params, $encrypt = true)
 	{
 		$username = $params['username'];
-		$userpass = $params['userpass'];
+		$userpass = ($encrypt) ? sha1($params['userpass']) : $params['userpass'];
 		$query = "SELECT user.id FROM user WHERE user.login = :name  AND user.password = :pass";
 		$result = DB::query($query, array(':name' => $username, ':pass' => $userpass), false);
 		$result_array = $result->fetch(PDO::FETCH_ASSOC);
-
 		if ($result_array !== false)
 		{
-    		session_start();
+            if (!isset($_SESSION))
+    		    session_start();
     		$_SESSION['user_id'] = $result_array['id'];
     		return true;
 		}
@@ -82,19 +84,21 @@ abstract class Autentification
 
 	public static function signUp($params)
 	{
-		session_start();
+        if (!isset($_SESSION))
+		    session_start();
 		if (isset($_SESSION['userdata']) && 
-			sha1($_POST['input_code']) == $_SESSION['userdata']['usercode'])
+			sha1($params['input_code']) == $_SESSION['userdata']['usercode'])
 		{
 			
 			$query = "INSERT INTO user (login, password, email) VALUES (:login, :password, :email)";
 			$result = DB::query($query, array(':login' => $_SESSION['userdata']['username'],
 											':email' => $_SESSION['userdata']['usermail'],
-										':password' => $_SESSION['userdata']['userpass']));
-			//ChromePhp::log($result);
-			if (1)
+										    ':password' => $_SESSION['userdata']['userpass']),
+                                            false);
+            $result_array = $result->fetch(PDO::FETCH_ASSOC);
+			if ($result_array !== false)
 			{
-				if (self::signIn($_SESSION['userdata']))
+				if (self::signIn($_SESSION['userdata'], false))
 				{
 					unset($_SESSION['userdata']);
 					return true;
@@ -106,7 +110,8 @@ abstract class Autentification
 
     public static function signOut()
     {
-        session_start();
+        if (!isset($_SESSION))
+            session_start();
         if (isset($_SESSION['user_id']))
             unset($_SESSION['user_id']);
     }

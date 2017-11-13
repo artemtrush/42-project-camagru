@@ -28,7 +28,8 @@ class Router
 
     private function authRedirect($pattern)
     {
-        session_start();
+        if (!isset($_SESSION))
+            session_start();
         if ($pattern === 'autentification' || $pattern === 'recovery')
         {
             if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id']))

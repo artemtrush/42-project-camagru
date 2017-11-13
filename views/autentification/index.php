@@ -39,7 +39,7 @@
     <br>
     <span id="repeat">Repeat</span>
     <br>
-    <span id="return_sign">Back</span>
+    <span id="return_to_sign">Back</span>
     <br>
 </div>
 
