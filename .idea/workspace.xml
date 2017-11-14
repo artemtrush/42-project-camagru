@@ -6,9 +6,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/Router.php" afterPath="$PROJECT_DIR$/components/Router.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/RecoveryController.php" afterPath="$PROJECT_DIR$/controllers/RecoveryController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/Autentification.php" afterPath="$PROJECT_DIR$/models/Autentification.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/js/autentification.js" afterPath="$PROJECT_DIR$/template/js/autentification.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/autentification/index.php" afterPath="$PROJECT_DIR$/views/autentification/index.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/Authentication.php" afterPath="$PROJECT_DIR$/models/Authentication.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/js/authentication.js" afterPath="$PROJECT_DIR$/template/js/authentication.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/authentication/index.php" afterPath="$PROJECT_DIR$/views/authentication/index.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -40,8 +40,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="autentification.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/template/js/autentification.js">
+      <file leaf-file-name="authentication.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/template/js/authentication.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-391">
               <caret line="13" column="54" lean-forward="true" selection-start-line="13" selection-start-column="54" selection-end-line="13" selection-end-column="54" />
@@ -61,8 +61,8 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Autentification.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/models/Autentification.php">
+      <file leaf-file-name="Authentication.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/models/Authentication.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
               <caret line="75" column="9" lean-forward="true" selection-start-line="75" selection-start-column="9" selection-end-line="75" selection-end-column="9" />
@@ -77,7 +77,7 @@
         </entry>
       </file>
       <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/autentification/index.php">
+        <entry file="file://$PROJECT_DIR$/views/authentication/index.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="244">
               <caret line="17" column="3" lean-forward="true" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="76" />
@@ -121,36 +121,36 @@
         <option value="$PROJECT_DIR$/views/SelfiePage.php" />
         <option value="$PROJECT_DIR$/controllers/SelfieController.php" />
         <option value="$PROJECT_DIR$/index.php" />
-        <option value="$PROJECT_DIR$/controllers/AutentificationController.php" />
+        <option value="$PROJECT_DIR$/controllers/AuthenticationController.php" />
         <option value="$PROJECT_DIR$/config/sql/user.sql" />
         <option value="$PROJECT_DIR$/controllers/GalleryController.php" />
         <option value="$PROJECT_DIR$/models/Gallery.php" />
         <option value="$PROJECT_DIR$/.htaccess" />
-        <option value="$PROJECT_DIR$/template/js/autentification.php" />
-        <option value="$PROJECT_DIR$/template/js/autentification_email.php" />
-        <option value="$PROJECT_DIR$/template/js/autentification_login.php" />
-        <option value="$PROJECT_DIR$/template/js/autentification/autentification_email.php" />
-        <option value="$PROJECT_DIR$/template/js/autentification/autentification_login.php" />
-        <option value="$PROJECT_DIR$/template/js/autentification/check_login.php" />
-        <option value="$PROJECT_DIR$/template/js/autentification/check_email.php" />
+        <option value="$PROJECT_DIR$/template/js/authentication.php" />
+        <option value="$PROJECT_DIR$/template/js/authentication_email.php" />
+        <option value="$PROJECT_DIR$/template/js/authentication_login.php" />
+        <option value="$PROJECT_DIR$/template/js/authentication/authentication_email.php" />
+        <option value="$PROJECT_DIR$/template/js/authentication/authentication_login.php" />
+        <option value="$PROJECT_DIR$/template/js/authentication/check_login.php" />
+        <option value="$PROJECT_DIR$/template/js/authentication/check_email.php" />
         <option value="$PROJECT_DIR$/components/PDOdatabase.php" />
-        <option value="$PROJECT_DIR$/template/js/autentification/sign_in.php" />
+        <option value="$PROJECT_DIR$/template/js/authentication/sign_in.php" />
         <option value="$PROJECT_DIR$/views/selfie/index.php" />
         <option value="$PROJECT_DIR$/template/js/header/signOut.php" />
         <option value="$PROJECT_DIR$/template/css/style.css" />
         <option value="$PROJECT_DIR$/views/_header.php" />
         <option value="$PROJECT_DIR$/template/js/header/header.js" />
-        <option value="$PROJECT_DIR$/template/js/autentification/emailCode.php" />
-        <option value="$PROJECT_DIR$/template/js/autentification/emailCodeSend.php" />
-        <option value="$PROJECT_DIR$/template/js/autentification/autentification.js" />
+        <option value="$PROJECT_DIR$/template/js/authentication/emailCode.php" />
+        <option value="$PROJECT_DIR$/template/js/authentication/emailCodeSend.php" />
+        <option value="$PROJECT_DIR$/template/js/authentication/authentication.js" />
         <option value="$PROJECT_DIR$/template/js/ajax.router.php" />
         <option value="$PROJECT_DIR$/template/js/header.js" />
         <option value="$PROJECT_DIR$/components/Router.php" />
-        <option value="$PROJECT_DIR$/views/autentification/index.php" />
-        <option value="$PROJECT_DIR$/template/js/autentification.js" />
+        <option value="$PROJECT_DIR$/views/authentication/index.php" />
+        <option value="$PROJECT_DIR$/template/js/authentication.js" />
         <option value="$PROJECT_DIR$/controllers/RecoveryController.php" />
         <option value="$PROJECT_DIR$/views/recovery/index.php" />
-        <option value="$PROJECT_DIR$/models/Autentification.php" />
+        <option value="$PROJECT_DIR$/models/Authentication.php" />
       </list>
     </option>
   </component>
@@ -240,7 +240,7 @@
               <item name="htdocs" type="b2602c69:ProjectViewProjectNode" />
               <item name="htdocs" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="views" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="autentification" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="authentication" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="htdocs" type="b2602c69:ProjectViewProjectNode" />
@@ -274,7 +274,7 @@
       <recent name="C:\xampp\htdocs\views" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\template\js\autentification" />
+      <recent name="C:\xampp\htdocs\template\js\authentication" />
       <recent name="C:\xampp\htdocs\views" />
       <recent name="C:\xampp\htdocs\views\selfie" />
       <recent name="C:\xampp\htdocs\views\recovery" />
@@ -566,8 +566,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template/js/autentification/checkLogin.php" />
-    <entry file="file://$PROJECT_DIR$/template/js/autentification/checkEmail.php" />
+    <entry file="file://$PROJECT_DIR$/template/js/authentication/checkLogin.php" />
+    <entry file="file://$PROJECT_DIR$/template/js/authentication/checkEmail.php" />
     <entry file="file://$PROJECT_DIR$/views/_footer.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -607,11 +607,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template/js/autentification/signIn.php" />
-    <entry file="file://$PROJECT_DIR$/template/js/autentification/signUp.php" />
-    <entry file="file://$PROJECT_DIR$/template/js/autentification/emailCodeVerify.php" />
-    <entry file="file://$PROJECT_DIR$/template/js/autentification/emailCode.php" />
-    <entry file="file://$PROJECT_DIR$/template/js/autentification/autentification.js" />
+    <entry file="file://$PROJECT_DIR$/template/js/authentication/signIn.php" />
+    <entry file="file://$PROJECT_DIR$/template/js/authentication/signUp.php" />
+    <entry file="file://$PROJECT_DIR$/template/js/authentication/emailCodeVerify.php" />
+    <entry file="file://$PROJECT_DIR$/template/js/authentication/emailCode.php" />
+    <entry file="file://$PROJECT_DIR$/template/js/authentication/authentication.js" />
     <entry file="file://$PROJECT_DIR$/template/js/signOut.php" />
     <entry file="file://$PROJECT_DIR$/template/js/header.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -693,7 +693,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/autentification/index.php">
+    <entry file="file://$PROJECT_DIR$/views/authentication/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="244">
           <caret line="17" column="3" lean-forward="true" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="76" />
@@ -709,7 +709,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controllers/AutentificationController.php">
+    <entry file="file://$PROJECT_DIR$/controllers/AuthenticationController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
@@ -717,7 +717,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template/js/autentification.js">
+    <entry file="file://$PROJECT_DIR$/template/js/authentication.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-391">
           <caret line="13" column="54" lean-forward="true" selection-start-line="13" selection-start-column="54" selection-end-line="13" selection-end-column="54" />
@@ -736,7 +736,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/Autentification.php">
+    <entry file="file://$PROJECT_DIR$/models/Authentication.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="75" column="9" lean-forward="true" selection-start-line="75" selection-start-column="9" selection-end-line="75" selection-end-column="9" />

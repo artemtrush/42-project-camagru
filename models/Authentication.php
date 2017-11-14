@@ -1,6 +1,6 @@
 <?php
 
-abstract class Autentification
+abstract class Authentication
 {
 	public static function emailVerify($params)
 	{
@@ -36,7 +36,7 @@ abstract class Autentification
 		$usermail = trim($params['usermail']);
 		$username = $params['username'];
 		$userpass = $params['userpass'];
-		$code = rand(111111, 999999);
+		$code = rand(111111, 999999);			ChromePhp::log($code);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         if (!isset($_SESSION))
 		    session_start();
@@ -72,6 +72,7 @@ abstract class Autentification
 		$query = "SELECT user.id FROM user WHERE user.login = :name  AND user.password = :pass";
 		$result = DB::query($query, array(':name' => $username, ':pass' => $userpass), false);
 		$result_array = $result->fetch(PDO::FETCH_ASSOC);
+
 		if ($result_array !== false)
 		{
             if (!isset($_SESSION))
@@ -89,14 +90,12 @@ abstract class Autentification
 		if (isset($_SESSION['userdata']) && 
 			sha1($params['input_code']) == $_SESSION['userdata']['usercode'])
 		{
-			
 			$query = "INSERT INTO user (login, password, email) VALUES (:login, :password, :email)";
 			$result = DB::query($query, array(':login' => $_SESSION['userdata']['username'],
 											':email' => $_SESSION['userdata']['usermail'],
 										    ':password' => $_SESSION['userdata']['userpass']),
                                             false);
-            $result_array = $result->fetch(PDO::FETCH_ASSOC);
-			if ($result_array !== false)
+			if ($result)
 			{
 				if (self::signIn($_SESSION['userdata'], false))
 				{
