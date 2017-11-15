@@ -90,17 +90,24 @@ abstract class Authentication
 		if (isset($_SESSION['userdata']) && 
 			sha1($params['input_code']) == $_SESSION['userdata']['usercode'])
 		{
-			$query = "INSERT INTO user (login, password, email) VALUES (:login, :password, :email)";
-			$result = DB::query($query, array(':login' => $_SESSION['userdata']['username'],
-											':email' => $_SESSION['userdata']['usermail'],
-										    ':password' => $_SESSION['userdata']['userpass']),
-                                            false);
-			if ($result)
+			$check_query = "SELECT user.id FROM user WHERE user.login = :name  OR user.email = :mail";
+			$check_result = DB::query($check_query, array(':name' => $_SESSION['userdata']['username'],
+														  ':mail' => $_SESSION['userdata']['usermail']),
+														  false);
+			if (($check_result->fetch(PDO::FETCH_ASSOC)) === false)
 			{
-				if (self::signIn($_SESSION['userdata'], false))
+				$query = "INSERT INTO user (login, password, email) VALUES (:login, :password, :email)";
+				$result = DB::query($query, array(':login' => $_SESSION['userdata']['username'],
+												':email' => $_SESSION['userdata']['usermail'],
+											    ':password' => $_SESSION['userdata']['userpass']),
+                                        	    false);
+				if ($result)
 				{
-					unset($_SESSION['userdata']);
-					return true;
+					if (self::signIn($_SESSION['userdata'], false))
+					{
+						unset($_SESSION['userdata']);
+						return true;
+					}
 				}
 			}
 		}

@@ -2,8 +2,8 @@
 const R = (function () {
 	return {
 		step: 0,
-		cdisable = 'gray',
-		cenable = 'black',
+		cdisable: 'gray',
+		cenable: 'black',
 		ajax_router: '/template/js/ajax.router.php'
 	};
 }());
@@ -45,6 +45,7 @@ R.stepHandle = function () {
 		R.pass_input.disabled = true;
 		R.conf_input.disabled = true;
 		R.prev_btn.disabled = true;
+		R.prev_btn.style.color = R.cdisable;
 		break;
 	case 1:
 		R.name_input.disabled = true;
@@ -52,7 +53,7 @@ R.stepHandle = function () {
 		R.pass_input.disabled = true;
 		R.conf_input.disabled = true;
 		R.prev_btn.disabled = false;
-		R.prev_btn.style.color = R.cdisable;
+		R.prev_btn.style.color = R.cenable;
 		break;
 	case 2:
 		R.name_input.disabled = true;
@@ -60,6 +61,7 @@ R.stepHandle = function () {
 		R.pass_input.disabled = false;
 		R.conf_input.disabled = false;
 		R.prev_btn.disabled = true;
+		R.prev_btn.style.color = R.cenable;
 		break;
 	}
 };
