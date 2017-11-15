@@ -101,26 +101,22 @@ A.checkLogin = function(callback) {
 				if (callback !== undefined)
 					callback();
 			}
-			else if (request.responseText === 'false')
-			{
-				A.login_input.style.borderColor = A.neg_color;
-				if (callback !== undefined)
-					A.setDiv('sign_form');
-			}
 			else
 			{
 				A.login_input.style.borderColor = A.neg_color;
-				A.serverError();
-				if (callback !== undefined)
+				if (callback === undefined)
+                    A.error('User exists!');//!!!!!!!!
+				else
 					A.setDiv('sign_form');
 			}
 		};
 	}
 	else
 	{
-		//status.innerHTML = '&#10008; Username must be 3 to 15 characters long.';
 		A.login_input.style.borderColor = A.neg_color;
-		if (callback !== undefined)
+		if (callback === undefined)
+            A.error('Username must be 3 to 15 characters long.');//!!!!!!!!
+		else
 			A.setDiv('sign_form');
 	}
 };
@@ -144,40 +140,34 @@ A.checkEmail = function(callback) {
 				if (callback !== undefined)
 					callback();
 			}
-			else if (request.responseText === 'false')
-			{
-			   // Email exists';
-				A.email_input.style.borderColor = A.neg_color;
-				if (callback !== undefined)
-					A.setDiv('sign_form');
-			}
 			else
 			{
 				A.email_input.style.borderColor = A.neg_color;
-				A.serverError();
-				if (callback !== undefined)
+				if (callback === undefined)
+                    A.error('Email exists');//!!!!!!!!!
+				else
 					A.setDiv('sign_form');
 			}
 		};
 	}
 	else
 	{
-		//status.innerHTML = '&#10008; Invalid';
 		A.email_input.style.borderColor =  A.neg_color;
-		if (callback !== undefined)
+		if (callback === undefined)
+			A.error('Invalid format email');//!!!!!!!!!
+		else
 			A.setDiv('sign_form');
 	}
 };
 
 A.checkPass = function() {
 	A.checkConfirm();
-	//Minimum eight characters, at least one uppercase letter, one lowercase letter and one number:
 	if (A.pass_input.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/g))
 	{
 		A.pass_input.style.borderColor = A.pos_color;
 		return true;
 	}
-	// '&#10008; Bad pass';
+    A.error('Minimum eight characters, at least one uppercase letter, one lowercase letter and one number:');//!!!!!!!!!!
 	A.pass_input.style.borderColor = A.neg_color;
 	return false;
 };
@@ -189,7 +179,7 @@ A.checkConfirm = function() {
 		A.confirm_input.style.borderColor = A.pos_color;
 		return true;
 	}
-	//status.innerHTML = '&#10008; No confirm';
+    A.error('Ne sovpadaet');//!!!!!!!!!!
 	A.confirm_input.style.borderColor = A.neg_color;
 	return false;
 };
@@ -212,43 +202,44 @@ A.signUser = function() {
 				location.pathname = '/selfie';
 			else
 			{
+                A.error('Bad login or password');//!!!!!!!!!!!!!
 				A.setDiv('sign_form');
-				A.serverError();
 			}
 		};
 	}
 	else
 	{
-		if (A.checkPass() && A.checkPass())
+		if (A.checkPass() && A.checkConfirm())
 		{
 			A.checkLogin(
-				A.checkEmail(
-					function() {
-						const request = new XMLHttpRequest();
-						let params = 'model=authentication&function=sendCode' +
-									'&username=' + A.login_input.value +
-									'&userpass=' + A.pass_input.value +
-									'&usermail=' + A.email_input.value;
-						request.open('POST', A.ajax_router);
-						request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-						request.send(params);
+				function () {
+                    A.checkEmail(
+                        function () {
+                            const request = new XMLHttpRequest();
+                            let params = 'model=authentication&function=sendCode' +
+                                '&username=' + A.login_input.value +
+                                '&userpass=' + A.pass_input.value +
+                                '&usermail=' + A.email_input.value;
+                            request.open('POST', A.ajax_router);
+                            request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                            request.send(params);
 
-						request.onload = function ()
-						{
-							if (request.responseText === 'true')
-							{
-								A.setDiv('email_code');
-							}
-							else
-							{
-								A.setDiv('sign_form');
-								A.serverError();
-							}
-						};
-					}
-				)
+                            request.onload = function () {
+                                if (request.responseText === 'true') {
+                                    A.setDiv('email_code');
+                                }
+                                else {
+                                    A.setDiv('sign_form');
+                                    A.error('Mail NOT SENDED');//!!!!!!!!
+                                }
+                            };
+                        }
+                    );
+                }
 			);
 		}
+		else
+            A.setDiv('sign_form');
 	}
 };
 
@@ -275,7 +266,7 @@ A.repeatCode = function () {
 		else
 		{
 			A.backToForm();
-			A.serverError();
+			A.error('Server pismo ne doshlo'); //!!!!!!
 		}
 	};
 };
@@ -298,21 +289,19 @@ A.registerUser = function () {
 				location.pathname = '/selfie';
 			else
 			{
-				//A.code_input.value = '';
+                A.error('kod ne tot');//!!!!!!
 				A.setDiv('email_code');
-				console.log('bad code');
-				//error bad code
 			}
 		};
 	}
 	else
-	{
-		//A.code_input.value = '';
-		console.log('bad codeOO');
-		//error bad code
-	}
+        A.error('kod ne tot');//!!!!!!
 };
 
-A.serverError = function () {
-	console.log('error');
+A.error = function (error) {
+	console.log(error);
+};
+
+A.errorHide = function () {
+
 };

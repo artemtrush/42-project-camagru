@@ -15,7 +15,7 @@
 <body>
 
 <div id="forgot_form" class="authentication_nav">
-    <input type="text" id="rec_name" placeholder="Enter your email or login">
+    <input type="text" id="rec_alias" placeholder="Enter your email or login">
     <input type="text" id="rec_code" placeholder="Enter code">
     <input type="password" id="rec_pass" placeholder="Enter pass">
     <input type="password" id="rec_confirm" placeholder="Enter confirm">
@@ -27,8 +27,9 @@
     <div class="auth_buttons">
     	<span id="rec_back"> OMG YA VSPOMNIL!10! </span>
     </div>
-
 </div>
+
+<div id="loading" class="authentication_nav"></div>
 
 <?php require_once (ROOT.'/views/_footer.php'); ?>
 <script>R.initialization();</script>

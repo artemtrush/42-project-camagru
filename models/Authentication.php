@@ -9,8 +9,8 @@ abstract class Authentication
 		$result = DB::query($query, array(':mail' => $usermail), false);
 		$result_array = $result->fetch(PDO::FETCH_ASSOC);
 		if ($result_array['COUNT(email)'] === 0)
-			return true;
-		return false;
+			return 'true';
+		return 'false';
 	}
 
 	public static function loginVerify($params)
@@ -20,15 +20,15 @@ abstract class Authentication
 		$result = DB::query($query, array(':name' => $username), false);
 		$result_array = $result->fetch(PDO::FETCH_ASSOC);
 		if ($result_array['COUNT(login)'] === 0)
-			return true;
-		return false;
+			return 'true';
+		return 'false';
 	}
 
 	private static function sendMail($email, $code)
 	{
 		$subject = "PHP SERVER {$code}";
 		$message = "Code: {$code}";
-		return mail($email, $subject, $message);
+		return mail($email, $subject, $message) ? 'true' : 'false';
 	}
 
 	public static function sendCode($params)
@@ -62,7 +62,7 @@ abstract class Authentication
 				return self::sendMail($userarray['usermail'], $code);
 			}
 		}
-		return false;
+		return 'false';
 	}
 
 	public static function signIn($params, $encrypt = true)
@@ -78,9 +78,9 @@ abstract class Authentication
             if (!isset($_SESSION))
     		    session_start();
     		$_SESSION['user_id'] = $result_array['id'];
-    		return true;
+    		return 'true';
 		}
-		return false;
+		return 'false';
 	}
 
 	public static function signUp($params)
@@ -106,12 +106,12 @@ abstract class Authentication
 					if (self::signIn($_SESSION['userdata'], false))
 					{
 						unset($_SESSION['userdata']);
-						return true;
+						return 'true';
 					}
 				}
 			}
 		}
-		return false;
+		return 'false';
 	}
 
     public static function signOut()

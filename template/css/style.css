@@ -19,6 +19,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #FBBA00;
 }
 
 #loading {
@@ -38,6 +39,7 @@ body {
 
 .auth_buttons span {
     cursor: pointer;
+    -webkit-user-select: none;
 }
 
 header {
