@@ -14,12 +14,23 @@
 </head>
 <body>
 
-<input type="text" name="rec_email" id="rec_email" placeholder="Enter username">
-<input type="text" name="rec_login" id="rec_email" placeholder="Enter username">
+<div id="forgot_form" class="authentication_nav">
+    <input type="text" id="rec_name" placeholder="Enter your email or login">
+    <input type="text" id="rec_code" placeholder="Enter code">
+    <input type="password" id="rec_pass" placeholder="Enter pass">
+    <input type="password" id="rec_confirm" placeholder="Enter confirm">
 
-<input type="text" name="rec_pass" id="rec_email" placeholder="Enter username">
-<input type="text" name="rec_confirm" id="rec_email" placeholder="Enter username">
+    <div class="auth_buttons">
+    	<span id="rec_prev"> Back </span>
+    	<span id="rec_next"> Next </span>
+    </div>
+    <div class="auth_buttons">
+    	<span id="rec_back"> OMG YA VSPOMNIL!10! </span>
+    </div>
+
+</div>
 
 <?php require_once (ROOT.'/views/_footer.php'); ?>
+<script>R.initialization();</script>
 </body>
 </html>
