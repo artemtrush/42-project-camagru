@@ -12,10 +12,10 @@ body {
 .authentication_nav {
     width: 400px;
     height: 200px;
+    display: none;
 }
 
 #sign_form, #forgot_form {
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -24,6 +24,12 @@ body {
 
 #loading {
     background-image: url(/template/img/8.svg);
+    background-size: 100%;
+}
+
+#success {
+    background-image: url(/template/img/success.jpg);
+    background-size: 100%;
 }
 
 /*style for header*/

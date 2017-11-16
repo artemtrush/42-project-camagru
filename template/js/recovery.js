@@ -8,6 +8,10 @@ const R = (function () {
 	};
 }());
 
+R.sleep = function (ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+};
+
 R.initialization = function() {
 	R.alias_input = document.getElementById('rec_alias');
 	R.code_input = document.getElementById('rec_code');
@@ -30,6 +34,7 @@ R.initialization = function() {
 R.setDiv = function (div_id) {
     document.getElementById('forgot_form').style.display = (div_id === 'forgot_form') ? 'flex' : 'none';
     document.getElementById('loading').style.display = (div_id === 'loading') ? 'block' : 'none';
+    document.getElementById('success').style.display = (div_id === 'success') ? 'block' : 'none';
 };
 
 R.prevStep = function () {
@@ -61,8 +66,10 @@ R.checkAlias = function () {
             R.step += 1;
             R.stepHandle();
         }
-        else
+        else if (request.responseText === 'false')
             R.error('Net takih');//!!!!!!!!!!
+		else
+            R.error('Server error mail ne otpravlen!');//!!!!!!!!!!
         R.setDiv('forgot_form');
     };
 };
@@ -93,6 +100,38 @@ R.checkCode = function () {
     };
 };
 
+R.checkPass = function () {
+	if (!(R.pass_input.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/g)))
+	{
+		R.error('Minimum eight characters, at least one uppercase letter, one lowercase letter and one number:');//!!!!!!!
+		return;
+	}
+	if (R.pass_input.value !== R.conf_input.value)
+	{
+        R.error('NE sovpadaet!');//!!!!!!!
+        return;
+	}
+    R.setDiv('loading');
+    const request = new XMLHttpRequest();
+    let params = 'model=recovery&function=passUpdate' +
+        '&new_pass=' + R.pass_input.value;
+    request.open('POST', R.ajax_router);
+    request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    request.send(params);
+
+    request.onload = async function()
+    {
+        if (request.responseText === 'true') {
+        	R.setDiv('success');
+        	await R.sleep(3000);
+            location.pathname = '/selfie';
+        }
+        else
+            R.error('Ne udalos obnovit parol');//!!!!!!!!!!
+        R.setDiv('forgot_form');
+    };
+};
+
 R.nextStep = function () {
 	switch (R.step) {
 		case 0:
@@ -102,7 +141,7 @@ R.nextStep = function () {
             R.checkCode();
 			break;
 		case 2:
-
+			R.checkPass();
 			break;
 	}
 };

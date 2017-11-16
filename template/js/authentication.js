@@ -302,6 +302,6 @@ A.error = function (error) {
 	console.log(error);
 };
 
-A.errorHide = function () {
-
-};
+// A.errorHide = function () {
+//
+// };
