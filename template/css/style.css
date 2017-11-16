@@ -19,7 +19,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #FBBA00;
+    background-color: greenyellow;
 }
 
 #loading {
@@ -46,6 +46,17 @@ body {
 .auth_buttons span {
     cursor: pointer;
     -webkit-user-select: none;
+}
+
+
+.auth_buttons span {
+    color: #5F5E5E;
+    transition: all.6s ease; /* Скорость анимации наведения */
+}
+
+.auth_buttons span:hover {
+    color: #FBBA00;
+    transition: all.6s ease; /* Скорость анимации наведения */
 }
 
 header {
