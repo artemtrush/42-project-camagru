@@ -8,9 +8,9 @@ const R = (function () {
 	};
 }());
 
-R.sleep = function (ms) {
-	return new Promise(resolve => setTimeout(resolve, ms));
-};
+// R.sleep = function (ms) {
+// 	return new Promise(resolve => setTimeout(resolve, ms));
+// };
 
 R.initialization = function() {
 	R.alias_input = document.getElementById('rec_alias');
@@ -34,7 +34,6 @@ R.initialization = function() {
 R.setDiv = function (div_id) {
     document.getElementById('forgot_form').style.display = (div_id === 'forgot_form') ? 'flex' : 'none';
     document.getElementById('loading').style.display = (div_id === 'loading') ? 'block' : 'none';
-    document.getElementById('success').style.display = (div_id === 'success') ? 'block' : 'none';
 };
 
 R.prevStep = function () {
@@ -122,8 +121,6 @@ R.checkPass = function () {
     request.onload = async function()
     {
         if (request.responseText === 'true') {
-        	R.setDiv('success');
-        	await R.sleep(3000);
             location.pathname = '/selfie';
         }
         else

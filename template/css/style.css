@@ -19,7 +19,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: greenyellow;
+    /*background-color: greenyellow;*/
 }
 
 #loading {
@@ -27,10 +27,13 @@ body {
     background-size: 100%;
 }
 
-#success {
+
+/*#success {
     background-image: url(/template/img/success.jpg);
     background-size: 100%;
-}
+}*/
+
+
 
 /*style for header*/
 .menu {
@@ -50,7 +53,8 @@ body {
 
 
 .auth_buttons span {
-    color: #5F5E5E;
+    /*color: #5F5E5E;*/
+    color: black;
     transition: all.6s ease; /* Скорость анимации наведения */
 }
 
@@ -73,7 +77,6 @@ header {
     align-items: center;
     /*свойства wrap*/
     align-content: stretch;
-
 }
 
 header div {
@@ -88,6 +91,24 @@ header div {
 
 header span {
     cursor: pointer;
+}
+
+#search_input {
+    display: none;
+    width: 70%;
+    height: 40%;
+    outline: none;
+
+    text-align: center;
+    border-color: #5F5E5E;
+    border-width: 3px;
+    border-radius: 20px;
+}
+
+#search_button {
+    display: none;
+    width: 20%;
+    height: 40%;
 }
 
 

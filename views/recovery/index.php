@@ -30,7 +30,6 @@
 </div>
 
 <div id="loading" class="authentication_nav"></div>
-<div id="success" class="authentication_nav"></div>
 <?php require_once (ROOT.'/views/_footer.php'); ?>
 <script>R.initialization();</script>
 </body>

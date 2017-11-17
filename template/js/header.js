@@ -1,4 +1,25 @@
 
+function searchShow()
+{
+	document.getElementById('search_input').style.display = 'inline';
+	document.getElementById('search_span').style.display = 'none';
+	document.getElementById('search_input').focus();
+}
+
+function searchHide()
+{
+	document.getElementById('search_span').style.display = 'inline';
+	document.getElementById('search_input').style.display = 'none';
+}
+
+function searchStart(e)
+{
+	  if (e.keyCode == 13) {
+   	 alert("Ура нажали Enter");
+  }
+	console.log('start');
+}
+
 function signOut()
 {
     const request = new XMLHttpRequest();
