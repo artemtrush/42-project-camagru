@@ -84,7 +84,7 @@ A.switchSign = function() {
 
 A.checkLogin = function(callback) {
 	const string = A.login_input.value;
-	if (string.match(/^[a-zA-Z0-9_-]{3,15}$/g))
+	if (string.match(/^[a-zA-Z0-9_-]{3,15}$/))
 	{
 		const request = new XMLHttpRequest();
 		let params = 'model=authentication&function=loginVerify' +
@@ -123,7 +123,7 @@ A.checkLogin = function(callback) {
 
 A.checkEmail = function(callback) {
 	const string = A.email_input.value;
-	if (string.match(/^.{1,30}@.{1,19}$/g))
+	if (string.match(/^.{1,30}@.{1,19}$/))
 	{
 		const request = new XMLHttpRequest();
 		let params = 'model=authentication&function=emailVerify' +
@@ -162,7 +162,7 @@ A.checkEmail = function(callback) {
 
 A.checkPass = function() {
 	A.checkConfirm();
-	if (A.pass_input.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/g))
+	if (A.pass_input.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/))
 	{
 		A.pass_input.style.borderColor = A.pos_color;
 		return true;
@@ -174,7 +174,7 @@ A.checkPass = function() {
 
 A.checkConfirm = function() {
 	if (A.confirm_input.value === A.pass_input.value &&
-		A.confirm_input.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/g))
+		A.confirm_input.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/))
 	{
 		A.confirm_input.style.borderColor = A.pos_color;
 		return true;

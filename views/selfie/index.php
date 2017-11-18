@@ -16,7 +16,7 @@
 </head>
 <body>
 <?php require_once (ROOT.'/views/_header.php')?>
-<div style="height: 1400px">    </div>
+<div style="height: 1400px;">    </div>
 
 <?php require_once (ROOT.'/views/_footer.php')?>
 </body>

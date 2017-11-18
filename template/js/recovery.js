@@ -100,7 +100,7 @@ R.checkCode = function () {
 };
 
 R.checkPass = function () {
-	if (!(R.pass_input.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/g)))
+	if (!(R.pass_input.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/)))
 	{
 		R.error('Minimum eight characters, at least one uppercase letter, one lowercase letter and one number:');//!!!!!!!
 		return;
