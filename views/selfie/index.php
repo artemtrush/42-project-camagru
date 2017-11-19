@@ -12,12 +12,49 @@
     <link href="/template/css/reset.css" rel="stylesheet" type="text/css">
     <link href="/template/css/style.css" rel="stylesheet" type="text/css">
 
-    <script src="/template/js/selfie.js"></script>
 </head>
 <body>
 <?php require_once (ROOT.'/views/_header.php')?>
-<div style="height: 1400px;">    </div>
+
+<video id="video" width="640" height="480" autoplay poster="/template/img/success.jpg"></video>
+<button id="snap">Snap Photo</button>
+<canvas id="canvas" width="640" height="480"></canvas>
+<script>
+//    window.stream.getVideoTracks()[0].stop();
+
+        navigator.webcam = (
+            navigator.webkitGetUserMedia ||
+            navigator.mozGetUserMedia
+        );
+
+        function mediaSuccess(stream) {
+            const video = document.getElementById('video');
+            video.srcObject = stream;
+            video.play();
+        }
+
+        function mediaError(error) {
+            console.log(error);
+        }
+
+        navigator.webcam({video:true, audio:false}, mediaSuccess, mediaError)
+
+
+    // Elements for taking the snapshot
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+    var video = document.getElementById('video');
+
+    // Trigger photo take
+    document.getElementById("snap").addEventListener("click", function() {
+        context.drawImage(video, 0, 0, 640, 480);
+    });
+
+
+
+</script>
 
 <?php require_once (ROOT.'/views/_footer.php')?>
+<!--    <script src="/template/js/selfie.js"></script>-->
 </body>
 </html>
