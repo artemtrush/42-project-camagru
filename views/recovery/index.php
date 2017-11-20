@@ -31,6 +31,6 @@
 
 <div id="loading" class="authentication_nav"></div>
 <?php require_once (ROOT.'/views/_footer.php'); ?>
-<script>R.initialization();</script>
+<script>S.initialization();</script>
 </body>
 </html>

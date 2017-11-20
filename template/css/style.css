@@ -42,8 +42,21 @@ body {
 }
 
 /*video*/
-#video {
+.media_block {
+    display: none;
     border: 3px solid black;
+}
+#media_div {
+    width: 640px;
+    height: 480px; 
+}
+#upload_input {
+    opacity: 0;
+    height: 0;
+    width: 0;
+}
+#upload_img {
+
 }
 
 /*header*/
