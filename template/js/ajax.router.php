@@ -1,7 +1,6 @@
 <?php
 define('ROOT', dirname(dirname(__DIR__)));  
 include_once(ROOT.'/components/logger/ChromePhp.php');//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 if (isset($_POST['function']) && !empty($_POST['function'])
 	&& isset($_POST['model']) && !empty($_POST['model']))
 {

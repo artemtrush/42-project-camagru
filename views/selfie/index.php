@@ -17,11 +17,16 @@
 <body>
 <?php require_once (ROOT.'/views/_header.php');?>
 
+<span id="snap_span" onclick="S.snapshot();">Snap</span>
 <div id="media_div">
     <video class="media_block" id="video" autoplay></video>
     <img class="media_block" id="upload_img" src="#">
     <img class="media_block" id="emoji" src="#">
 </div>
+
+<br><br><br><br><br><br><br><br>
+
+
 
 <label>
     <span id="upload_span">Upload</span>

@@ -44,11 +44,14 @@ body {
 /*video*/
 .media_block {
     display: none;
+    position: absolute;
     border: 3px solid black;
+    width: 640px;
+    height: 480px;
 }
 #media_div {
     width: 640px;
-    height: 480px; 
+    height: 480px;
 }
 #upload_input {
     opacity: 0;
