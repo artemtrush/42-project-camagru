@@ -20,22 +20,15 @@ abstract class Selfie
     {
         $img_encoded = substr($params['image'], 22);
         $img = imagecreatefromstring(base64_decode($img_encoded));
-        switch (pathinfo($params['emoji_src'], PATHINFO_EXTENSION))
+        $emj_list = json_decode($params['emoji_list'], true);
+
+        for ($i = 0; $i < count($emj_list); $i++)
         {
-            case 'png':
-                $extension = 'png';
-                break;
-            case 'jpg':
-                $extension = 'jpeg';
-                break;
-            case 'bmp':
-                $extension = 'bmp';
-                break;
-            default:
-                return 'false';
+            $emj = imagecreatefrompng($emj_list[$i]['src']);
+            $left =  $emj_list[$i]['left'];
+            $top = $emj_list[$i]['top'];
+            imagecopy($img, $emj, $left, $top, 0, 0, imagesx($emj), imagesy($emj));
         }
-        $emj = ('imagecreatefrom'.$extension)($params['emoji_src']);
-        imagecopy($img, $emj, $params['left'], $params['top'], 0, 0, imagesx($emj), imagesy($emj));
         if (self::saveImage($img))
             return 'true';
         return 'false';

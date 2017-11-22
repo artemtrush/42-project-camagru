@@ -17,16 +17,15 @@
 <body>
 <?php require_once (ROOT.'/views/_header.php');?>
 
-<span id="snap_span" onclick="S.snapshot();">Snap</span>
 <div id="media_div">
-    <video class="media_block" id="video" autoplay></video>
-    <img class="media_block" id="upload_img" src="#">
-    <img class="media_block" id="emoji" src="#">
+    <video id="video" autoplay></video>
+    <img id="upload_img" src="#">
 </div>
 
 <br><br><br><br><br><br><br><br>
 
 
+<span id="snap_span" onclick="S.snapshot();">Snap</span>
 
 <label>
     <span id="upload_span">Upload</span>
@@ -35,7 +34,13 @@
 
 <br>
 
-
+<div id="emoji_div">
+    <img class="emoji" src="/template/img/sprite.png">
+    <img class="emoji" src="/template/img/twitter.png">
+    <img class="emoji" src="/template/img/0.png">
+    <img class="emoji" src="/template/img/11.png">
+    <img class="emoji" src="/template/img/12.png">
+</div>
 
 <!-- <canvas id="canvas" width="640" height="480"></canvas> -->
 

@@ -7,7 +7,7 @@ const H = (function () {
 
 H.initialization = function () {
     document.getElementById('search_input').onkeyup = function(event){
-        if (event.keyCode === 13)
+        if (event.which === 13)
             H.searchRedirect(document.getElementById('search_input').value);
         else
             H.searchStart();

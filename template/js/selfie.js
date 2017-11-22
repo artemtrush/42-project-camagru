@@ -1,8 +1,9 @@
 //    window.stream.getVideoTracks()[0].stop();
 const S = (function () {
 	return {
-        // media_width: 640,
-        // media_height: 480,
+	    target: null,
+        target_offset_left: 0,
+        target_offset_top: 0,
         media_width: 640,
         media_height: 480,
 	    currentMedia: 'image',
@@ -12,16 +13,13 @@ const S = (function () {
 
 S.initialization = function() {
 	navigator.webcam = (navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.getUserMedia);
-
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    document.getElementById('emoji').style.display = 'block';
-    //document.getElementById('emoji').src = '/template/img/sprite.png';
-    document.getElementById('emoji').src = '/template/img/sprite.png';
+    document.onmousedown= S.dragStart;
+    document.onmousemove = S.dragMove;
+    document.onmouseup = S.dragEnd;
 
 	S.videoJoin();
 	S.switchMedia();
 };
-
 
 S.switchMedia = function() {
     const image = document.getElementById('upload_img');
@@ -35,7 +33,8 @@ S.switchMedia = function() {
 S.multipartConvert = function(data, boundary) {
     let params = ['\r\n'];
     for (let key in data)
-        params.push('Content-Disposition: form-data; name=\"' + key + '\"\r\n\r\n' + data[key] + '\r\n');
+        if (data.hasOwnProperty(key))
+            params.push('Content-Disposition: form-data; name=\"' + key + '\"\r\n\r\n' + data[key] + '\r\n');
     params = params.join('--' + boundary + '\r\n') + '--' + boundary + '--\r\n';
     return params;
 };
@@ -49,18 +48,49 @@ S.getCanvasURL = function (id) {
     return canvas.toDataURL();
 };
 
+/*absolute coords*/
+S.getCoords = function(elem) {
+    let block = elem.getBoundingClientRect();
+    return {
+        left: parseInt(block.left) + parseInt(pageXOffset),
+        top: parseInt(block.top) + parseInt(pageYOffset)
+    };
+};
+
+S.getEmojiList = function() {
+    let emoji_collection = document.getElementsByClassName('emoji');
+    let emoji_list = [];
+    let media_coords = S.getCoords(document.getElementById('media_div'));
+    for (let i = 0; i < emoji_collection.length; i++)
+    {
+        if (emoji_collection[i].parentNode.id !== 'emoji_div')
+        {
+            emoji_list.push({
+                src: emoji_collection[i].src,
+                left: parseInt(emoji_collection[i].style.left) - media_coords.left,
+                top: parseInt(emoji_collection[i].style.top) - media_coords.top,
+                zinx: parseInt(emoji_collection[i].style.zIndex)
+            })
+        }
+    }
+    emoji_list.sort(function (a, b) {
+        if (a.zinx > b.zinx)
+            return 1;
+        return -1;
+    });
+    return emoji_list;
+};
+
 S.snapshot = function () {
     let media_id = (S.currentMedia === 'video') ? 'video' : 'upload_img';
     dataURL = S.getCanvasURL(media_id);
-console.log(document.getElementById("video").width);
+
     const request = new XMLHttpRequest();
     let data = {
     model: 'selfie',
     function: 'combineImage',
-    top: 100,
-    left: 100,
     image: dataURL,
-    emoji_src: document.getElementById('emoji').src
+    emoji_list: JSON.stringify(S.getEmojiList())
     };
     let boundary = String(Math.random()).slice(2);
     let params = S.multipartConvert(data, boundary);
@@ -100,4 +130,60 @@ S.uploadImage = function() {
 
 	if (input_file)
 		reader.readAsDataURL(input_file);
+};
+
+S.maxIndex = function () {
+    let highest_index = 1;
+    const elements = document.getElementsByClassName('emoji');
+    for (let i = 0; i < elements.length; i++)
+    {
+        if (highest_index <= parseInt(elements[i].style.zIndex))
+            highest_index = parseInt(elements[i].style.zIndex) + 1;
+    }
+    return highest_index;
+};
+
+S.dragStart = function (event) {
+    if (event.which !== 1)
+        return;
+    S.target = event.target.closest('.emoji');
+    if (!S.target)
+        return;
+    if (S.target.parentNode.id === 'emoji_div')
+    {
+        let avatar = document.createElement('img');
+        avatar.src = S.target.src;
+        avatar.className = S.target.className;
+        document.body.appendChild(avatar);
+        avatar.style.position = 'absolute';
+        avatar.style.left = S.getCoords(S.target).left + 'px';
+        avatar.style.top = S.getCoords(S.target).top + 'px';
+        S.target = avatar;
+    }
+    S.target_offset_left = event.pageX - S.getCoords(S.target).left;
+    S.target_offset_top = event.pageY - S.getCoords(S.target).top;
+    S.target.style.zIndex = S.maxIndex();
+    /*return -> select forbiddance*/
+    return false;
+};
+
+S.dragMove = function (event) {
+    if (!S.target)
+        return;
+    S.target.style.left = event.pageX - S.target_offset_left + 'px';
+    S.target.style.top = event.pageY - S.target_offset_top + 'px';
+};
+
+S.dragEnd = function (event) {
+    if (event.which !== 1)
+        return;
+    if (!S.target)
+        return;
+    const media = document.getElementById('media_div').getBoundingClientRect();
+    if (event.clientX < media.left ||
+        event.clientY < media.top ||
+        event.clientX > media.left + media.width ||
+        event.clientY > media.top + media.height)
+        S.target.remove();
+    S.target = null;
 };
