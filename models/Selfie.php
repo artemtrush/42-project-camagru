@@ -44,4 +44,16 @@ abstract class Selfie
             return 'true';
         return 'false';
     }
+
+    public static function getImages($params)
+    {
+        if (!isset($_SESSION))
+            session_start();
+        $id = $_SESSION['user_id'];
+        $number = intval($params['number']);
+        $query = "SELECT image.path FROM image WHERE image.user_id = :id ORDER BY image.id DESC LIMIT :number";
+        $result = DB::query($query, array(':id' => $id, ':number' => $number));
+
+        return json_encode($result);
+    }
 }

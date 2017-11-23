@@ -34,7 +34,7 @@ G.getImages = function() {
         let btn_enabled = true;
         if (!request.responseText.match(/.*false$/))
         {
-            let array = JSON.parse(request.responseText);   console.log(array);
+            let array = JSON.parse(request.responseText);
             if (array[0] > 0)
                 G.image_last = array[0];
             else

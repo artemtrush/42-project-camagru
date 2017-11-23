@@ -13,14 +13,12 @@ if (isset($_POST['function']) && !empty($_POST['function'])
 		unset($_POST['model']);
 		include_once(ROOT.'\components\PDOdatabase.php');
 		include_once($modelFile);
-		try 
-		{
+		try {
 			$result = $function($_POST);
 			echo $result;
 		}
-		catch (Exception $e)
-		{
-			echo 'Request error occurred.';
+		catch (Exception $e) {
+		    echo $e->getMessage();
 		}
 		return ;
 	}

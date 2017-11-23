@@ -15,16 +15,16 @@ abstract class Gallery
 	public static function getImages($params)
 	{
 		$id = $params['id'];
-		$last = $params['image_last'];
+		$last = intval($params['image_last']);
 		$query = "SELECT image.path FROM image WHERE image.user_id = :id AND image.id > :last LIMIT 10";
 		$result = DB::query($query, array(':id' => $id, ':last' => $last));
 		$last = -1;
 		if (count($result) === 10)
 		{
 			unset($result[9]);
-			$last_query = "SELECT image.id FROM image WHERE image.src = :src";
-			$last_result = DB::query($query, array(':src' => $result[8]['path']), false);
-			$last_array = $result->fetch(PDO::FETCH_ASSOC);
+			$last_query = "SELECT image.id FROM image WHERE image.path = :path";
+			$last_result = DB::query($last_query, array(':path' => $result[8]['path']), false);
+			$last_array = $last_result->fetch(PDO::FETCH_ASSOC);
 			if ($last_array)
 				$last = $last_array['id'];
 		}			

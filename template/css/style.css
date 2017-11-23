@@ -91,23 +91,25 @@ header span:hover {
 }
 
 /*footer*/
-footer {
+footer hr {
+
+}
+
+footer div {
     width: 100%;
     min-height: 50px;
 
     font-size: 20px;
     font-family: 'Acme', sans-serif;
 
-
     display: flex;
     flex-wrap: wrap;
-    /*свойства ряда*/
     justify-content: space-between;
     align-items: center;
-    /*свойства wrap*/
     align-content: stretch;
 }
-footer div {
+
+footer span {
     height: 30px;
     line-height: 30px;
 }

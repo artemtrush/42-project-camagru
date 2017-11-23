@@ -2,6 +2,7 @@
     width: 640px;
     height: 480px;
 }
+
 #video, #upload_img {
     display: none;
     position: relative;
@@ -10,14 +11,35 @@
     height: 480px;
     z-index: 0;
 }
+
 .emoji {
     cursor: pointer;
     /*width: 64px;*/
     /*height: 64px;*/
     /*cursor: url('путь к курсору1'), url('путь к курсору2'), ..., <ключевое слово>*/
 }
+
 #upload_input {
     opacity: 0;
     height: 0;
     width: 0;
+}
+
+#main_div, #side_div {
+    height: 800px;
+}
+
+#main_div {
+    float: left;
+}
+
+#side_div {
+    float: right;
+    width: 200px;
+    background-color: orange;
+}
+
+#side_div img {
+    width: 160px;
+    height: 120px;
 }

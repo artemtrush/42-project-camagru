@@ -1,10 +1,12 @@
-<hr>
 <footer>
+    <hr>
     <div>
-        Copyright @ <?=date ('Y')?> All Rights Reserved
-    </div>
+        <span>
+            Copyright @ <?=date ('Y')?> All Rights Reserved
+        </span>
 
-    <div>
-        Designed by "atrush"
+        <span>
+            Designed by "atrush"
+        </span>
     </div>
 </footer>

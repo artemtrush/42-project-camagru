@@ -6,6 +6,7 @@ const S = (function () {
         target_offset_top: 0,
         media_width: 640,
         media_height: 480,
+        sidebar_max_images: 6,
 	    currentMedia: 'image',
 		ajax_router: '/template/js/ajax.router.php'
 	};
@@ -19,6 +20,38 @@ S.initialization = function() {
 
 	S.videoJoin();
 	S.switchMedia();
+	S.getImages(S.sidebar_max_images);
+};
+
+S.appendImage = function (path) {
+    const container = document.getElementById('side_div');
+    let img = document.createElement('img');
+    img.src = path;
+    container.appendChild(img);
+};
+
+S.getImages = function (number) {
+    const request = new XMLHttpRequest();
+    let params = 'model=selfie&function=getImages' +
+                '&number=' + number;
+    request.open('POST', S.ajax_router);
+    request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    request.send(params);
+
+    request.onload = function()
+    {
+        if (!request.responseText.match(/.*false$/))
+        {
+            try {
+                let array = JSON.parse(request.responseText);
+                for (let i = 0; i < array.length; i++)
+                    S.appendImage(array[i].path);
+                return;
+            }
+            catch (e) {}
+        }
+        console.log('getImages error');
+    }
 };
 
 S.switchMedia = function() {
@@ -81,6 +114,19 @@ S.getEmojiList = function() {
     return emoji_list;
 };
 
+S.emojiFree = function () {
+    let emoji_collection = document.getElementsByClassName('emoji');
+
+    let i = 0;
+    while (i < emoji_collection.length)
+    {
+        if (emoji_collection[i].parentNode.id !== 'emoji_div')
+            emoji_collection[i].remove();
+        else
+            i++;
+    }
+};
+
 S.snapshot = function () {
     let media_id = (S.currentMedia === 'video') ? 'video' : 'upload_img';
     dataURL = S.getCanvasURL(media_id);
@@ -100,6 +146,7 @@ S.snapshot = function () {
 
     if (request.status === 200)
     {
+        S.getImages(1);
         console.log('snap = ' + request.responseText);
     }
 };
