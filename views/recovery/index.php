@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
 
-    <link href="/template/css/reset.css" rel="stylesheet" type="text/css">
     <link href="/template/css/style.css" rel="stylesheet" type="text/css">
 
     <script src="/template/js/recovery.js"></script>
@@ -30,7 +29,7 @@
 </div>
 
 <div id="loading" class="authentication_nav"></div>
-<?php require_once (ROOT.'/views/_footer.php'); ?>
+<?php include_once (ROOT.'/views/_footer.php'); ?>
 <script>S.initialization();</script>
 </body>
 </html>

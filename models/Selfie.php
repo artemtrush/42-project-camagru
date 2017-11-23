@@ -11,9 +11,20 @@ abstract class Selfie
         if (!file_exists($dir))
             mkdir($dir, 0777, true);
         do {
-            $file = ROOT.'/database/'.$id.'/'.uniqid().'.png';
-        } while (file_exists($file));
-        return imagepng($data, $file);
+            $file = '/database/'.$id.'/'.uniqid().'.png';
+        } while (file_exists(ROOT.$file));
+
+        if (imagepng($data, ROOT.$file))
+        {
+            $query = "INSERT INTO image (user_id, rating, path) VALUES (:user_id, :rating, :path)";
+            $result = DB::query($query, array(':user_id' => $id,
+                                            ':rating' => 0,
+                                            ':path' => $file),
+                                            false);
+            if ($result)
+                return true;
+        }
+        return false;
     }
 
     public static function combineImage($params)

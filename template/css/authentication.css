@@ -1,0 +1,30 @@
+.authentication_nav {
+    width: 400px;
+    height: 200px;
+    display: none;
+}
+#sign_form, #forgot_form {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /*background-color: greenyellow;*/
+}
+#loading {
+    background-image: url(/template/img/8.svg);
+    background-size: 100%;
+}
+
+/*authentication buttons*/
+.auth_buttons span {
+    cursor: pointer;
+    -webkit-user-select: none;
+}
+.auth_buttons span {
+    /*color: #5F5E5E;*/
+    color: black;
+    transition: all.6s ease; /* Скорость анимации наведения */
+}
+.auth_buttons span:hover {
+    color: #FBBA00;
+    transition: all.6s ease; /* Скорость анимации наведения */
+}

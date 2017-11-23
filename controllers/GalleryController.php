@@ -6,13 +6,19 @@ class GalleryController
 {
     public function actionIndex()
     {
-
-        return true;
+    	if (!isset($_SESSION))
+    		session_start();
+    	$id = $_SESSION['user_id'];
+    	return $this->actionView($id);
     }
 
     public function actionView($id)
     {
-        echo 'id ='.$id;
+        if (!isset($_SESSION))
+    		session_start();
+    	$access = ($id === $_SESSION['user_id']) ? true : false;
+        $login = Gallery::getLogin($id);
+        require_once(ROOT.'/views/gallery/index.php'); 
         return true;
     }
 }
