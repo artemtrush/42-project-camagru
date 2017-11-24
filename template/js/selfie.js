@@ -25,6 +25,8 @@ S.initialization = function() {
 
 S.appendImage = function (path) {
     const container = document.getElementById('side_div');
+    if (container.childNodes.length >= S.sidebar_max_images)
+        container.firstChild.remove();
     let img = document.createElement('img');
     img.src = path;
     container.appendChild(img);
@@ -46,11 +48,15 @@ S.getImages = function (number) {
                 let array = JSON.parse(request.responseText);
                 for (let i = 0; i < array.length; i++)
                     S.appendImage(array[i].path);
-                return;
             }
-            catch (e) {}
+            catch (e) {
+                console.log('getImages error');        
+            }
         }
-        console.log('getImages error');
+        else
+            console.log('getImages error');
+        if (document.getElementById('side_div').childNodes.length === 0)
+            console.log('empty');
     }
 };
 
@@ -140,14 +146,15 @@ S.snapshot = function () {
     };
     let boundary = String(Math.random()).slice(2);
     let params = S.multipartConvert(data, boundary);
-    request.open('POST', S.ajax_router, false);
+    request.open('POST', S.ajax_router);
     request.setRequestHeader('Content-type', 'multipart/form-data; boundary=' + boundary);
     request.send(params);
 
-    if (request.status === 200)
-    {
-        S.getImages(1);
-        console.log('snap = ' + request.responseText);
+    request.onload = function () {
+        if (request.responseText === 'true')
+            S.getImages(1);
+        else
+            console.log('snapError');
     }
 };
 

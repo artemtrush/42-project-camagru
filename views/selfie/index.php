@@ -40,9 +40,7 @@
     </div>
 </div>
 
-<div id="side_div">
-
-</div>
+<div id="side_div"></div>
 
 
 <?php include_once (ROOT.'/views/_footer.php');?>
