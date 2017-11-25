@@ -53,7 +53,29 @@ abstract class Selfie
         $number = intval($params['number']);
         $query = "SELECT image.path FROM image WHERE image.user_id = :id ORDER BY image.id DESC LIMIT :number";
         $result = DB::query($query, array(':id' => $id, ':number' => $number));
-
         return json_encode($result);
+    }
+
+    public static function getEmoji($params)
+    {
+        $dir = ROOT.'/template/img/'.$params['dir'];
+        if (!file_exists($dir))
+            return 'false';
+        $list = scandir($dir);
+        $array = array();
+        foreach ($list as $file)
+            if (pathinfo($file, PATHINFO_EXTENSION) === 'png')
+                array_push($array, '/template/img/'.$params['dir'].'/'.$file);
+        return json_encode($array);
+    }
+
+    public static function deleteImage($params)
+    {
+        $path = strstr($params['path'],'/database/');
+        $query = "DELETE FROM image WHERE image.path = :path";
+        $result = DB::query($query, array(':path' => $path), false);
+        if ($result)
+            return 'true';
+        return 'false';
     }
 }

@@ -1,7 +1,7 @@
 
 const G = (function () {
     return {
-        image_last: 0,
+        image_last: 4294967295,//max id value
         ajax_router: '/template/js/ajax.router.php'
     };
 }());
@@ -10,10 +10,16 @@ G.initialization = function () {
     G.getImages();
 };
 
+G.viewImage = function (image) {
+    const view = document.getElementById('view_image');
+    view.style.display = 'block';
+};
+
 G.appendImage = function (path) {
     const container = document.getElementById('image_container');
     let img = document.createElement('img');
     img.src = path;
+    img.onclick = function(){G.viewImage(this);};
     container.appendChild(img);
 };
 
@@ -32,8 +38,7 @@ G.getImages = function() {
     request.onload = function()
     {
         let btn_enabled = true;
-        if (!request.responseText.match(/.*false$/))
-        {
+        try {
             let array = JSON.parse(request.responseText);
             if (array[0] > 0)
                 G.image_last = array[0];
@@ -42,11 +47,12 @@ G.getImages = function() {
             for (let i = 1; i < array.length; i++)
                 G.appendImage(array[i].path);
         }
-        else
-        {
+        catch (e) {
             console.log('getImages error');
         }
         if (btn_enabled)
             button.style.display = 'block';
-    }
+        if (document.getElementById('image_container').childNodes.length === 0)
+            console.log('empty');
+    };
 };

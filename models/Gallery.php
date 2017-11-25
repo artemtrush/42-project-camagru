@@ -16,7 +16,7 @@ abstract class Gallery
 	{
 		$id = $params['id'];
 		$last = intval($params['image_last']);
-		$query = "SELECT image.path FROM image WHERE image.user_id = :id AND image.id > :last LIMIT 10";
+		$query = "SELECT image.path FROM image WHERE image.user_id = :id AND image.id < :last ORDER BY image.id DESC LIMIT 10";
 		$result = DB::query($query, array(':id' => $id, ':last' => $last));
 		$last = -1;
 		if (count($result) === 10)

@@ -19,6 +19,9 @@
 
 <div id='image_container'></div>
 <span id="more_button" onclick="G.getImages();">MORE</span>
+<div id="view_image"></div>
+
+<div style="height: 3000px;"></div>
 
 <?php include_once (ROOT.'/views/_footer.php');?>
 <script>

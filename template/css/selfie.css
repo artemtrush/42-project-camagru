@@ -1,12 +1,41 @@
-#media_div {
+#main_div {
+    height: 800px;
+}
+#main_div {
+    width: 800px;
+    float: left;
+}
+
+#media_div, .emoji_div {
+    float: left;
     width: 640px;
+}
+#media_div {
+    height: 480px;
+    border: 3px solid black;
+}
+.emoji_div {
+    display: none;
+    height: 200px;
+}
+
+#button_div, #emoji_tab {
+    float: left;
+    width: 150px;
+}
+#button_div {
     height: 480px;
 }
+#emoji_tab {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
 
 #video, #upload_img {
     display: none;
     position: relative;
-    border: 3px solid black;
     width: 640px;
     height: 480px;
     z-index: 0;
@@ -14,9 +43,14 @@
 
 .emoji {
     cursor: pointer;
-    /*width: 64px;*/
-    /*height: 64px;*/
     /*cursor: url('путь к курсору1'), url('путь к курсору2'), ..., <ключевое слово>*/
+}
+
+.tab_buttons_enabled{
+    background-color: green;
+}
+.tab_buttons_disabled {
+    background-color: red;
 }
 
 #upload_input {
@@ -25,21 +59,30 @@
     width: 0;
 }
 
-#main_div, #side_div {
-    height: 800px;
-}
-
-#main_div {
-    float: left;
-}
-
-#side_div {
-    float: right;
+#sidebar {
+    overflow: hidden;
     width: 200px;
+    float: right;
     background-color: orange;
-}
 
+}
+#side_div {
+    top: -20px;
+    width: 100%;
+    height: 0;
+
+    transition: all 3s ease-in-out;
+    -webkit-transition: all 2s ease-in-out;
+    -moz-transition: all 2s ease-in-out;
+}
 #side_div img {
     width: 160px;
     height: 120px;
+}
+#side_button {
+    position: relative;
+
+    width: 100%;
+    height: 50px;
+    background-color: red;
 }

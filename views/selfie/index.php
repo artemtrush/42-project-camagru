@@ -18,30 +18,42 @@
 
 <div id="main_div">
     <div id="media_div">
-        <video id="video" autoplay></video>
+        <video id="video" autoplay poster="/template/img/poster.png"></video>
         <img id="upload_img" src="#">
     </div>
 
-    <br>
-
-    <span id="snap_span" onclick="S.snapshot();">Snap</span>
-    <span id="free_span" onclick="S.emojiFree();">Free</span>
-    <label>
-        <span id="upload_span">Upload</span>
-        <input id="upload_input" type="file" accept="image/*" onchange="S.uploadImage();">
-    </label>
-
-    <div id="emoji_div">
-    <img class="emoji" src="/template/img/sprite.png">
-    <img class="emoji" src="/template/img/twitter.png">
-    <img class="emoji" src="/template/img/0.png">
-    <img class="emoji" src="/template/img/11.png">
-    <img class="emoji" src="/template/img/12.png">
+    <div id="button_div">
+        <div id="free_button" onclick="S.emojiFree();">
+            Free
+        </div>
+        <div id="unload_button" onclick="S.switchMedia();">
+            Switch
+        </div>
+        <div id="upload_button" onclick="document.getElementById('upload_input').click();">
+            Upload
+            <input id="upload_input" type="file" accept="image/*" onchange="S.uploadImage();">
+        </div>
+        <div id="snap_button" onclick="S.snapshot();">
+            Snap
+        </div>
     </div>
+
+    <div id="size64" class="emoji_div"></div>
+    <div id="size128" class="emoji_div"></div>
+    <div id="size256" class="emoji_div"></div>
+
+    <div id="emoji_tab">
+        <div id="btn64" class="tab_buttons_disabled" onclick="S.openPack(event, 'size64')">64</div>
+        <div id="btn128" class="tab_buttons_disabled" onclick="S.openPack(event, 'size128')">128</div>
+        <div id="btn256" class="tab_buttons_disabled" onclick="S.openPack(event, 'size256')">256</div>
+    </div>
+
 </div>
 
-<div id="side_div"></div>
-
+<div id="sidebar">
+    <div id="side_div"></div>
+    <div id="side_button" onclick="S.sidehide();"></div>
+</div>
 
 <?php include_once (ROOT.'/views/_footer.php');?>
 <script>S.initialization();</script>
