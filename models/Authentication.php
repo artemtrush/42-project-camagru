@@ -16,10 +16,10 @@ abstract class Authentication
 	public static function loginVerify($params)
 	{
 		$username = $params['username'];
-		$query = "SELECT COUNT(login) FROM user WHERE user.login = :name";
+		$query = "SELECT COUNT(login) AS number FROM user WHERE user.login = :name";
 		$result = DB::query($query, array(':name' => $username), false);
 		$result_array = $result->fetch(PDO::FETCH_ASSOC);
-		if ($result_array['COUNT(login)'] === 0)
+		if ($result_array['number'] === 0)
 			return 'true';
 		return 'false';
 	}

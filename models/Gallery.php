@@ -2,6 +2,17 @@
 
 abstract class Gallery
 {
+    private static function getImageId($src)
+    {
+        $path = strstr($src,'/database/');
+        $query = "SELECT image.id FROM image WHERE image.path = :path";
+        $result = DB::query($query, array(':path' => $path), false);
+        $result_array = $result->fetch(PDO::FETCH_ASSOC);
+        if ($result_array)
+            return $result_array['id'];
+        return false;
+    }
+
 	public static function getLogin($id)
 	{
 		$query = "SELECT user.login FROM user WHERE user.id = :id";
@@ -31,4 +42,63 @@ abstract class Gallery
 		array_unshift($result, $last);
 		return json_encode($result);
 	}
+
+	public static function likeImage($params)
+    {
+        if (!isset($_SESSION))
+            session_start();
+        $user_id = $_SESSION['user_id'];
+        $image_id = self::getImageId($params['src']);
+        if (!$image_id)
+            return 'false';
+        $query = "INSERT INTO vote (image_id, user_id) VALUES (:image_id, :user_id)";
+        $result = DB::query($query, array(':image_id' => $image_id, ':user_id' => $user_id), false);
+        if ($result)
+            return 'true';
+        return 'false';
+    }
+
+    public static function dislikeImage($params)
+    {
+        if (!isset($_SESSION))
+            session_start();
+        $user_id = $_SESSION['user_id'];
+        $image_id = self::getImageId($params['src']);
+        if (!$image_id)
+            return 'false';
+        $query = "DELETE FROM vote WHERE vote.image_id = :image_id AND vote.user_id = :user_id";
+        $result = DB::query($query, array(':image_id' => $image_id, ':user_id' => $user_id), false);
+        if ($result)
+            return 'true';
+        return 'false';
+    }
+
+    public static function checkVote($params)
+    {
+        if (!isset($_SESSION))
+            session_start();
+        $user_id = $_SESSION['user_id'];
+        $image_id = self::getImageId($params['src']);
+        if (!$image_id)
+            return 'error';
+        $query = "SELECT vote.image_id FROM vote WHERE vote.image_id = :image_id AND vote.user_id = :user_id";
+        $result = DB::query($query, array(':image_id' => $image_id, ':user_id' => $user_id), false);
+        $result_array = $result->fetch(PDO::FETCH_ASSOC);
+        if ($result_array)
+            return 'true';
+        return 'false';
+    }
+
+    public static function countVotes($params)
+    {
+        $image_id = self::getImageId($params['src']);
+        if (!$image_id)
+            return 'false';
+        $query = "SELECT COUNT(vote.image_id) AS number FROM vote WHERE vote.image_id = :image_id";
+        $result = DB::query($query, array(':image_id' => $image_id), false);
+        $result_array = $result->fetch(PDO::FETCH_ASSOC);
+        if ($result_array)
+            return $result_array['number'];
+        return 'false';
+    }
 }

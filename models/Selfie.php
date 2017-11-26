@@ -16,11 +16,8 @@ abstract class Selfie
 
         if (imagepng($data, ROOT.$file))
         {
-            $query = "INSERT INTO image (user_id, rating, path) VALUES (:user_id, :rating, :path)";
-            $result = DB::query($query, array(':user_id' => $id,
-                                            ':rating' => 0,
-                                            ':path' => $file),
-                                            false);
+            $query = "INSERT INTO image (user_id, path) VALUES (:user_id, :path)";
+            $result = DB::query($query, array(':user_id' => $id, ':path' => $file), false);
             if ($result)
                 return true;
         }

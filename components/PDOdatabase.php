@@ -72,12 +72,14 @@ abstract class DB
             $user_query = file_get_contents(ROOT.'/config/sql/user.sql');
             $image_query = file_get_contents(ROOT.'/config/sql/image.sql');
             $comment_query = file_get_contents(ROOT.'/config/sql/comment.sql');
+            $vote_query = file_get_contents(ROOT.'/config/sql/vote.sql');
             try
             {
                 self::$db->exec($create_query);
                 self::$db->exec($user_query);
                 self::$db->exec($image_query);
                 self::$db->exec($comment_query);
+                self::$db->exec($vote_query);
                 echo "Database 'camagru' has been created" . PHP_EOL;
                 return true;
             }
