@@ -23,6 +23,7 @@ S.initialization = function() {
 	S.videoJoin();
 	S.handleFree();
 	S.switchMedia();
+     document.getElementById('switch_button').style.backgroundColor = 'red'; //!!!!!!!!!!!!!!!!!
 	S.getImages(S.sidebar_max_images);
     S.loadPack('size64', '64');
     S.loadPack('size128', '128');
@@ -41,10 +42,12 @@ S.handleFree = function () {
     if (i === emoji_collection.length)
     {
         free.style.backgroundColor = 'red';
+        free.onclick = null;
     }
     else
     {
         free.style.backgroundColor = 'green';
+        free.onclick = S.emojiFree;
     }
 };
 
@@ -58,10 +61,12 @@ S.handleSnap = function () {
     if (i === emoji_collection.length || (S.currentMedia === 'video' && S.video_active === false))
     {
         snap.style.backgroundColor = 'red';
+        snap.onclick = null;
     }
     else
     {
         snap.style.backgroundColor = 'green';
+        snap.onclick = S.snapshot;
     }
 };
 
@@ -243,7 +248,8 @@ S.uploadImage = function() {
 		image.src = reader.result;
 		if (S.currentMedia === 'video')
 		    S.switchMedia();
-        document.getElementById('unload_button').style.backgroundColor = 'green';
+        document.getElementById('switch_button').style.backgroundColor = 'green';
+        document.getElementById('switch_button').onclick = S.switchMedia;
 	};
 
 	if (input_file)

@@ -66,27 +66,72 @@ G.countVotes = function (src) {
     };
 };
 
-G.addSocialShare = function(href, url, ico) {
-   const container = document.getElementById('social_container');
-   let link = document.createElement('a');
-   let img = document.createElement('img');
+G.appendComment = function (user, date, text) {
+    const container = document.getElementById('comment_box');
+    let span = document.createElement('span');
+    span.ClassName = 'comment_span';
+    span.innerHTML = text;
+    container.appendChild(span);
+};
 
-   img.src = ico;
-   img.className = 'social_icon';
-   link.href = href + url;
-   link.className = 'social_link';
-   link.appendChild(img);
-   container.appendChild(link);
+G.getComments = function () {
+    const request = new XMLHttpRequest();
+    let params = 'model=gallery&function=getComments' +
+                '&src=' + document.getElementById('selected_image').src;
+    request.open('POST', G.ajax_router);
+    request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    request.send(params);
+    request.onload = function()
+    {
+        try
+        {
+            let array = JSON.parse(request.responseText);
+            for (let i = 0; i < array.length; i++)
+                G.appendComment(array[i]['username'], array[i]['date'], array[i]['text']);
+        }
+        catch
+            console.log('get comments error');
+    };
+};
+
+G.sendComment = function () {
+    const area = document.getElementById('comment_area');
+    let text = area.value;
+    const request = new XMLHttpRequest();
+    let params = 'model=gallery&function=sendComment' +
+                '&message=' + text +
+                '&src=' + document.getElementById('selected_image').src;
+    request.open('POST', G.ajax_router);
+    request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    request.send(params);
+    area.value = '';
+    request.onload = function()
+    {
+        try
+        {
+            let array = JSON.parse(request.responseText);
+            G.appendComment(array['username'], array['date'], text);
+        }
+        catch
+            console.log('comment add errror');
+    };
 };
 
 G.viewImage = function (image) {
-    document.getElementById('selected_image').src = image.src;
     G.checkVote(image.src);
     G.countVotes(image.src);
-    let share_url = 'https://itc.ua/wp-content/uploads/2017/04/Unit-Factory.jpg';
-    G.addSocialShare('http://www.facebook.com/sharer.php?u=', share_url, '/template/img/like.png');
-    G.addSocialShare('http://twitter.com/share?url=', share_url, '/template/img/like.png');
-    G.addSocialShare('https://plus.google.com/share?url=', share_url, '/template/img/like.png');
+
+    if (document.getElementById('selected_image').src !== image.src)
+    {
+        document.getElementById('selected_image').src = image.src;
+        let share_url = 'https://itc.ua/wp-content/uploads/2017/04/Unit-Factory.jpg';
+        document.getElementById('telegram').href = 'https://t.me/share/url?url=' + share_url;
+        document.getElementById('facebook').href = 'http://www.facebook.com/sharer.php?u=' + share_url;
+        document.getElementById('twitter').href = 'http://twitter.com/share?url=' + share_url;
+        document.getElementById('linkedin').href = 'http://www.linkedin.com/shareArticle?url=' + share_url;
+        document.getElementById('google').href = 'https://plus.google.com/share?url=' + share_url;
+        document.getElementById('comment_area').value = '';
+    }
     document.getElementById('view_image').style.display = 'block';
 };
 

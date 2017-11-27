@@ -21,8 +21,8 @@ abstract class DB
                 * ERRMODE_EXCEPTION - Выбрасывать исключения.
                 */
                 self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                self::$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
                 //отключить клиент-серверную эмуляцию подготавливаемых запросов
+                self::$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
                 self::$db->exec("SET NAMES UTF8");
             }
             catch (PDOException $error)
@@ -42,12 +42,25 @@ abstract class DB
         return true;
     }
 
+    private static function delFolder($dir)
+    {
+        if (!file_exists($dir))
+            return false;
+        $files = array_diff(scandir($dir), array('.','..'));
+        foreach ($files as $file)
+        {
+            (is_dir("$dir/$file")) ? delFolder("$dir/$file") : unlink("$dir/$file");
+        }
+        return rmdir($dir);
+    }
+
     private static function delete()
     {
         try
         {
             self::$db->exec("DROP DATABASE IF EXISTS camagru");
             echo "Database 'camagru' has been deleted" . PHP_EOL;
+            self::delFolder(ROOT.'/database');
             return true;
         }
         catch (PDOException $error) {

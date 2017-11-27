@@ -72,7 +72,10 @@ abstract class Selfie
         $query = "DELETE FROM image WHERE image.path = :path";
         $result = DB::query($query, array(':path' => $path), false);
         if ($result)
+        {
+            unlink(ROOT.$path);
             return 'true';
+        }
         return 'false';
     }
 }

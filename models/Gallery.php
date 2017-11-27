@@ -101,4 +101,19 @@ abstract class Gallery
             return $result_array['number'];
         return 'false';
     }
+
+    public static function getComments($params)
+    {
+        $image_id = self::getImageId($params['src']);
+        $query = "SELECT comment.user_id as username, comment.text, comment.date FROM comment WHERE comment.image_id = :image_id";
+        $result = DB::query($query, array(':image_id' => $image_id));
+        foreach ($result as $field)
+            $field['username'] = self::getLogin($field['username']);
+        return json_encode($result);
+    }
+
+    public static function sendComment($params)
+    {
+
+    }
 }

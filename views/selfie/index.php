@@ -26,7 +26,7 @@
         <div id="free_button" onclick="S.emojiFree();">
             Free
         </div>
-        <div id="unload_button" onclick="S.switchMedia();">
+        <div id="switch_button">
             Switch
         </div>
         <div id="upload_button" onclick="document.getElementById('upload_input').click();">
