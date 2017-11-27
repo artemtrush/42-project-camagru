@@ -83,14 +83,14 @@ G.getComments = function () {
     request.send(params);
     request.onload = function()
     {
-        try
-        {
+        try {
             let array = JSON.parse(request.responseText);
             for (let i = 0; i < array.length; i++)
                 G.appendComment(array[i]['username'], array[i]['date'], array[i]['text']);
         }
-        catch
+        catch (e) {
             console.log('get comments error');
+        }
     };
 };
 
@@ -107,19 +107,20 @@ G.sendComment = function () {
     area.value = '';
     request.onload = function()
     {
-        try
-        {
+        try {
             let array = JSON.parse(request.responseText);
             G.appendComment(array['username'], array['date'], text);
         }
-        catch
+        catch (e) {
             console.log('comment add errror');
+        }
     };
 };
 
 G.viewImage = function (image) {
     G.checkVote(image.src);
     G.countVotes(image.src);
+    G.getComments();
 
     if (document.getElementById('selected_image').src !== image.src)
     {

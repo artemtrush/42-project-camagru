@@ -105,6 +105,8 @@ abstract class Gallery
     public static function getComments($params)
     {
         $image_id = self::getImageId($params['src']);
+        if (!$image_id)
+            return 'false';
         $query = "SELECT comment.user_id as username, comment.text, comment.date FROM comment WHERE comment.image_id = :image_id";
         $result = DB::query($query, array(':image_id' => $image_id));
         foreach ($result as $field)
@@ -114,6 +116,21 @@ abstract class Gallery
 
     public static function sendComment($params)
     {
-
+        if (!isset($_SESSION))
+            session_start();
+        $user_id = $_SESSION['user_id'];
+        $text = $params['text'];
+        $image_id = self::getImageId($params['src']);
+        if (!$image_id)
+            return 'false';
+        $query = "INSERT INTO comment (user_id, image_id, text) VALUES (:user_id, :image_id, :text)";
+        $result = DB::query($query, array(':user_id' => $user_id, ':image_id' => $image_id, ':text' => $text), false);
+        if ($result)
+        {
+            $array['username'] = self::getLogin($user_id);
+            $array['date'] = '00000';
+            return json_encode($array);
+        }
+        return 'false';
     }
 }
