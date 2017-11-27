@@ -83,7 +83,7 @@
 #message_box textarea {
 	resize: none;
 	outline: none;
-	overflow: auto;
+	/*overflow: auto;*/
 }
 
 
@@ -149,4 +149,8 @@
 .social_icon {
 	width: 32px;
 	height: 32px;
+}
+
+#remove_button {
+	display: none;
 }

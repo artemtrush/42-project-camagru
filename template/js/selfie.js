@@ -93,6 +93,9 @@ S.removeImage = function (image) {
     request.onload = function()
     {
         if (request.responseText === 'true') {
+            const container = document.getElementById('side_div');
+            while (container.firstChild)
+                container.firstChild.remove();
             S.getImages(S.sidebar_max_images);
         }
         else

@@ -69,9 +69,19 @@ abstract class Selfie
     public static function deleteImage($params)
     {
         $path = strstr($params['path'],'/database/');
-        $query = "DELETE FROM image WHERE image.path = :path";
+        $query = "SELECT image.id FROM image WHERE image.path = :path;";
         $result = DB::query($query, array(':path' => $path), false);
-        if ($result)
+        $result_array = $result->fetch(PDO::FETCH_ASSOC);
+        if (!$result_array)
+            return 'false';
+        $id = $result_array['id'];
+        $delete_image_query = "DELETE FROM image WHERE image.id = :id;";
+        $delete_vote_query = "DELETE FROM vote WHERE vote.image_id = :id;";
+        $delete_comment_query = "DELETE FROM comment WHERE comment.image_id = :id;";
+        $image_result = DB::query($delete_image_query, array(':id' => $id), false);
+        $vote_result = DB::query($delete_vote_query, array(':id' => $id), false);
+        $comment_result = DB::query($delete_comment_query, array(':id' => $id), false);
+        if ($image_result && $vote_result && $comment_result)
         {
             unlink(ROOT.$path);
             return 'true';

@@ -13,6 +13,31 @@ abstract class Gallery
         return false;
     }
 
+    private static function sendMail($sender, $image_id, $text)
+    {
+
+        $query = "SELECT image.user_id FROM image WHERE image.id = :id";
+        $result = DB::query($query, array(':id' => $image_id), false);
+        $result_array = $result->fetch(PDO::FETCH_ASSOC);
+        if (!$result_array)
+            return false;
+        $receiver = $result_array['user_id'];
+        if ($receiver === $sender)
+            return true;
+        $user_query = "SELECT user.login, user.email FROM user WHERE user.id = :id";
+        $user_result = DB::query($user_query, array(':id' => $receiver), false);
+        $user_array = $user_result->fetch(PDO::FETCH_ASSOC);
+        if (!$user_array)
+            return false;
+        $sender_name = self::getLogin($sender);
+        $receiver_name = $user_array['login'];
+        $email = $user_array['email'];
+
+        $subject = "$sender_name comment your photo";
+        $message = "Hello $receiver_name, user $sender_name comment your photo with text : $text";
+        return mail($email, $subject, $message);
+    }
+
 	public static function getLogin($id)
 	{
 		$query = "SELECT user.login FROM user WHERE user.id = :id";
@@ -109,8 +134,8 @@ abstract class Gallery
             return 'false';
         $query = "SELECT comment.user_id as username, comment.text, comment.date FROM comment WHERE comment.image_id = :image_id";
         $result = DB::query($query, array(':image_id' => $image_id));
-        foreach ($result as $field)
-            $field['username'] = self::getLogin($field['username']);
+        for ($i = 0; $i < count($result); $i++)
+            $result[$i]['username'] = self::getLogin($result[$i]['username']);
         return json_encode($result);
     }
 
@@ -125,11 +150,9 @@ abstract class Gallery
             return 'false';
         $query = "INSERT INTO comment (user_id, image_id, text) VALUES (:user_id, :image_id, :text)";
         $result = DB::query($query, array(':user_id' => $user_id, ':image_id' => $image_id, ':text' => $text), false);
-        if ($result)
-        {
-            $array['username'] = self::getLogin($user_id);
-            $array['date'] = '00000';
-            return json_encode($array);
+        if ($result) {
+            self::sendMail($user_id, $image_id, $text);
+            return 'true';
         }
         return 'false';
     }

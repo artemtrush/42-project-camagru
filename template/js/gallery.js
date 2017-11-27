@@ -10,6 +10,12 @@ const G = (function () {
 }());
 
 G.initialization = function () {
+    const remove = document.getElementById('remove_button');
+    if (G.access)
+    {
+        remove.onclick = G.removeImage;
+        remove.style.display = 'block';
+    }
     G.getImages();
 };
 
@@ -69,12 +75,12 @@ G.countVotes = function (src) {
 G.appendComment = function (user, date, text) {
     const container = document.getElementById('comment_box');
     let span = document.createElement('span');
-    span.ClassName = 'comment_span';
-    span.innerHTML = text;
+    span.className = 'comment_span';
+    span.innerHTML = text + '|' + date + '|' + user;
     container.appendChild(span);
 };
 
-G.getComments = function () {
+G.getComments = function (callback) {
     const request = new XMLHttpRequest();
     let params = 'model=gallery&function=getComments' +
                 '&src=' + document.getElementById('selected_image').src;
@@ -84,9 +90,14 @@ G.getComments = function () {
     request.onload = function()
     {
         try {
+            const container = document.getElementById('comment_box');
+            while (container.firstChild)
+                container.firstChild.remove();
             let array = JSON.parse(request.responseText);
             for (let i = 0; i < array.length; i++)
                 G.appendComment(array[i]['username'], array[i]['date'], array[i]['text']);
+            if (callback !== undefined)
+                callback();
         }
         catch (e) {
             console.log('get comments error');
@@ -99,7 +110,7 @@ G.sendComment = function () {
     let text = area.value;
     const request = new XMLHttpRequest();
     let params = 'model=gallery&function=sendComment' +
-                '&message=' + text +
+                '&text=' + text +
                 '&src=' + document.getElementById('selected_image').src;
     request.open('POST', G.ajax_router);
     request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -107,24 +118,25 @@ G.sendComment = function () {
     area.value = '';
     request.onload = function()
     {
-        try {
-            let array = JSON.parse(request.responseText);
-            G.appendComment(array['username'], array['date'], text);
+        if (request.responseText === 'true') {
+            G.getComments(function () {
+                const container = document.getElementById('comment_box');
+                container.scrollTop = container.scrollHeight;
+            });
         }
-        catch (e) {
-            console.log('comment add errror');
-        }
+        else
+            console.log('error send coment');
     };
 };
 
 G.viewImage = function (image) {
     G.checkVote(image.src);
     G.countVotes(image.src);
-    G.getComments();
 
     if (document.getElementById('selected_image').src !== image.src)
     {
         document.getElementById('selected_image').src = image.src;
+        G.getComments();
         let share_url = 'https://itc.ua/wp-content/uploads/2017/04/Unit-Factory.jpg';
         document.getElementById('telegram').href = 'https://t.me/share/url?url=' + share_url;
         document.getElementById('facebook').href = 'http://www.facebook.com/sharer.php?u=' + share_url;
@@ -144,6 +156,7 @@ G.hideImage = function () {
 G.appendImage = function (path) {
     const container = document.getElementById('image_container');
     let img = document.createElement('img');
+    img.className = 'gallery_image';
     img.src = path;
     img.onclick = function(){G.viewImage(this);};
     container.appendChild(img);
@@ -180,5 +193,33 @@ G.getImages = function() {
             button.style.display = 'block';
         if (document.getElementById('image_container').childNodes.length === 0)
             console.log('empty');
+    };
+};
+
+G.removeImage = function () {
+    if (!confirm('sure?'))
+        return ;
+    let src = document.getElementById('selected_image').src;
+    const request = new XMLHttpRequest();
+    let params = 'model=selfie&function=deleteImage' +
+                '&path=' + src;
+    request.open('POST', G.ajax_router);
+    request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    request.send(params);
+
+    request.onload = function()
+    {
+        if (request.responseText === 'true') {
+            let collection = document.getElementsByClassName('gallery_image');
+            for (let i = 0; i < collection.length; i++)
+                if (collection[i].src === src)
+                {
+                    collection[i].src = '/template/img/deleted_image.png';
+                    break ;
+                }
+            G.hideImage();
+        }
+        else
+            console.log('image delete error');
     };
 };

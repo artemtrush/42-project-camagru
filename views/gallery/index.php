@@ -40,6 +40,7 @@
         <div id="message_box">
             <textarea id="comment_area" rows="5" cols="30" maxlength="300" placeholder="type comment"></textarea>
             <button id="send_button" onclick="G.sendComment();">Send</button>
+            <button id="remove_button">Delete</button>
         </div>
         <div id="social_box">
             <a id="telegram" class="social_link"><img class="social_icon" src="/template/img/telegram.png"></a>
