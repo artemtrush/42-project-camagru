@@ -74,7 +74,6 @@ class Router
                     $this->error404();
                 //Create controller object
                 $controllerObject = new $controllerName;
-
                 //Call controller's action
                 $result = call_user_func_array(array($controllerObject, $actionName), $params);
                 if ($result) {

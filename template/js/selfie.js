@@ -1,4 +1,4 @@
-//    window.stream.getVideoTracks()[0].stop();
+
 const S = (function () {
 	return {
 	    target: null,
@@ -99,7 +99,7 @@ S.removeImage = function (image) {
             S.getImages(S.sidebar_max_images);
         }
         else
-            console.log('image remove error');
+            window_error('oops, there was an error deleting the photo');
     };
 };
 

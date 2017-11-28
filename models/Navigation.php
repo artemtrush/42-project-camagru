@@ -17,7 +17,7 @@ abstract class Navigation
     {
         if (!isset($_SESSION))
             session_start();
-        $id = $_SESSION['user_id'];
+        $id = (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) ? $_SESSION['user_id'] : -1;
         $string = $params['search_string'];
         $query = "SELECT user.login FROM user WHERE user.login LIKE :login AND user.id <> :id LIMIT 3";
         $result = DB::query($query, array(':login' => '%'.$string.'%', ':id' => $id));

@@ -9,4 +9,6 @@
             Designed by "atrush"
         </span>
     </div>
+<!--    Include error_repoting module-->
+    <script src="/template/js/error_reporting.js"></script>
 </footer>
