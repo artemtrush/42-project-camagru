@@ -2,6 +2,8 @@
 const G = (function () {
     return {
         image_last: 4294967295,/*max id value*/
+        social_access: false,
+        deletion_access: false,
         vote_status: false,
         like_src: '/template/img/like.png',
         dislike_src: '/template/img/dislike.png',
@@ -10,11 +12,17 @@ const G = (function () {
 }());
 
 G.initialization = function () {
-    const remove = document.getElementById('remove_button');
-    if (G.access)
+    if (G.deletion_access)
     {
-        remove.onclick = G.removeImage;
-        remove.style.display = 'block';
+        document.getElementById('remove_button').onclick = G.removeImage;
+        document.getElementById('remove_button').style.display = 'block';
+    }
+    if (G.social_access)
+    {
+        document.getElementById('message_box').style.display = 'block';
+        document.getElementById('send_button').onclick = G.sendComment;
+        document.getElementById('like_image').style.display = 'block';
+        document.getElementById('like_image').onclick = G.likeImage;
     }
     G.getImages();
 };
@@ -130,7 +138,8 @@ G.sendComment = function () {
 };
 
 G.viewImage = function (image) {
-    G.checkVote(image.src);
+    if (G.social_access)
+        G.checkVote(image.src);
     G.countVotes(image.src);
 
     if (document.getElementById('selected_image').src !== image.src)
@@ -169,7 +178,7 @@ G.getImages = function() {
     const request = new XMLHttpRequest();
     let params = 'model=gallery&function=getImages' +
                 '&image_last=' + G.image_last +
-                '&id=' + G.id;
+                '&id=' + G.owner_id;
     request.open('POST', G.ajax_router);
     request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     request.send(params);

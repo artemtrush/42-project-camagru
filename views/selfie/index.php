@@ -51,6 +51,7 @@
 </div>
 
 <div id="sidebar">
+    <span id="side_login"><?php echo $login ?></span>
     <div id="side_div"></div>
     <div id="side_button" onclick="S.sidehide();"></div>
 </div>

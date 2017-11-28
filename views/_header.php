@@ -26,7 +26,14 @@
  
     <div>
         <span id="sign_out_span" class="menu" onclick="H.signOut()">
-            Sign Out
+            <?php
+                if (!isset($_SESSION))
+                    session_start();
+                if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id']))
+                    echo 'Sign Out';
+                else
+                    echo 'Sign In';
+            ?>
         </span>
     </div>
     <script>H.initialization();</script>

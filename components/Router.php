@@ -30,13 +30,21 @@ class Router
     {
         if (!isset($_SESSION))
             session_start();
+        if ($pattern === 'gallery/([0-9]+)')
+            return;
         if ($pattern === 'authentication' || $pattern === 'recovery')
         {
             if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id']))
+            {
                 header("location: /selfie");
+                exit;
+            }
         }
         else if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id']))
+        {
             header("location: /authentication");
+            exit;
+        }
     }
 
     public function run()

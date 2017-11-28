@@ -29,7 +29,7 @@
 
         <div id="image_box">
             <img id="selected_image" src="#">
-            <img id ="like_image" src="/template/img/like.png" onclick="G.likeImage();">
+            <img id="like_image" src="/template/img/like.png">
             <div id="likemeter">
                 <img src="/template/img/likemeter.png">
                 <span id="likenumber">0</span>
@@ -39,7 +39,7 @@
         <div id="comment_box"></div>
         <div id="message_box">
             <textarea id="comment_area" rows="5" cols="30" maxlength="300" placeholder="type comment"></textarea>
-            <button id="send_button" onclick="G.sendComment();">Send</button>
+            <button id="send_button">Send</button>
             <button id="remove_button">Delete</button>
         </div>
         <div id="social_box">
@@ -54,8 +54,9 @@
 
 <?php include_once (ROOT.'/views/_footer.php');?>
 <script>
-    G.id = "<?php echo $id; ?>";
-    G.access = "<?php echo $access; ?>";
+    G.owner_id = "<?php echo $id; ?>";
+    G.social_access = "<?php echo $social_access; ?>";
+    G.deletion_access = "<?php echo $deletion_access; ?>";
     G.initialization();
 </script>
 </body>
