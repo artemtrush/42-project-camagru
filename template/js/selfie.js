@@ -75,19 +75,22 @@ S.appendImage = function (path) {
 	if (container.childNodes.length >= S.sidebar_max_images)
 		container.firstChild.remove();
 	let img = document.createElement('img');
-	img.className = 'side_image';
-	img.style.backgroundImage = 'url(' + path + ')';
-	img.src = '/template/img/deletered.png';
-	img.onclick = function(){S.removeImage(this);};
-	container.appendChild(img);
+	let div = document.createElement('div');
+
+	div.className = 'side_image';
+	div.style.backgroundImage = 'url(' + path + ')';
+	div.onclick = function(){S.removeImage(this.style.backgroundImage.match(/url\(\"(.*)\"\)/)[1]);};
+    img.src = '/template/img/deletered.png';
+    div.appendChild(img);
+	container.appendChild(div);
 };
 
-S.removeImage = function (image) {
+S.removeImage = function (src) {
 	if (!confirm('sure?'))
 		return ;
 	const request = new XMLHttpRequest();
 	let params = 'model=selfie&function=deleteImage' +
-				'&path=' + image.src;
+				'&path=' + src;
 	request.open('POST', S.ajax_router);
 	request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	request.send(params);
@@ -121,10 +124,12 @@ S.getImages = function (number) {
 				S.appendImage(array[i].path);
 		}
 		catch (error) {
-			console_error(error);
+			console_error(error.message);
 		}
 		if (document.getElementById('side_div').childNodes.length === 0)
-			console.log('empty');
+            document.getElementById('side_div').style.backgroundImage = 'url(/template/img/empty.jpg)';
+		else
+            document.getElementById('side_div').style.backgroundImage = '';
 	}
 };
 
@@ -225,7 +230,7 @@ S.snapshot = function () {
 		if (request.responseText === 'true')
 			S.getImages(1);
 		else
-			console.log('snapError');
+            window_error('Oops, there was an error taking the photo :(');
 	}
 };
 
@@ -237,7 +242,7 @@ S.videoJoin = function() {
 		S.video_active = true;
 	}
 	function videoError(error) {
-		console.log(error);
+		console_error(error.message);
 		S.video_active = false;
 	}
 
@@ -370,24 +375,23 @@ S.loadPack = function (id, dir) {
 
 	request.onload = function()
 	{
-		if (!request.responseText.match(/.*false$/))
-		{
-			try {
-				let array = JSON.parse(request.responseText);
-				for (let i = 0; i < array.length; i++)
-				{
-					let img = document.createElement('img');
-					img.src = array[i];
-					img.className = 'emoji';
-					container.appendChild(img);
-				}
-			}
-			catch (e) {
-				console.log('getEmoji error');
+		if (!request.responseText === 'false') {
+            console_error('File or directory not found.');
+            return ;
+        }
+		try {
+			let array = JSON.parse(request.responseText);
+			for (let i = 0; i < array.length; i++)
+			{
+				let img = document.createElement('img');
+				img.src = array[i];
+				img.className = 'emoji';
+				container.appendChild(img);
 			}
 		}
-		else
-			console.log('getEmoji error');
+		catch (error) {
+			console_error(error.message);
+		}
 	};
 };
 

@@ -105,7 +105,7 @@ A.checkLogin = function(callback) {
 			{
 				A.login_input.style.borderColor = A.neg_color;
 				if (callback === undefined)
-                    A.error('User exists!');//!!!!!!!!
+                    A.user_error('A user with such login already exists.');
 				else
 					A.setDiv('sign_form');
 			}
@@ -115,7 +115,7 @@ A.checkLogin = function(callback) {
 	{
 		A.login_input.style.borderColor = A.neg_color;
 		if (callback === undefined)
-            A.error('Username must be 3 to 15 characters long.');//!!!!!!!!
+            A.user_error('The login must be 3 to 15 characters long and consist only of English letters, numbers, underscores, and dashes.');
 		else
 			A.setDiv('sign_form');
 	}
@@ -144,7 +144,7 @@ A.checkEmail = function(callback) {
 			{
 				A.email_input.style.borderColor = A.neg_color;
 				if (callback === undefined)
-                    A.error('Email exists');//!!!!!!!!!
+                    A.user_error('A user with such email already exists.');
 				else
 					A.setDiv('sign_form');
 			}
@@ -154,7 +154,7 @@ A.checkEmail = function(callback) {
 	{
 		A.email_input.style.borderColor =  A.neg_color;
 		if (callback === undefined)
-			A.error('Invalid format email');//!!!!!!!!!
+			A.user_error('Invalid email format.');
 		else
 			A.setDiv('sign_form');
 	}
@@ -167,7 +167,7 @@ A.checkPass = function() {
 		A.pass_input.style.borderColor = A.pos_color;
 		return true;
 	}
-    A.error('Minimum eight characters, at least one uppercase letter, one lowercase letter and one number:');//!!!!!!!!!!
+    A.user_error('Invalid password format: At least eight characters, one uppercase and one lowercase letter, and one number.');
 	A.pass_input.style.borderColor = A.neg_color;
 	return false;
 };
@@ -179,7 +179,7 @@ A.checkConfirm = function() {
 		A.confirm_input.style.borderColor = A.pos_color;
 		return true;
 	}
-    A.error('Ne sovpadaet');//!!!!!!!!!!
+    A.user_error('The passwords do not match.');
 	A.confirm_input.style.borderColor = A.neg_color;
 	return false;
 };
@@ -202,7 +202,7 @@ A.signUser = function() {
 				location.pathname = '/selfie';
 			else
 			{
-                A.error('Bad login or password');//!!!!!!!!!!!!!
+                window_error('Invalid login or password.');
 				A.setDiv('sign_form');
 			}
 		};
@@ -230,7 +230,7 @@ A.signUser = function() {
                                 }
                                 else {
                                     A.setDiv('sign_form');
-                                    A.error('Mail NOT SENDED');//!!!!!!!!
+                                    window_error('Oops, there was an error sending verification code :(');
                                 }
                             };
                         }
@@ -266,7 +266,7 @@ A.repeatCode = function () {
 		else
 		{
 			A.backToForm();
-			A.error('Server pismo ne doshlo'); //!!!!!!
+            window_error('Oops, there was an error sending verification code :(');
 		}
 	};
 };
@@ -289,19 +289,16 @@ A.registerUser = function () {
 				location.pathname = '/selfie';
 			else
 			{
-                A.error('kod ne tot');//!!!!!!
+                window_error('Invalid verification code.');
 				A.setDiv('email_code');
 			}
 		};
 	}
 	else
-        A.error('kod ne tot');//!!!!!!
+        window_error('Invalid verification code.');
 };
 
-A.error = function (error) {
-	console.log(error);
+A.user_error = function (error) {
+	console.log(error);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 };
 
-// A.errorHide = function () {
-//
-// };

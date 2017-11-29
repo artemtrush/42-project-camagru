@@ -43,7 +43,7 @@ G.likeImage = function () {
             G.countVotes(src);
         }
         else
-            console.log('error like');
+            window_error('An error has occurred. Try again later.');
     };
 };
 
@@ -60,7 +60,7 @@ G.checkVote = function (src) {
         else if (request.responseText === 'false')
             G.vote_status = false;
         else
-            console.log('error vote check');
+            console_error('Unable to verify user\'s vote.');
         document.getElementById('like_image').src = (G.vote_status) ? G.dislike_src : G.like_src;
     };
 };
@@ -107,8 +107,8 @@ G.getComments = function (callback) {
             if (callback !== undefined)
                 callback();
         }
-        catch (e) {
-            console.log('get comments error');
+        catch (error) {
+            console_error(error.message);
         }
     };
 };
@@ -133,7 +133,7 @@ G.sendComment = function () {
             });
         }
         else
-            console.log('error send coment');
+            window_error('Oops, there was an error sending message :(');
     };
 };
 
@@ -195,13 +195,13 @@ G.getImages = function() {
             for (let i = 1; i < array.length; i++)
                 G.appendImage(array[i].path);
         }
-        catch (e) {
-            console.log('getImages error');
+        catch (error) {
+            console_error(error.message);
         }
         if (btn_enabled)
             button.style.display = 'block';
         if (document.getElementById('image_container').childNodes.length === 0)
-            console.log('empty');
+            document.getElementById('empty_gallery').style.display = 'block';
     };
 };
 
@@ -229,6 +229,6 @@ G.removeImage = function () {
             G.hideImage();
         }
         else
-            console.log('image delete error');
+            window_error('Oops, there was an error deleting the photo :(');
     };
 };

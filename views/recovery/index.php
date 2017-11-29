@@ -30,6 +30,6 @@
 
 <div id="loading" class="authentication_nav"></div>
 <?php include_once (ROOT.'/views/_footer.php'); ?>
-<script>S.initialization();</script>
+<script>R.initialization();</script>
 </body>
 </html>

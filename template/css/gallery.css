@@ -156,3 +156,10 @@
 #remove_button {
 	display: none;
 }
+
+#empty_gallery {
+	width: 500px;
+	height: 500px;
+	background-color: orange;
+	display: none;
+}

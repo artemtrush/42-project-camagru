@@ -17,6 +17,10 @@
 <?php include_once (ROOT.'/views/_header.php');?>
 <h1> <?php echo $login;?> </h1>
 
+<div id="empty_gallery">
+    There are no pictures yet :(
+</div>
+
 <div id='image_container'></div>
 <span id="more_button" onclick="G.getImages();">Load more</span>
 <div id="view_image">

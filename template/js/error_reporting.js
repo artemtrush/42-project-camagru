@@ -1,19 +1,16 @@
 const console_reporting = true;
 const window_reporting = true;
 
-function console_error(error)
+function console_error(error_message)
 {
     if (!console_reporting)
         return;
-    if (error !== undefined)
-        console.log('kekek');
-    else
-        console.log('lolek');
+        console.log(error_message);
 }
 
-function window_error(error)
+function window_error(error_message)
 {
     if (!window_reporting)
         return;
-    console.log('keks');
+    console.log(error_message);
 }

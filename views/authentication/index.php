@@ -23,7 +23,7 @@
     <input type="password" id="confirm" placeholder="Confirm password">
 
     <div class="auth_buttons">
-        <span id="forgot">Forgot pass</span>
+        <span id="forgot">I forgot my login information</span>
         &nbsp;&nbsp;
         <span id="sign"></span>
         &nbsp;&nbsp;

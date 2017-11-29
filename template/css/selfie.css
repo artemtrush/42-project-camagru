@@ -71,7 +71,7 @@
     width: 100%;
     height: 0;
 
-    transition: all 3s ease-in-out;
+    transition: all 2s ease-in-out;
     -webkit-transition: all 2s ease-in-out;
     -moz-transition: all 2s ease-in-out;
 }
@@ -80,6 +80,18 @@
     width: 160px;
     height: 120px;
   }
+.side_image img {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all 1s ease-out;
+    -webkit-transition: all 1s ease-out;
+    -moz-transition: all 1s ease-out;
+}
+.side_image img:hover {
+    opacity: 0.7;
+}
+
 #side_button {
     position: relative;
 

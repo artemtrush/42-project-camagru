@@ -8,10 +8,6 @@ const R = (function () {
 	};
 }());
 
-// R.sleep = function (ms) {
-// 	return new Promise(resolve => setTimeout(resolve, ms));
-// };
-
 R.initialization = function() {
 	R.alias_input = document.getElementById('rec_alias');
 	R.code_input = document.getElementById('rec_code');
@@ -46,7 +42,7 @@ R.prevStep = function () {
 
 R.checkAlias = function () {
 	if (R.alias_input.value.length < 3) {
-		R.error('Nado 3 simvola');//!!!!!!!!!!
+		window_error('The user with such account could not be found.');
         return;
     }
     R.setDiv('loading');
@@ -66,16 +62,16 @@ R.checkAlias = function () {
             R.stepHandle();
         }
         else if (request.responseText === 'false')
-            R.error('Net takih');//!!!!!!!!!!
+            window_error('The user with such account could not be found.');
 		else
-            R.error('Server error mail ne otpravlen!');//!!!!!!!!!!
+            window_error('Oops, there was an error sending verification code :(');
         R.setDiv('forgot_form');
     };
 };
 
 R.checkCode = function () {
     if (R.code_input.value.length !== 6) {
-        R.error('Nado 6 simvola');//!!!!!!!!!!
+        window_error('Invalid verification code.');
         return;
     }
     R.setDiv('loading');
@@ -94,7 +90,7 @@ R.checkCode = function () {
             R.stepHandle();
         }
         else
-            R.error('Invalid code');//!!!!!!!!!!
+            window_error('Invalid verification code.');
         R.setDiv('forgot_form');
     };
 };
@@ -102,12 +98,12 @@ R.checkCode = function () {
 R.checkPass = function () {
 	if (!(R.pass_input.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/)))
 	{
-		R.error('Minimum eight characters, at least one uppercase letter, one lowercase letter and one number:');//!!!!!!!
+		window_error('Invalid password format: At least eight characters, one uppercase and one lowercase letter, and one number.');
 		return;
 	}
 	if (R.pass_input.value !== R.conf_input.value)
 	{
-        R.error('NE sovpadaet!');//!!!!!!!
+        window_error('The passwords do not match.');
         return;
 	}
     R.setDiv('loading');
@@ -124,7 +120,7 @@ R.checkPass = function () {
             location.pathname = '/selfie';
         }
         else
-            R.error('Ne udalos obnovit parol');//!!!!!!!!!!
+            window_error('Oops, there was an error updating your password :(');
         R.setDiv('forgot_form');
     };
 };
@@ -167,8 +163,4 @@ R.stepHandle = function () {
 			R.prev_btn.style.color = R.cenable;
 			break;
 	}
-};
-
-R.error = function (error) {
-	console.log(error);
 };

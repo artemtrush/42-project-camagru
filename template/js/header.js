@@ -1,4 +1,3 @@
-
 const H = (function () {
     return {
         ajax_router: '/template/js/ajax.router.php'
@@ -72,7 +71,7 @@ H.searchRedirect = function (login) {
             location.pathname = "/gallery/" + id;
         }
     }
-    console.log('bad login');//!!!!!!!!!!!!!!!!!!
+    window_error('The user you were looking for could not be found.');
 };
 
 H.searchShow = function () {
