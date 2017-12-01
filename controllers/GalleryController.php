@@ -19,9 +19,8 @@ class GalleryController
 		$login = Gallery::getLogin($id);
 		if (!$login)
 		{
-				header("HTTP/1.0 404 Not Found");
-				include(ROOT . '/views/error/error404.html');
-				exit;
+			global $router;
+			$router->error404();
 		}
 		if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id']))
 		{

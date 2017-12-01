@@ -11,10 +11,9 @@ class Router
         $this->routes = include($routPath);
     }
 
-    private function  error404()
+    public function  error404()
     {
-        header("HTTP/1.0 404 Not Found");
-        include(ROOT . '/views/error/error404.html');
+        include(ROOT . '/views/error/404.php');
         exit;
     }
 

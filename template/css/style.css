@@ -116,4 +116,16 @@ footer span {
     line-height: 30px;
 }
 
+.window_error {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 80px;
+    background-color: red;
+    transition: all 3s ease-out;
+    -webkit-transition: all 3s ease-out;
+    -moz-transition: all 3s ease-out;
+}
+
 /*@media(max-width: 768px) {*/

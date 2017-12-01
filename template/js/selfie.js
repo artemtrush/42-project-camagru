@@ -242,7 +242,7 @@ S.videoJoin = function() {
 		S.video_active = true;
 	}
 	function videoError(error) {
-		console_error(error.message);
+		console_error(error);
 		S.video_active = false;
 	}
 
@@ -375,7 +375,7 @@ S.loadPack = function (id, dir) {
 
 	request.onload = function()
 	{
-		if (!request.responseText === 'false') {
+		if (request.responseText === 'false') {
             console_error('File or directory not found.');
             return ;
         }

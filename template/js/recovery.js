@@ -23,6 +23,10 @@ R.initialization = function() {
     };
 	R.prev_btn.onclick = R.prevStep;
 	R.next_btn.onclick = R.nextStep;
+    document.onkeypress = function (event) {
+        if (event.which === 13)
+            R.nextStep();
+    }
     R.stepHandle();
     R.setDiv('forgot_form');
 };
@@ -98,7 +102,7 @@ R.checkCode = function () {
 R.checkPass = function () {
 	if (!(R.pass_input.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/)))
 	{
-		window_error('Invalid password format: At least eight characters, one uppercase and one lowercase letter, and one number.');
+		window_error('Invalid password format: At least eight characters, one uppercase and one lowercase letter, and one number.', 10);
 		return;
 	}
 	if (R.pass_input.value !== R.conf_input.value)

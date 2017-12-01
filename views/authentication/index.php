@@ -10,8 +10,11 @@
     <link href="/template/css/style.css" rel="stylesheet" type="text/css">
 
     <script src="/template/js/authentication.js"></script>
+    <script src="/template/js/header.js"></script>
 </head>
 <body>
+
+<p id="hint_area"></p>
 
 <div id="sign_form" class="authentication_nav">
     <input type="text" id="login" placeholder="Enter username">
@@ -22,13 +25,22 @@
 
     <input type="password" id="confirm" placeholder="Confirm password">
 
-    <div class="auth_buttons">
-        <span id="forgot">I forgot my login information</span>
-        &nbsp;&nbsp;
-        <span id="sign"></span>
-        &nbsp;&nbsp;
-        <span id="switch"></span>
+    <span class="auth_buttons" id="sign"></span>
+    <span class="auth_buttons" id="switch"></span>
+    <span class="auth_buttons" id="forgot">I forgot my password</span>
+
+    <div>
+        <span id="search_span" class="menu" onclick="H.searchShow()">
+            Search
+        </span>
+        <input type="text" id="search_input" maxlength="15" placeholder="type smth" onblur="H.searchHide()">
+        <ul id="search_drop_down">
+            <li class="search_login" onmousedown="H.searchRedirect(this.innerHTML);"></li>
+            <li class="search_login" onmousedown="H.searchRedirect(this.innerHTML);"></li>
+            <li class="search_login" onmousedown="H.searchRedirect(this.innerHTML);"></li>
+        </ul>
     </div>
+
 </div>
 
 <div id="email_code" class="authentication_nav">
@@ -45,6 +57,9 @@
 <div id="loading" class="authentication_nav"></div>
 
 <?php include_once (ROOT.'/views/_footer.php'); ?>
-<script>A.initialization();</script>
+<script>
+    A.initialization();
+    H.initialization();
+</script>
 </body>
 </html>

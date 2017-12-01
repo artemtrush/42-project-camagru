@@ -2,6 +2,8 @@
 const A = (function () {
 	return {
 		sign_mode: true,
+		login_focus: false,
+		email_focus: false,
 		pos_color: 'green',
 		neg_color: 'red',
 		res_color: '',
@@ -25,12 +27,16 @@ A.initialization = function() {
 
 	A.email_input.onkeyup = function() {A.checkEmail();};
 	A.email_input.onblur = function() {A.checkEmail();};
+	A.email_input.onfocus = function() {A.checkEmail();};
 	A.confirm_input.onkeyup = A.checkConfirm;
+	A.confirm_input.onfocus = A.checkConfirm;
+
 	A.sign_btn.onclick = A.signUser;
 	A.switch_btn.onclick = A.switchSign;
 	A.back_btn.onclick = A.backToForm;
 	A.repeat_btn.onclick = A.repeatCode;
 	A.register_btn.onclick = A.registerUser;
+
 	A.forgot_btn.onclick = function () {
         location.pathname = '/recovery';
     };
@@ -53,14 +59,16 @@ A.switchSign = function() {
 
 		A.sign_btn.innerText = 'Sign Up';
 		A.switch_btn.innerText = 'I already have an account';
-		A.checkEmail();
 
 		A.login_input.onkeyup = function() {A.checkLogin();};
 		A.login_input.onblur = function() {A.checkLogin();};
-		A.checkLogin();
-
+		A.login_input.onfocus = function() {A.checkLogin();};
 		A.pass_input.onkeyup = A.checkPass;
+		A.pass_input.onfocus = A.checkPass;
+
 		A.checkPass();
+		A.checkEmail();
+		A.checkLogin();
 
 		A.sign_mode = true;
 	}
@@ -76,14 +84,21 @@ A.switchSign = function() {
 
 
 		A.login_input.onkeyup = null;
+		A.login_input.onblur = null;
+		A.login_input.onfocus = null;
 		A.pass_input.onkeyup = null;
+		A.pass_input.onfocus = null;
 
 		A.sign_mode = false;
 	}
+	A.user_error(false);
 };
 
 A.checkLogin = function(callback) {
 	const string = A.login_input.value;
+	A.login_focus = true;
+	A.email_focus = false;
+	A.user_error(false);
 	if (string.match(/^[a-zA-Z0-9_-]{3,15}$/))
 	{
 		const request = new XMLHttpRequest();
@@ -105,7 +120,10 @@ A.checkLogin = function(callback) {
 			{
 				A.login_input.style.borderColor = A.neg_color;
 				if (callback === undefined)
-                    A.user_error('A user with such login already exists.');
+				{
+					if (A.login_focus)
+                    	A.user_error('A user with such login already exists.');
+            	}
 				else
 					A.setDiv('sign_form');
 			}
@@ -123,6 +141,9 @@ A.checkLogin = function(callback) {
 
 A.checkEmail = function(callback) {
 	const string = A.email_input.value;
+	A.login_focus = false;
+	A.email_focus = true;
+	A.user_error(false);
 	if (string.match(/^.{1,30}@.{1,19}$/))
 	{
 		const request = new XMLHttpRequest();
@@ -144,7 +165,10 @@ A.checkEmail = function(callback) {
 			{
 				A.email_input.style.borderColor = A.neg_color;
 				if (callback === undefined)
-                    A.user_error('A user with such email already exists.');
+				{
+					if (A.email_focus)
+                    	A.user_error('A user with such email already exists.');
+				}
 				else
 					A.setDiv('sign_form');
 			}
@@ -161,9 +185,12 @@ A.checkEmail = function(callback) {
 };
 
 A.checkPass = function() {
+	A.login_focus = false;
+	A.email_focus = false;
 	A.checkConfirm();
 	if (A.pass_input.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/))
 	{
+		A.user_error(false);
 		A.pass_input.style.borderColor = A.pos_color;
 		return true;
 	}
@@ -173,9 +200,12 @@ A.checkPass = function() {
 };
 
 A.checkConfirm = function() {
+	A.login_focus = false;
+	A.email_focus = false;
 	if (A.confirm_input.value === A.pass_input.value &&
 		A.confirm_input.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/))
 	{
+		A.user_error(false);
 		A.confirm_input.style.borderColor = A.pos_color;
 		return true;
 	}
@@ -239,7 +269,10 @@ A.signUser = function() {
 			);
 		}
 		else
+		{
             A.setDiv('sign_form');
+            A.user_error(false);
+		}
 	}
 };
 
@@ -299,6 +332,13 @@ A.registerUser = function () {
 };
 
 A.user_error = function (error) {
-	console.log(error);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	const paragraph = document.getElementById('hint_area');
+	if (error === false)
+	{
+		paragraph.style.opacity = 0;
+		return ;
+	}
+	paragraph.innerText = error;
+	paragraph.style.opacity = 1;
 };
 
