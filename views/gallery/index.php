@@ -43,15 +43,26 @@
         <div id="comment_box"></div>
         <div id="message_box">
             <textarea id="comment_area" rows="5" cols="30" maxlength="300" placeholder="type comment"></textarea>
-            <button id="send_button">Send</button>
-            <button id="remove_button">Delete</button>
+            <a id="send_button" class="button">Send</a>
+            <a id="remove_button" class="button">Delete</a>
+            <span id="message_counter">0/300</span>
         </div>
+
         <div id="social_box">
-            <a id="telegram" class="social_link"><img class="social_icon" src="/template/img/telegram.png"></a>
-            <a id="facebook" class="social_link"><img class="social_icon" src="/template/img/facebook.png"></a>
-            <a id="twitter" class="social_link"><img class="social_icon" src="/template/img/twitter.png"></a>
-            <a id="linkedin" class="social_link"><img class="social_icon" src="/template/img/linkedin.png"></a>
-            <a id="google" class="social_link"><img class="social_icon" src="/template/img/google.png"></a>
+            <a id="telegram" class="social_link" target="_blank">
+                <img class="social_icon" src="/template/img/telegram.png">
+            </a>
+            <a id="facebook" class="social_link" target="_blank">
+                <img class="social_icon" src="/template/img/facebook.png">  </a>
+            <a id="twitter" class="social_link" target="_blank">
+                <img class="social_icon" src="/template/img/twitter.png">
+            </a>
+            <a id="linkedin" class="social_link" target="_blank">
+                <img class="social_icon" src="/template/img/linkedin.png">
+            </a>
+            <a id="google" class="social_link" target="_blank">
+                <img class="social_icon" src="/template/img/google.png">
+            </a>
         </div>
     </div>
 </div>

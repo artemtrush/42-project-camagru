@@ -17,23 +17,23 @@
 <p id="hint_area"></p>
 
 <div id="sign_form" class="authentication_nav">
-    <input type="text" id="login" placeholder="Enter username">
+    <input id="login" class="input_field" placeholder="login">
 
-    <input type="text" id="mail" placeholder="Enter email">
+    <input id="mail" class="input_field" placeholder="email">
 
-    <input type="password" id="pass" placeholder="Enter password">
+    <input type="password" id="pass" class="input_field" placeholder="password">
 
-    <input type="password" id="confirm" placeholder="Confirm password">
+    <input type="password" id="confirm" class="input_field" placeholder="confirmation">
 
-    <span class="auth_buttons" id="sign"></span>
-    <span class="auth_buttons" id="switch"></span>
-    <span class="auth_buttons" id="forgot">I forgot my password</span>
+    <a class="button" id="sign"></a>
+    <a class="button" id="forgot">I forgot my password</a>
+    <a class="button" id="switch"></a>
 
     <div>
-        <span id="search_span" class="menu" onclick="H.searchShow()">
+        <a id="search_link" class="button" onclick="H.searchShow()">
             Search
-        </span>
-        <input type="text" id="search_input" maxlength="15" placeholder="type smth" onblur="H.searchHide()">
+        </a>
+        <input id="search_input" maxlength="15" placeholder="Search" onblur="H.searchHide()">
         <ul id="search_drop_down">
             <li class="search_login" onmousedown="H.searchRedirect(this.innerHTML);"></li>
             <li class="search_login" onmousedown="H.searchRedirect(this.innerHTML);"></li>
@@ -44,14 +44,11 @@
 </div>
 
 <div id="email_code" class="authentication_nav">
-    <input type="text" id="code" placeholder="Enter email code">
-    <br>
-    <span id="register">Register</span>
-    <br>
-    <span id="repeat">Repeat</span>
-    <br>
-    <span id="return_to_sign">Back</span>
-    <br>
+    <span id="verification_hint"></span>
+    <input id="code" class="input_field" placeholder="verification code">
+    <a id="register" class="button"> Complete registration </a>
+    <a id="repeat" class="button"> Resend verification code </a>
+    <a id="return_to_sign" class="button">Back!!</a>
 </div>
 
 <div id="loading" class="authentication_nav"></div>

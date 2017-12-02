@@ -5,8 +5,10 @@ const G = (function () {
         social_access: false,
         deletion_access: false,
         vote_status: false,
+        last_key: 0,
         like_src: '/template/img/like.png',
         dislike_src: '/template/img/dislike.png',
+        deleted_src: '/template/img/deleted_image.png',
         ajax_router: '/template/js/ajax.router.php'
     };
 }());
@@ -23,6 +25,23 @@ G.initialization = function () {
         document.getElementById('send_button').onclick = G.sendComment;
         document.getElementById('like_image').style.display = 'block';
         document.getElementById('like_image').onclick = G.likeImage;
+
+        let area = document.getElementById('comment_area');
+        area.onkeydown = function (event) {
+            document.getElementById('message_counter').innerText = area.value.length + '/300';
+            if (G.last_key === 16 && event.which === 13) {
+                G.sendComment();
+                G.last_key = -1;
+            }
+            else
+                G.last_key = event.which;
+        };
+        area.onkeyup = function () {
+            document.getElementById('message_counter').innerText = area.value.length + '/300';
+            if (G.last_key === -1)
+                area.value = '';
+            G.last_key = 0;
+        };
     }
     G.getImages();
 };
@@ -75,7 +94,7 @@ G.countVotes = function (src) {
     {
         if (request.responseText !== 'false')
         {
-            document.getElementById('likenumber').innerHTML = parseInt(request.responseText);
+            document.getElementById('likenumber').innerText = parseInt(request.responseText);
         }
     };
 };
@@ -84,7 +103,7 @@ G.appendComment = function (user, date, text) {
     const container = document.getElementById('comment_box');
     let span = document.createElement('span');
     span.className = 'comment_span';
-    span.innerHTML = text + '|' + date + '|' + user;
+    span.innerText = text + '|' + date + '|' + user;
     container.appendChild(span);
 };
 
@@ -116,6 +135,11 @@ G.getComments = function (callback) {
 G.sendComment = function () {
     const area = document.getElementById('comment_area');
     let text = area.value;
+    if (text.trim().length === 0) {
+        area.value = '';
+        area.focus();
+        return;
+    }
     const request = new XMLHttpRequest();
     let params = 'model=gallery&function=sendComment' +
                 '&text=' + text +
@@ -124,9 +148,19 @@ G.sendComment = function () {
     request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     request.send(params);
     area.value = '';
+    area.focus();
     request.onload = function()
     {
         if (request.responseText === 'true') {
+            const notification = new XMLHttpRequest();
+            notification.open('POST', G.ajax_router);
+            notification.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            notification.send('model=gallery&function=notification');
+            notification.onload = function () {
+                if (notification.responseText !== 'true')
+                    console_error('Unable to send email');
+            };
+
             G.getComments(function () {
                 const container = document.getElementById('comment_box');
                 container.scrollTop = container.scrollHeight;
@@ -138,14 +172,16 @@ G.sendComment = function () {
 };
 
 G.viewImage = function (image) {
+    if (image.name === 'deleted')
+        return;
     if (G.social_access)
         G.checkVote(image.src);
     G.countVotes(image.src);
-
     if (document.getElementById('selected_image').src !== image.src)
     {
         document.getElementById('selected_image').src = image.src;
         G.getComments();
+        /* let share_url = image.src; */
         let share_url = 'https://itc.ua/wp-content/uploads/2017/04/Unit-Factory.jpg';
         document.getElementById('telegram').href = 'https://t.me/share/url?url=' + share_url;
         document.getElementById('facebook').href = 'http://www.facebook.com/sharer.php?u=' + share_url;
@@ -206,7 +242,7 @@ G.getImages = function() {
 };
 
 G.removeImage = function () {
-    if (!confirm('sure?'))
+    if (!confirm('Do you really want to delete the photo?'))
         return ;
     let src = document.getElementById('selected_image').src;
     const request = new XMLHttpRequest();
@@ -223,7 +259,8 @@ G.removeImage = function () {
             for (let i = 0; i < collection.length; i++)
                 if (collection[i].src === src)
                 {
-                    collection[i].src = '/template/img/deleted_image.png';
+                    collection[i].src = G.deleted_src;
+                    collection[i].name = 'deleted';
                     break ;
                 }
             G.hideImage();

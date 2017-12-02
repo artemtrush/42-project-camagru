@@ -1,22 +1,22 @@
 <header>
     <script src="/template/js/header.js"></script>
     <div>
-        <span id="selfie_span" class="menu" onclick="H.selfiePage()">
+        <a class="menu_link" onclick="H.selfiePage()">
             Selfie
-        </span>
+        </a>
     </div>
 
     <div>
-        <span id="gallery_span" class="menu" onclick="H.galleryPage()">
+        <a class="menu_link" onclick="H.galleryPage()">
             Gallery
-        </span>
+        </a>
     </div>
 
     <div>
-        <span id="search_span" class="menu" onclick="H.searchShow()">
+        <a id="search_link" class="menu_link" onclick="H.searchShow()">
             Search
-        </span>
-        <input type="text" id="search_input" maxlength="15" placeholder="type smth" onblur="H.searchHide()">
+        </a>
+        <input id="search_input" maxlength="15" placeholder="Search" onblur="H.searchHide()">
         <ul id="search_drop_down">
             <li class="search_login" onmousedown="H.searchRedirect(this.innerHTML);"></li>
             <li class="search_login" onmousedown="H.searchRedirect(this.innerHTML);"></li>
@@ -25,7 +25,7 @@
     </div>
  
     <div>
-        <span id="sign_out_span" class="menu" onclick="H.signOut()">
+        <a class="menu_link" onclick="H.signOut()">
             <?php
                 if (!isset($_SESSION))
                     session_start();
@@ -34,7 +34,7 @@
                 else
                     echo 'Sign In';
             ?>
-        </span>
+        </a>
     </div>
     <script>H.initialization();</script>
 </header>

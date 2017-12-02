@@ -1,0 +1,76 @@
+header {
+    /*position: fixed;*/
+    background-color: white;
+    border: 3px solid #535353;
+    border-radius: 20px; /* Радиус скругления */
+    width: 100%;
+    min-height: 100px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: stretch;
+}
+header div {
+    flex-grow: 1;
+    font-size: 45px;
+    font-family: 'Gloria Hallelujah', cursive;
+    text-align: center;
+    min-width: 200px;
+    height: 95px;
+    line-height: 90px;
+}
+header span {
+    cursor: pointer;
+    -webkit-user-select: none;
+    color: #5F5E5E;
+    transition: all.6s ease; /* Скорость анимации наведения */
+}
+header span:hover {
+    color: #FBBA00;
+    transition: all.6s ease; /* Скорость анимации наведения */
+}
+#search_input {
+    display: none;
+    width: 70%;
+    height: 40%;
+    outline: none;
+
+    text-align: center;
+    border-color: #5F5E5E;
+    border-width: 3px;
+    border-radius: 20px;
+}
+#search_button {
+    display: none;
+    width: 20%;
+    height: 40%;
+}
+#search_drop_down {
+    display: none;
+    position: relative;
+    list-style-type: none;
+    cursor: pointer;
+    width: 60%;
+    padding-left: 20%;
+
+    font-size: 20px;
+    line-height: 30px;
+
+    top: -15px;
+    left: 0;
+}
+#search_drop_down li {
+    display: none;
+    background-color: white;
+    border-radius: 20px;
+    border: 1px solid black;
+    margin: 3px;
+}
+#search_drop_down li span{
+    color: red;
+}
+#search_drop_down li:hover {
+    background-color: orangered;
+}

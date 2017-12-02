@@ -218,6 +218,13 @@ A.signUser = function() {
 	A.setDiv('loading');
 	if (A.sign_mode === false)
 	{
+        if (!A.login_input.value.match(/^[a-zA-Z0-9_-]{3,15}$/) ||
+			!A.pass_input.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/))
+		{
+            window_error('Invalid login or password.');
+            A.setDiv('sign_form');
+			return;
+		}
 		const request = new XMLHttpRequest();
 		let params = 'model=authentication&function=signIn' +
 					'&username=' + A.login_input.value + 
@@ -256,6 +263,8 @@ A.signUser = function() {
 
                             request.onload = function () {
                                 if (request.responseText === 'true') {
+                                	document.getElementById('verification_hint').innerText =
+										'The letter with verification code was sent to ' + A.email_input.value;
                                     A.setDiv('email_code');
                                 }
                                 else {

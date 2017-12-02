@@ -3,7 +3,7 @@ const R = (function () {
 	return {
 		step: 0,
 		cdisable: 'gray',
-		cenable: 'black',
+		cenable: '#e9e9e9',
 		ajax_router: '/template/js/ajax.router.php'
 	};
 }());
@@ -26,7 +26,7 @@ R.initialization = function() {
     document.onkeypress = function (event) {
         if (event.which === 13)
             R.nextStep();
-    }
+    };
     R.stepHandle();
     R.setDiv('forgot_form');
 };
@@ -151,6 +151,7 @@ R.stepHandle = function () {
 			R.pass_input.disabled = true;
 			R.conf_input.disabled = true;
 			R.prev_btn.style.color = R.cdisable;
+            R.prev_btn.style.pointerEvents = 'none';
 			break;
 		case 1:
 			R.alias_input.disabled = true;
@@ -158,6 +159,7 @@ R.stepHandle = function () {
 			R.pass_input.disabled = true;
 			R.conf_input.disabled = true;
 			R.prev_btn.style.color = R.cenable;
+            R.prev_btn.style.pointerEvents = 'auto';
 			break;
 		case 2:
 			R.alias_input.disabled = true;
@@ -165,6 +167,7 @@ R.stepHandle = function () {
 			R.pass_input.disabled = false;
 			R.conf_input.disabled = false;
 			R.prev_btn.style.color = R.cenable;
+            R.prev_btn.style.pointerEvents = 'auto';
 			break;
 	}
 };

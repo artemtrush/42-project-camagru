@@ -77,7 +77,7 @@ abstract class DB
             self::delete();
         else
             self::connect(str_replace("dbname=camagru;", "", $DB_DSN), $DB_USER, $DB_PASSWORD);
-        if (self::$db != null)
+        if (self::$db !== null)
         {
             $create_query = file_get_contents(ROOT.'/config/sql/create.sql');
             $user_query = file_get_contents(ROOT.'/config/sql/user.sql');

@@ -15,7 +15,6 @@ abstract class Gallery
 
     private static function sendMail($sender, $image_id, $text)
     {
-
         $query = "SELECT image.user_id FROM image WHERE image.id = :id";
         $result = DB::query($query, array(':id' => $image_id), false);
         $result_array = $result->fetch(PDO::FETCH_ASSOC);
@@ -37,6 +36,8 @@ abstract class Gallery
         $message = "Hello $receiver_name, user $sender_name comment your photo with text : $text";
         return mail($email, $subject, $message);
     }
+
+
 
 	public static function getLogin($id)
 	{
@@ -151,9 +152,22 @@ abstract class Gallery
         $query = "INSERT INTO comment (user_id, image_id, text) VALUES (:user_id, :image_id, :text)";
         $result = DB::query($query, array(':user_id' => $user_id, ':image_id' => $image_id, ':text' => $text), false);
         if ($result) {
-            self::sendMail($user_id, $image_id, $text);
+            $_SESSION['comment'] = array('uid' => $user_id, 'imgid' => $image_id, 'text' => $text);
             return 'true';
         }
+        return 'false';
+    }
+
+    public static function notification()
+    {
+        if (!isset($_SESSION))
+            session_start();
+        if (!isset($_SESSION['comment']) || empty($_SESSION['comment']))
+            return 'false';
+        $array = $_SESSION['comment'];
+        unset($_SESSION['comment']);
+        if (self::sendMail($array['uid'], $array['imgid'], $array['text']))
+            return 'true';
         return 'false';
     }
 }

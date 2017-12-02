@@ -86,7 +86,7 @@ S.appendImage = function (path) {
 };
 
 S.removeImage = function (src) {
-	if (!confirm('sure?'))
+	if (!confirm('Do you really want to delete the photo?'))
 		return ;
 	const request = new XMLHttpRequest();
 	let params = 'model=selfie&function=deleteImage' +

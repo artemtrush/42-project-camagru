@@ -14,17 +14,17 @@
 <body>
 
 <div id="forgot_form" class="authentication_nav">
-    <input type="text" id="rec_alias" placeholder="Enter your email or login">
-    <input type="text" id="rec_code" placeholder="Enter code">
-    <input type="password" id="rec_pass" placeholder="Enter pass">
-    <input type="password" id="rec_confirm" placeholder="Enter confirm">
+    <input id="rec_alias" class="input_field" placeholder="login or email">
+    <input id="rec_code" class="input_field" placeholder="verification code">
+    <input type="password" id="rec_pass" class="input_field" placeholder="new password">
+    <input type="password" id="rec_confirm" class="input_field" placeholder="confirmation">
 
-    <div class="auth_buttons">
-    	<span id="rec_prev"> Back </span>
-    	<span id="rec_next"> Next </span>
+    <div>
+    	<a id="rec_prev" class="button"> Back </a>
+    	<a id="rec_next" class="button"> Next </a>
     </div>
-    <div class="auth_buttons">
-    	<span id="rec_back"> OMG YA VSPOMNIL!10! </span>
+    <div>
+    	<a id="rec_back" class="button"> I've managed to recall my password </a>
     </div>
 </div>
 

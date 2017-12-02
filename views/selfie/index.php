@@ -24,17 +24,17 @@
 
     <div id="button_div">
         <div id="free_button" onclick="S.emojiFree();">
-            Free
+            <a class="button"> Free </a>
         </div>
         <div id="switch_button">
-            Switch
+            <a class="button"> Switch </a>
         </div>
         <div id="upload_button" onclick="document.getElementById('upload_input').click();">
-            Upload
+            <a class="button"> Upload </a>
             <input id="upload_input" type="file" accept="image/*" onchange="S.uploadImage();">
         </div>
         <div id="snap_button" onclick="S.snapshot();">
-            Snap
+            <a class="button"> Snap </a>
         </div>
     </div>
 

@@ -21,18 +21,3 @@
 
     opacity: 0;
 }
-
-.auth_buttons {
-    cursor: pointer;
-    -webkit-user-select: none;
-}
-.auth_buttons {
-    /*color: #5F5E5E;*/
-    color: black;
-    transition: all.6s ease; /* Скорость анимации наведения */
-}
-
-.auth_buttons:hover {
-    color: #FBBA00;
-    transition: all.6s ease; /* Скорость анимации наведения */
-}

@@ -78,12 +78,12 @@ H.searchShow = function () {
     H.searchStart();
 	document.getElementById('search_input').style.display = 'inline';
     document.getElementById('search_drop_down').style.display = 'block';
-	document.getElementById('search_span').style.display = 'none';
+	document.getElementById('search_link').style.display = 'none';
 	document.getElementById('search_input').focus();
 };
 
 H.searchHide = function () {
-	document.getElementById('search_span').style.display = 'inline';
+	document.getElementById('search_link').style.display = 'inline';
 	document.getElementById('search_input').style.display = 'none';
     document.getElementById('search_drop_down').style.display = 'none';
 };
