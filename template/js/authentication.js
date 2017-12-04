@@ -4,8 +4,8 @@ const A = (function () {
 		sign_mode: true,
 		login_focus: false,
 		email_focus: false,
-		pos_color: 'green',
-		neg_color: 'red',
+		pos_color: 'DarkGreen',
+		neg_color: 'DarkRed',
 		res_color: '',
 		ajax_router: '/template/js/ajax.router.php'
 	};

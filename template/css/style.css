@@ -6,13 +6,17 @@
 @import "/template/css/recovery.css";
 
 body {
+    font-size: 100px;
+    word-wrap: break-word;
+    font-family: sans-serif;
+
     width: 90%;
+    height: auto;
     padding-left: 5%;
     padding-right: 5%;
     padding-top: 1%;
     padding-bottom: 1%;
     background-color: #e9e9e9;
-    font-family: sans-serif;
 }
 
 footer hr {
@@ -22,9 +26,9 @@ footer hr {
 footer div {
     width: 100%;
     min-height: 50px;
-
-    font-size: 20px;
+    font-size: 13%;
     font-family: 'Acme', sans-serif;
+    color: #5F5E5E;
 
     display: flex;
     flex-wrap: wrap;
@@ -58,9 +62,9 @@ a.button {
     position: relative;
     cursor: pointer;
     display: inline-block;
-    font-size: 90%;
+    font-size: 10%;
     font-weight: 700;
-    /*color: rgb(209,209,217);*/
+
     color: #e9e9e9;
     text-decoration: none;
     text-shadow: 0 -1px 2px rgba(0,0,0,.2);
@@ -99,14 +103,5 @@ a.menu_link {
     transition: all .6s ease;
 }
 a.menu_link:hover {color: #FBBA00;}
-
-input.input_field {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    width: 200px;
-    height: 30px;
-    text-align: center;
-}
 
 /*@media(max-width: 768px) {*/

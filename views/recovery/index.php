@@ -14,10 +14,10 @@
 <body>
 
 <div id="forgot_form" class="authentication_nav">
-    <input id="rec_alias" class="input_field" placeholder="login or email">
-    <input id="rec_code" class="input_field" placeholder="verification code">
-    <input type="password" id="rec_pass" class="input_field" placeholder="new password">
-    <input type="password" id="rec_confirm" class="input_field" placeholder="confirmation">
+    <input id="rec_alias" class="input_field" maxlength="50" placeholder="login or email">
+    <input id="rec_code" class="input_field" maxlength="20" placeholder="verification code">
+    <input type="password" id="rec_pass" class="input_field" maxlength="20" placeholder="new password">
+    <input type="password" id="rec_confirm" class="input_field" maxlength="20" placeholder="confirmation">
 
     <div>
     	<a id="rec_prev" class="button"> Back </a>
