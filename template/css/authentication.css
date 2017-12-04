@@ -1,4 +1,5 @@
 body.authentication {
+    font-size: 100px;
     padding-top: 5%;
     min-width: 400px;
     min-height: 600px;
@@ -39,6 +40,9 @@ div.flex_column {
     font-family: 'Dosis', sans-serif;
 
     opacity: 0;
+}
+#verification_hint {
+     font-size: 15%;
 }
 
 input.input_field {

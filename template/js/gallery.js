@@ -181,7 +181,7 @@ G.viewImage = function (image) {
     {
         document.getElementById('selected_image').src = image.src;
         G.getComments();
-        /* let share_url = image.src; */
+        // let share_url = image.src;
         let share_url = 'https://itc.ua/wp-content/uploads/2017/04/Unit-Factory.jpg';
         document.getElementById('telegram').href = 'https://t.me/share/url?url=' + share_url;
         document.getElementById('facebook').href = 'http://www.facebook.com/sharer.php?u=' + share_url;

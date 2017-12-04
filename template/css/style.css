@@ -6,7 +6,7 @@
 @import "/template/css/recovery.css";
 
 body {
-    font-size: 100px;
+/*    font-size: 100px;*/
     word-wrap: break-word;
     font-family: sans-serif;
 
@@ -51,6 +51,7 @@ footer span {
     right: 0;
     width: 200px;
     height: 80px;
+    font-size: 20%;
     background-color: red;
     transition: all 3s ease-out;
     -webkit-transition: all 3s ease-out;
