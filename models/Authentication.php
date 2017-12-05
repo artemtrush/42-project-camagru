@@ -24,11 +24,10 @@ abstract class Authentication
 		return 'false';
 	}
 
-	private static function sendMail($email, $code)
+	private static function sendMessage($email, $code)
 	{
-		$subject = "PHP SERVER {$code}";
 		$message = "Code: {$code}";
-		return mail($email, $subject, $message) ? 'true' : 'false';
+		return sendmail($email, $message) ? 'true' : 'false';
 	}
 
 	public static function sendCode($params)
@@ -44,8 +43,7 @@ abstract class Authentication
                             'usermail' => $usermail,
                             'userpass' => sha1($userpass),
                             'usercode' => sha1($code));
-
-		return self::sendMail($usermail, $code);
+		return self::sendMessage($usermail, $code);
 	}
 
 	public static function repeatCode()
@@ -59,7 +57,7 @@ abstract class Authentication
 			{
 				$code = rand(111111, 999999);
 				$_SESSION['userdata']['usercode'] = sha1($code);
-				return self::sendMail($userarray['usermail'], $code);
+				return self::sendMessage($userarray['usermail'], $code);
 			}
 		}
 		return 'false';

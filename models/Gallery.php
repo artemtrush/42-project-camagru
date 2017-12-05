@@ -31,10 +31,9 @@ abstract class Gallery
         $sender_name = self::getLogin($sender);
         $receiver_name = $user_array['login'];
         $email = $user_array['email'];
-
-        $subject = "$sender_name comment your photo";
+        
         $message = "Hello $receiver_name, user $sender_name comment your photo with text : $text";
-        return mail($email, $subject, $message);
+        return sendmail($email, $message);
     }
 
 

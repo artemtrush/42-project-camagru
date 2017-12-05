@@ -10,9 +10,8 @@ abstract class Recovery
         $code = rand(111111, 999999);			ChromePhp::log($code);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         $_SESSION['recovery_code'] = sha1($code);
         $_SESSION['recovery_mail'] = $email;
-        $subject = "PHP SERVER {$code}";
         $message = "RECOVERY Code: {$code}";
-        return mail($email, $subject, $message);
+        return sendmail($email, $message);
     }
 
     public static function aliasVerify($params)
