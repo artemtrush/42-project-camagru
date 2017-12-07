@@ -9,14 +9,9 @@ https://www.freshdesignweb.com/css3-buttons/
 */
 
 
-include_once('logger/ChromePhp.php');
-
 function sendmail($email, $message, $subject = null)
 {
-	Chrome::log($email);
-	Chrome::log($message);
 	if (!$subject)
 		$subject = "PHP SERVER NOTIFICATION";
-	Chrome::log($subject);
 	return mail($email, $subject, $message);
 }
