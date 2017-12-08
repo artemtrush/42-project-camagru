@@ -1,15 +1,12 @@
-@import "/template/css/_reset.css";
+/*@import "/template/css/_reset.css";
 @import "/template/css/header.css";
 @import "/template/css/authentication.css";
 @import "/template/css/selfie.css";
 @import "/template/css/gallery.css";
 @import "/template/css/recovery.css";
+*/
 
 body {
-    word-wrap: break-word;
-
-    width: 90%;
-    height: auto;
     padding-left: 5%;
     padding-right: 5%;
     padding-top: 1%;
@@ -17,31 +14,20 @@ body {
     background-color: #e9e9e9;
 }
 
-footer hr {
-    width: 100%;
-    margin: 0;
-}
-footer div {
-    width: 100%;
-    min-height: 50px;
-    font-size: 13px;
+footer {
     font-family: 'Acme', sans-serif;
     color: #5F5E5E;
-
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    align-content: stretch;
-}
-footer span {
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
-    height: 30px;
-    line-height: 30px;
 }
 
+footer hr {
+    margin-bottom: 10px;
+    opacity: 0.5;
+    background-color: #5F5E5E;
+    height: 1px;
+}
 
 .window_error {
     position: fixed;
@@ -56,6 +42,10 @@ footer span {
     -moz-transition: all 3s ease-out;
 }
 
+
+
+
+/*
 a.button {
 
     position: relative;

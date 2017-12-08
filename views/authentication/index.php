@@ -4,8 +4,9 @@
 	<meta http-equiv="content-type" content="text/html" charset="utf-8">
 	<title>Authentication</title>
 
-	<link href="https://fonts.googleapis.com/css?family=Cabin|Dosis|Acme" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
+	<link href="https://fonts.googleapis.com/css?family=Cabin|Dosis|Acme" rel="stylesheet">
 	<link href="/template/css/style.css" rel="stylesheet" type="text/css">
 
 	<script src="/template/js/authentication.js"></script>
@@ -13,41 +14,63 @@
 </head>
 <body class="authentication">
 
-	<div id="sign_form" class="authentication_nav">
+<div class="container-fluid">
+	<div class="row">
+		<div id="sign_form" class="col-md-6 col-md-offset-3 authentication_nav">
+			<div class="row">
 
-		<p id="hint_area"></p>
-		<input id="login" class="input_field" maxlength="15" placeholder="login">
-		<input id="mail" class="input_field" maxlength="50" placeholder="email">
-		<input type="password" id="pass" class="input_field" maxlength="20" placeholder="password">
-		<input type="password" id="confirm" class="input_field" maxlength="20" placeholder="confirmation">
+				<div class="col-md-12">
+					<p id="hint_area"></p>
+				</div>
 
-		<div class="flex_column">
-			<a class="button" id="sign"></a>
-			<a class="button" id="forgot">I forgot my password</a>
-			<a class="button" id="switch"></a>
-			<div>
-				<a id="search_link" class="button" onclick="H.searchShow()">
-					Search
-				</a>
-				<input id="search_input" maxlength="15" placeholder="Search" onblur="H.searchHide()">
-				<ul id="search_drop_down">
-					<li class="search_login" onmousedown="H.searchRedirect(this.innerHTML);"></li>
-					<li class="search_login" onmousedown="H.searchRedirect(this.innerHTML);"></li>
-					<li class="search_login" onmousedown="H.searchRedirect(this.innerHTML);"></li>
-				</ul>
+				<div class="col-md-12">
+					<div class="form-group">
+						<input id="login" class="form-control input_field" maxlength="15" placeholder="login">
+					</div>
+					<div class="form-group">
+						<input id="mail" class="form-control input_field" maxlength="50" placeholder="email">
+					</div>
+					<div class="form-group">
+						<input type="password" id="pass" class="form-control input_field" maxlength="20" placeholder="password">
+					</div>
+					<div class="form-group">
+						<input type="password" id="confirm" class="form-control input_field" maxlength="20" placeholder="confirmation">
+					</div>
+				</div>
+
+				<div class="col-md-12">
+					<a class="btn button" id="sign"></a>
+					<a class="btn button" id="forgot">I forgot my password</a>
+					<a class="btn button" id="switch"></a>
+				</div>
+
+
+					<div>
+						<a id="search_link" class="button" onclick="H.searchShow()">
+							Search
+						</a>
+						<input id="search_input" maxlength="15" placeholder="Search" onblur="H.searchHide()">
+						<ul id="search_drop_down">
+							<li class="search_login" onmousedown="H.searchRedirect(this.innerHTML);"></li>
+							<li class="search_login" onmousedown="H.searchRedirect(this.innerHTML);"></li>
+							<li class="search_login" onmousedown="H.searchRedirect(this.innerHTML);"></li>
+						</ul>
+					</div>
+
 			</div>
 		</div>
-	</div>
 
-	<div id="email_code" class="authentication_nav">
-		<span id="verification_hint"></span>
-		<input id="code" class="input_field" maxlength="20" placeholder="verification code">
-		<a id="register" class="button"> Complete registration </a>
-		<a id="repeat" class="button"> Resend verification code </a>
-		<a id="return_to_sign" class="button">Back!!</a>
-	</div>
+		<div id="email_code" class="col-md-6 authentication_nav">
+			<span id="verification_hint"></span>
+			<input id="code" class="input_field" maxlength="20" placeholder="verification code">
+			<a id="register" class="button"> Complete registration </a>
+			<a id="repeat" class="button"> Resend verification code </a>
+			<a id="return_to_sign" class="button">Back!!</a>
+		</div>
 
-	<div id="loading" class="authentication_nav"></div>
+		<div id="loading" class="col-md-6 authentication_nav"></div>
+	</div>
+</div>
 
 	<?php include_once (ROOT.'/views/_footer.php'); ?>
 	<script>
