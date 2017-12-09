@@ -1,0 +1,20 @@
+body.recovery {
+    padding-top: 10%;
+    min-width: 420px;
+}
+
+input.recovery-disabled:disabled {
+    border: transparent;
+    border-radius: 15px;
+    background-size: 42%;
+    background-image: url("/template/img/disabled_input.png");
+}
+
+input.recovery-complete:disabled {
+     color: black;
+     background-color: transparent;
+     border-bottom: 1.3px solid transparent;
+ }
+
+.recovery-disabled:disabled::-webkit-input-placeholder {color:#e9e9e9;}
+.recovery-disabled:disabled::-moz-placeholder          {color:#e9e9e9;}

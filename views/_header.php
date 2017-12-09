@@ -13,7 +13,7 @@
     </div>
 
     <div>
-        <a id="search_link" class="menu_link" onclick="H.searchShow()">
+        <a id="search_button" class="menu_link" onclick="H.searchShow()">
             Search
         </a>
         <input id="search_input" maxlength="15" placeholder="Search" onblur="H.searchHide()">

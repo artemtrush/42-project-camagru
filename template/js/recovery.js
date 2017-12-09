@@ -2,8 +2,6 @@
 const R = (function () {
 	return {
 		step: 0,
-		cdisable: 'gray',
-		cenable: '#e9e9e9',
 		ajax_router: '/template/js/ajax.router.php'
 	};
 }());
@@ -32,7 +30,7 @@ R.initialization = function() {
 };
 
 R.setDiv = function (div_id) {
-    document.getElementById('forgot_form').style.display = (div_id === 'forgot_form') ? 'flex' : 'none';
+    document.getElementById('forgot_form').style.display = (div_id === 'forgot_form') ? 'block' : 'none';
     document.getElementById('loading').style.display = (div_id === 'loading') ? 'block' : 'none';
 };
 
@@ -102,7 +100,7 @@ R.checkCode = function () {
 R.checkPass = function () {
 	if (!(R.pass_input.value.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,20}$/)))
 	{
-		window_error('Invalid password format: At least eight characters, one uppercase and one lowercase letter, and one number.', 10);
+		window_error('Invalid password format: At least eight characters, one uppercase and one lowercase letter, and one number.', 7);
 		return;
 	}
 	if (R.pass_input.value !== R.conf_input.value)
@@ -150,7 +148,10 @@ R.stepHandle = function () {
 			R.code_input.disabled = true;
 			R.pass_input.disabled = true;
 			R.conf_input.disabled = true;
-			R.prev_btn.style.color = R.cdisable;
+            R.code_input.classList.remove('recovery-complete');
+            R.code_input.classList.add('recovery-disabled');
+
+			R.prev_btn.classList.add('disabled');
             R.prev_btn.style.pointerEvents = 'none';
 			break;
 		case 1:
@@ -158,7 +159,9 @@ R.stepHandle = function () {
 			R.code_input.disabled = false;
 			R.pass_input.disabled = true;
 			R.conf_input.disabled = true;
-			R.prev_btn.style.color = R.cenable;
+            R.alias_input.classList.add('recovery-complete');
+
+            R.prev_btn.classList.remove('disabled');
             R.prev_btn.style.pointerEvents = 'auto';
 			break;
 		case 2:
@@ -166,7 +169,10 @@ R.stepHandle = function () {
 			R.code_input.disabled = true;
 			R.pass_input.disabled = false;
 			R.conf_input.disabled = false;
-			R.prev_btn.style.color = R.cenable;
+            R.code_input.classList.add('recovery-complete');
+            R.code_input.classList.remove('recovery-disabled');
+
+            R.prev_btn.classList.remove('disabled');
             R.prev_btn.style.pointerEvents = 'auto';
 			break;
 	}

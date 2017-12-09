@@ -13,7 +13,7 @@
 
     <script src="/template/js/gallery.js"></script>
 </head>
-<body>
+<body class="gallery">
 <?php include_once (ROOT.'/views/_header.php');?>
 <h1> <?php echo $login;?> </h1>
 

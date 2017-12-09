@@ -10,7 +10,7 @@
 
     <script src="/template/js/selfie.js"></script>
 </head>
-<body>
+<body class="selfie">
 <?php include_once (ROOT.'/views/_header.php');?>
 
 <div id="main_div">

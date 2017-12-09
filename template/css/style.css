@@ -1,10 +1,14 @@
-/*@import "/template/css/_reset.css";
+
 @import "/template/css/header.css";
+@import "/template/css/button.css";
 @import "/template/css/authentication.css";
+
+/*
 @import "/template/css/selfie.css";
 @import "/template/css/gallery.css";
-@import "/template/css/recovery.css";
 */
+@import "/template/css/recovery.css";
+
 
 body {
     padding-left: 5%;
@@ -15,6 +19,10 @@ body {
 }
 
 footer {
+    position: fixed;
+    width: 100%;
+    left: 0; bottom: 0;
+    padding: 1% 5% 2% 5%;
     font-family: 'Acme', sans-serif;
     color: #5F5E5E;
     -webkit-user-select: none;
@@ -23,64 +31,23 @@ footer {
 }
 
 footer hr {
-    margin-bottom: 10px;
-    opacity: 0.5;
+    margin-bottom: 15px;
+    opacity: 0.7;
     background-color: #5F5E5E;
     height: 1px;
 }
 
 .window_error {
     position: fixed;
-    top: 0;
-    right: 0;
-    width: 200px;
-    height: 80px;
-    font-size: 20px;
-    background-color: red;
+    top: 20px;
+    right: 20px;
+    font-size: 130%;
+    padding: 0;
+    text-align: center;
+
     transition: all 3s ease-out;
     -webkit-transition: all 3s ease-out;
     -moz-transition: all 3s ease-out;
-}
-
-
-
-
-/*
-a.button {
-
-    position: relative;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 10%;
-    font-weight: 700;
-
-    color: #e9e9e9;
-    text-decoration: none;
-    text-shadow: 0 -1px 2px rgba(0,0,0,.2);
-    padding: .5em 1em;
-    outline: none;
-    border-radius: 3px;
-    background: linear-gradient(rgb(110,112,120), rgb(81,81,86)) rgb(110,112,120);
-    box-shadow:
-            0 1px rgba(255,255,255,.2) inset,
-            0 3px 5px rgba(0,1,6,.5),
-            0 0 1px 1px rgba(0,1,6,.2);
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    transition: .2s ease-in-out;
-}
-
-a.button:hover:not(:active) {
-    background: linear-gradient(rgb(126,126,134), rgb(70,71,76)) rgb(126,126,134);
-}
-a.button:active {
-    top: 1px;
-    background: linear-gradient(rgb(76,77,82), rgb(56,57,62)) rgb(76,77,82);
-    box-shadow:
-            0 0 1px rgba(0,0,0,.5) inset,
-            0 2px 3px rgba(0,0,0,.5) inset,
-            0 1px 1px rgba(255,255,255,.1);
 }
 
 a.menu_link {
@@ -93,4 +60,4 @@ a.menu_link {
 }
 a.menu_link:hover {color: #FBBA00;}
 
-/*@media(max-width: 768px) {*/
+

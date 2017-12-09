@@ -16,6 +16,7 @@ H.initialization = function () {
 H.searchStart = function () {
     let search_string = document.getElementById('search_input').value;
     let ul = document.getElementsByClassName('search_login');
+    document.getElementById('search_drop_down').style.display = 'none';
     if (!(search_string.match(/^[a-zA-Z0-9_-]{1,15}$/g)))
     {
         let i = 0;
@@ -46,6 +47,7 @@ H.searchStart = function () {
                 i++;
             }
         }
+        document.getElementById('search_drop_down').style.display = (i === 0) ? 'none' : 'block';
         while (i < ul.length)
         {
             ul[i].style.display = 'none';
@@ -69,6 +71,7 @@ H.searchRedirect = function (login) {
         {
             let id = request.responseText.substring(4);
             location.pathname = "/gallery/" + id;
+            return ;
         }
     }
     window_error('The user you were looking for could not be found.');
@@ -76,14 +79,13 @@ H.searchRedirect = function (login) {
 
 H.searchShow = function () {
     H.searchStart();
-	document.getElementById('search_input').style.display = 'inline';
-    document.getElementById('search_drop_down').style.display = 'block';
-	document.getElementById('search_link').style.display = 'none';
+	document.getElementById('search_input').style.display = 'block';
+	document.getElementById('search_button').style.display = 'none';
 	document.getElementById('search_input').focus();
 };
 
 H.searchHide = function () {
-	document.getElementById('search_link').style.display = 'inline';
+	document.getElementById('search_button').style.display = 'inline-block';
 	document.getElementById('search_input').style.display = 'none';
     document.getElementById('search_drop_down').style.display = 'none';
 };

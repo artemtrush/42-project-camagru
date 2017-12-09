@@ -4,8 +4,8 @@ const A = (function () {
 		sign_mode: true,
 		login_focus: false,
 		email_focus: false,
-		pos_color: 'DarkGreen',
-		neg_color: 'DarkRed',
+        pos_color: '#009900',
+        neg_color: '#b30000',
 		res_color: '',
 		ajax_router: '/template/js/ajax.router.php'
 	};
@@ -46,7 +46,7 @@ A.initialization = function() {
 };
 
 A.setDiv = function(div_id) {
-	document.getElementById('sign_form').style.display = (div_id === 'sign_form') ? 'flex' : 'none';
+	document.getElementById('sign_form').style.display = (div_id === 'sign_form') ? 'block' : 'none';
 	document.getElementById('email_code').style.display = (div_id === 'email_code') ? 'block' : 'none';
 	document.getElementById('loading').style.display = (div_id === 'loading') ? 'block' : 'none';
 };
@@ -54,8 +54,8 @@ A.setDiv = function(div_id) {
 A.switchSign = function() {
 	if (A.sign_mode === false) //if <sign in> now
 	{
-		A.email_input.style.display = 'inline';
-		A.confirm_input.style.display = 'inline';
+        A.email_input.classList.toggle('input-hidden');
+        A.confirm_input.classList.toggle('input-hidden');
 
 		A.sign_btn.innerText = 'Sign Up';
 		A.switch_btn.innerText = 'I already have an account';
@@ -76,8 +76,9 @@ A.switchSign = function() {
 	{
 		A.login_input.style.borderColor = A.res_color;
 		A.pass_input.style.borderColor = A.res_color;
-		A.email_input.style.display = 'none';
-		A.confirm_input.style.display = 'none';
+
+        A.email_input.classList.toggle('input-hidden');
+        A.confirm_input.classList.toggle('input-hidden');
 
 		A.sign_btn.innerText = 'Sign In';
 		A.switch_btn.innerText = 'I don\'t have an account yet';
