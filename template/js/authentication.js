@@ -71,6 +71,7 @@ A.switchSign = function() {
 		A.checkLogin();
 
 		A.sign_mode = true;
+        A.user_error(false);
 	}
 	else //if <sign up> now
 	{
@@ -91,8 +92,8 @@ A.switchSign = function() {
 		A.pass_input.onfocus = null;
 
 		A.sign_mode = false;
+        A.user_error("<span class=\'title\'>Camagru </span>", 'html');
 	}
-	A.user_error(false);
 };
 
 A.checkLogin = function(callback) {
@@ -341,14 +342,17 @@ A.registerUser = function () {
         window_error('Invalid verification code.');
 };
 
-A.user_error = function (error) {
+A.user_error = function (error, mode = 'text') {
 	const paragraph = document.getElementById('hint_area');
 	if (error === false)
 	{
 		paragraph.style.opacity = 0;
 		return ;
 	}
-	paragraph.innerText = error;
+	if (mode === 'html')
+        paragraph.innerHTML = error;
+	else
+        paragraph.innerText = error;
 	paragraph.style.opacity = 1;
 };
 

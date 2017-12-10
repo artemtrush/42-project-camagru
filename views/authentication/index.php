@@ -4,7 +4,6 @@
 	<meta http-equiv="content-type" content="text/html" charset="utf-8">
 	<title>Authentication</title>
 
-    <link href="https://fonts.googleapis.com/css?family=Cabin|Dosis|Acme" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link href="/template/css/style.css" rel="stylesheet" type="text/css">
@@ -13,6 +12,7 @@
 	<script src="/template/js/header.js"></script>
 </head>
 <body class="authentication">
+<?php include_once (ROOT.'/views/_loader.php'); ?>
 
 <div class="container-fluid">
 	<div class="row">
@@ -43,8 +43,7 @@
                     <a class="btn button" id="switch"></a>
 					<a class="btn button" id="forgot">I forgot my password</a>
                     <div>
-                        <a class="btn button" id="search_button" onclick="H.searchShow()"
-                        style="padding: 12px;">
+                        <a class="btn button" id="search_button" onclick="H.searchShow()" style="padding: 12px;">
                             I'm just looking for someone
                             <span class="glyphicon glyphicon-search" style="font-size: 80%;"></span>
                         </a>
@@ -83,7 +82,10 @@
             </div>
 		</div>
 
-		<div id="loading" class="col-md-6 col-md-offset-3 authentication_nav"</div>
+<!--		<div id="loading" class="col-md-6 col-md-offset-3 authentication_nav"</div>-->
+            <div id="loading" class="col-md-6 col-md-offset-3 authentication_nav">
+                <div class="loader"></div>
+            </div>
 	</div>
 </div>
 
@@ -91,6 +93,7 @@
 <script>
     A.initialization();
     H.initialization();
+//    A.setDiv('loading');//!!!!!!
 </script>
 </body>
 </html>

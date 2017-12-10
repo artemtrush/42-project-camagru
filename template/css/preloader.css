@@ -1,0 +1,140 @@
+/*page loader*/
+div#pl_left, div#pl_right{
+    position: fixed;
+    width: 200%;
+    height: 100%;
+    top:0; left:-50%;
+    z-index: 9998;
+    -webkit-transition: all 1s ease-in 0.1s;
+    -moz-transition: all 1s ease-in 0.1s;
+    transition: all 1s ease-in 0.1s;
+}
+div#pl_left {
+    background: linear-gradient(-45deg, transparent 50%, #222222 0);
+}
+
+div#pl_right {
+    background: linear-gradient(135deg, transparent 50%, #222222 0);
+}
+
+div.loaded_left{
+    opacity: 0.6;
+    -webkit-transform: translate(-100%);
+    -moz-transform: translate(-100%);
+    transform: translate(-100%);
+}
+
+div.loaded_right{
+    opacity: 0.6;
+    -webkit-transform: translate(100%);
+    -moz-transform: translate(100%);
+    transform: translate(100%);
+}
+
+div#pl_spin {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 9999;
+    -webkit-transition: all 0.7s linear;
+    -moz-transition: all 0.7s linear;
+    transition: all 0.7s linear;
+
+    padding: 0;
+    width: 150px;
+    height: 150px;
+    margin: -125px 0 0 -75px;
+}
+
+div.loaded_spin {
+    opacity: 0;
+    z-index: 0!important;
+}
+
+
+/* div loader */
+div.loader, div.loader:before, div.loader:after{
+    border: 3px solid transparent;
+    border-radius: 50%;
+}
+
+div.loader:before, div.loader:after {
+    content: '';
+    position: absolute;
+}
+
+div.loader {
+    width: 150px;
+    height: 150px;
+    margin: 50px auto;
+
+    position: relative;
+    border-top-color: #FBBA00;
+    -webkit-animation: spin 2s infinite linear;
+    animation: spin 2s infinite linear;
+}
+
+div.loader:before {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border-top-color: #00abd4;
+    -webkit-animation: spin 3s infinite linear;
+    animation: spin 3s infinite linear;
+}
+
+div.loader:after {
+    top: 43px;
+    left: 23px;
+    right: 43px;
+    bottom: 23px;
+    border-top-color: #Ff1400;
+    border-bottom-color: #Ff1400;
+    -webkit-animation: antispin 0.2s infinite linear;
+    animation: antispin 0.2s infinite linear;
+}
+
+@-webkit-keyframes spin {
+     from {
+         -webkit-transform: rotate(0deg);
+         transform: rotate(0deg);
+     }
+     to {
+         -webkit-transform: rotate(360deg);
+         transform: rotate(360deg);
+     }
+ }
+
+@keyframes spin {
+    from {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes antispin {
+    from {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(-360deg);
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes antispin {
+    from {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(-360deg);
+        transform: rotate(-360deg);
+    }
+}

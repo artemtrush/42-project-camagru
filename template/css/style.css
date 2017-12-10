@@ -1,12 +1,13 @@
 
+@import "/template/css/fonts/_config.css";
+@import "/template/css/preloader.css";
 @import "/template/css/header.css";
 @import "/template/css/button.css";
 @import "/template/css/authentication.css";
 
-/*
-@import "/template/css/selfie.css";
-@import "/template/css/gallery.css";
-*/
+/*@import "/template/css/selfie.css";*/
+/*@import "/template/css/gallery.css";*/
+
 @import "/template/css/recovery.css";
 
 
@@ -23,7 +24,7 @@ footer {
     width: 100%;
     left: 0; bottom: 0;
     padding: 1% 5% 2% 5%;
-    font-family: 'Acme', sans-serif;
+    font-family: Acme, sans-serif;
     color: #5F5E5E;
     -webkit-user-select: none;
     -moz-user-select: none;

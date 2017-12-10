@@ -3,6 +3,12 @@ body.recovery {
     min-width: 420px;
 }
 
+div#forgot_form input {
+    -webkit-transition: font-size 0.3s linear;
+    -moz-transition: font-size 0.3s linear;
+    transition: font-size 0.3s linear;
+}
+
 input.recovery-disabled:disabled {
     border: transparent;
     border-radius: 15px;
@@ -11,9 +17,10 @@ input.recovery-disabled:disabled {
 }
 
 input.recovery-complete:disabled {
-     color: black;
-     background-color: transparent;
-     border-bottom: 1.3px solid transparent;
+    color: black;
+    font-size: 200%;
+    background-color: transparent;
+    border-bottom: 1.3px solid transparent;
  }
 
 .recovery-disabled:disabled::-webkit-input-placeholder {color:#e9e9e9;}

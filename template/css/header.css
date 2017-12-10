@@ -2,7 +2,7 @@ header {
     /*position: fixed;*/
     background-color: white;
     border: 3px solid #535353;
-    border-radius: 20px; /* Радиус скругления */
+    border-radius: 20px;
     width: 100%;
     min-height: 100px;
 
@@ -15,7 +15,7 @@ header {
 header div {
     flex-grow: 1;
     font-size: 45px;
-    font-family: 'Gloria Hallelujah', cursive;
+    font-family: Gloria, cursive;
     text-align: center;
     min-width: 200px;
     height: 95px;
@@ -33,7 +33,7 @@ ul#search_drop_down {
     cursor: pointer;
     text-align: center;
     font-size: 150%;
-    font-family: 'Cabin', sans-serif;
+    font-family: Cabin, sans-serif;
     font-style: italic;
 
     padding: 0;

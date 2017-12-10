@@ -1,0 +1,19 @@
+@font-face {
+    font-family: Acme;
+    src: url(Acme-Regular.ttf);
+}
+
+@font-face {
+    font-family: Gloria;
+    src: url(GloriaHallelujah.ttf);
+}
+
+@font-face {
+    font-family: Cabin;
+    src: url(Cabin-Regular.ttf);
+}
+
+@font-face {
+    font-family: Dosis;
+    src: url(Dosis-Regular.ttf);
+}
