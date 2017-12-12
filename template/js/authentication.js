@@ -56,6 +56,8 @@ A.switchSign = function() {
 	{
         A.email_input.classList.toggle('input-hidden');
         A.confirm_input.classList.toggle('input-hidden');
+        A.email_input.disabled = false;
+        A.confirm_input.disabled = false;
 
 		A.sign_btn.innerText = 'Sign Up';
 		A.switch_btn.innerText = 'I already have an account';
@@ -80,6 +82,8 @@ A.switchSign = function() {
 
         A.email_input.classList.toggle('input-hidden');
         A.confirm_input.classList.toggle('input-hidden');
+        A.email_input.disabled = true;
+        A.confirm_input.disabled = true;
 
 		A.sign_btn.innerText = 'Sign In';
 		A.switch_btn.innerText = 'I don\'t have an account yet';

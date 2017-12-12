@@ -1,5 +1,6 @@
 
 .button {
+    min-width: 310px;
     width: 100%;
     line-height: 0;
     background:  #a6a6a6;

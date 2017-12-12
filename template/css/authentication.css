@@ -3,7 +3,9 @@ body.authentication {
     min-width: 420px;
 }
 
-div.authentication_nav {display: none;}
+div.authentication_nav {
+    display: none;
+}
 
 div#loading {
     height: 500px;
@@ -53,9 +55,9 @@ input.input_field {
     margin: 0;
     margin-bottom: 30px;
 
-    -webkit-transition: all 0.5s ease-out;
-    -moz-transition: all 0.5s ease-out;
-    transition: all 0.5s ease-out;
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s linear;
+    transition: all 0.3s linear;
 }
 input.input_field,
 input.input_field:focus,

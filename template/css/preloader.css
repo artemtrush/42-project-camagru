@@ -3,17 +3,19 @@ div#pl_left, div#pl_right{
     position: fixed;
     width: 200%;
     height: 100%;
-    top:0; left:-50%;
+    top:0;
     z-index: 9998;
     -webkit-transition: all 1s ease-in 0.1s;
     -moz-transition: all 1s ease-in 0.1s;
     transition: all 1s ease-in 0.1s;
 }
 div#pl_left {
+    left:-49%;
     background: linear-gradient(-45deg, transparent 50%, #222222 0);
 }
 
 div#pl_right {
+    left:-51%;
     background: linear-gradient(135deg, transparent 50%, #222222 0);
 }
 

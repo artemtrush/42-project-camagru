@@ -31,13 +31,13 @@
 
             <div class="row">
                 <div class="col-md-push-6 col-md-6">
-                    <a id="rec_next" class="btn button"> Next </a>
+                    <a id="rec_next" class="btn button" style="min-width: 100px;"> Next </a>
                 </div>
                 <div class="col-md-pull-6 col-md-6">
-                    <a id="rec_prev" class="btn button"> Back </a>
+                    <a id="rec_prev" class="btn button" style="min-width: 100px;"> Back </a>
                 </div>
             </div>
-            <a id="rec_back" class="btn button"> I've managed to recall my password </a>
+            <a id="rec_back" class="btn button" style="min-width: 350px";> I've managed to recall my password </a>
         </div>
 
         <div id="loading" class="col-md-6 col-md-offset-3 authentication_nav"></div>

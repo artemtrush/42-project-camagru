@@ -1,7 +1,7 @@
 <footer>
 	<div class=container-fluid>
 		<div class="row">
-			<div class="col-md-12"><hr></div>
+			<div id="ftr_line" class="col-md-12"><hr></div>
 			<div class="col-md-6 text-left">
 				<span>
 					Copyright &copy; <?=date ('Y')?> All Rights Reserved

@@ -11,7 +11,14 @@
 @import "/template/css/recovery.css";
 
 
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 body {
+    /*footer height*/
+    margin-bottom: 60px;
     padding-left: 5%;
     padding-right: 5%;
     padding-top: 1%;
@@ -20,22 +27,31 @@ body {
 }
 
 footer {
-    position: fixed;
+    position: absolute;
+    height: 60px;
+    line-height: 40px;
     width: 100%;
     left: 0; bottom: 0;
+    margin: 0;
     padding: 1% 5% 2% 5%;
     font-family: Acme, sans-serif;
     color: #5F5E5E;
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
+    z-index: -999;
+}
+
+div.ftr_line {
+    max-height: 1px;
+    padding: 0;
 }
 
 footer hr {
-    margin-bottom: 15px;
     opacity: 0.7;
     background-color: #5F5E5E;
-    height: 1px;
+    min-height: 1px;
+    margin: 0;
 }
 
 .window_error {

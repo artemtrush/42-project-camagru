@@ -12,7 +12,6 @@
 	<script src="/template/js/header.js"></script>
 </head>
 <body class="authentication">
-<?php include_once (ROOT.'/views/_loader.php'); ?>
 
 <div class="container-fluid">
 	<div class="row">

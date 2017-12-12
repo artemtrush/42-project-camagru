@@ -14,6 +14,7 @@
 <?php include_once (ROOT.'/views/_loader.php'); ?>
 <?php include_once (ROOT.'/views/_header.php');?>
 
+<div class="container-fluid"></div>
 <div id="main_div">
     <div id="media_div">
         <video id="video" autoplay poster="/template/img/poster.png"></video>
