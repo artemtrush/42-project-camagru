@@ -37,7 +37,7 @@ S.handleFree = function () {
 	let i = 0;
 	let emoji_collection = document.getElementsByClassName('emoji');
 	for (; i < emoji_collection.length; i++)
-		if (emoji_collection[i].parentNode.className !== 'emoji_div')
+		if (emoji_collection[i].parentNode.classList.contains('emoji_div') === false)
 			break ;
 	if (i === emoji_collection.length)
 	{
@@ -56,7 +56,7 @@ S.handleSnap = function () {
 	let i = 0;
 	let emoji_collection = document.getElementsByClassName('emoji');
 	for (; i < emoji_collection.length; i++)
-		if (emoji_collection[i].parentNode.className !== 'emoji_div')
+		if (emoji_collection[i].parentNode.classList.contains('emoji_div') === false)
 			break ;
 	if (i === emoji_collection.length || (S.currentMedia === 'video' && S.video_active === false))
 	{
@@ -176,7 +176,7 @@ S.getEmojiList = function() {
 	let media_coords = S.getCoords(document.getElementById('media_div'));
 	for (let i = 0; i < emoji_collection.length; i++)
 	{
-		if (emoji_collection[i].parentNode.className !== 'emoji_div')
+		if (emoji_collection[i].parentNode.classList.contains('emoji_div') === false)
 		{
 			emoji_list.push({
 				src: emoji_collection[i].src,
@@ -200,7 +200,7 @@ S.emojiFree = function () {
 	let i = 0;
 	while (i < emoji_collection.length)
 	{
-		if (emoji_collection[i].parentNode.className !== 'emoji_div')
+		if (emoji_collection[i].parentNode.classList.contains('emoji_div') === false)
 			emoji_collection[i].remove();
 		else
 			i++;
@@ -283,7 +283,7 @@ S.dragStart = function (event) {
 	S.target = event.target.closest('.emoji');
 	if (!S.target)
 		return;
-	if (S.target.parentNode.className === 'emoji_div')
+	if (S.target.parentNode.classList.contains('emoji_div') === true)
 	{
 		let avatar = document.createElement('img');
 		avatar.src = S.target.src;
@@ -339,14 +339,16 @@ S.dragEnd = function (event) {
 	if (!S.target)
 		return;
 	const media_id = (S.currentMedia === 'video') ? 'video' : 'upload_img';
-	const media = document.getElementById(media_id).getBoundingClientRect();
-	if (event.clientX < media.left ||
-		event.clientY < media.top ||
-		event.clientX > media.right ||
-		event.clientY > media.bottom)
+	const media_rect = document.getElementById(media_id).getBoundingClientRect();
+	const target_rect = S.target.getBoundingClientRect();
+
+	if (target_rect.right <= media_rect.left ||
+		target_rect.bottom <= media_rect.top ||
+		target_rect.left >= media_rect.right ||
+		target_rect.top >= media_rect.bottom)
 		S.target.remove();
 	else
-		S.emojiClip(S.target, media);
+		S.emojiClip(S.target, media_rect);
 	S.target = null;
 	S.handleSnap();
 	S.handleFree();
@@ -360,8 +362,12 @@ S.openPack = function(event, div_id) {
 
 	const tab_buttons = document.getElementsByClassName('tab_buttons_enabled');
 	for (let i = 0; i < tab_buttons.length; i++)
-		tab_buttons[i].className = 'tab_buttons_disabled';
-	event.currentTarget.className = 'tab_buttons_enabled';
+	{
+		tab_buttons[i].classList.add('tab_buttons_disabled');
+		tab_buttons[i].classList.remove('tab_buttons_enabled');
+	}
+	event.currentTarget.classList.add('tab_buttons_enabled');
+	event.currentTarget.classList.remove('tab_buttons_disabled');
 };
 
 S.loadPack = function (id, dir) {
