@@ -17,8 +17,7 @@ html {
 }
 
 body {
-    /*footer height*/
-    margin-bottom: 60px;
+    margin-bottom: 60px;    /*footer height*/
     padding-left: 5%;
     padding-right: 5%;
     padding-top: 1%;
