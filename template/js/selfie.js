@@ -4,8 +4,8 @@ const S = (function () {
 		target: null,
 		target_offset_left: 0,
 		target_offset_top: 0,
-		media_width: 1920,
-		media_height: 1080,
+		media_width: 1600,
+		media_height: 1200,
 		sidebar_max_images: 6,
 		video_active: false,
 		sidebar: false,
@@ -19,12 +19,17 @@ S.initialization = function() {
 	document.onmousedown= S.dragStart;
 	document.onmousemove = S.dragMove;
 	document.onmouseup = S.dragEnd;
-
+	window.onresize = function () {
+		S.emojiFree();
+		S.resizeImage();
+		S.resizeEmoji();
+	};
 	S.videoJoin();
 	S.handleFree();
 	S.switchMedia();
 	document.getElementById('switch_button').classList.add('media_buttons_disabled');
 	S.getImages(S.sidebar_max_images);
+	S.resizeImage();
 	S.loadPack('size64', '64');
 	S.loadPack('size128', '128');
 	S.loadPack('size256', '256');
@@ -218,7 +223,8 @@ S.snapshot = function () {
 	model: 'selfie',
 	function: 'combineImage',
 	image: dataURL,
-	emoji_list: JSON.stringify(S.getEmojiList())
+	emoji_list: JSON.stringify(S.getEmojiList()),
+	multiplier: S.media_width / document.getElementById(media_id).clientWidth
 	};
 	let boundary = String(Math.random()).slice(2);
 	let params = S.multipartConvert(data, boundary);
@@ -253,17 +259,35 @@ S.uploadImage = function() {
 	const image = document.getElementById('upload_img');
 	const input_file = document.getElementById('upload_input').files[0];
 	const reader = new FileReader();
-
 	reader.onloadend = function () {
 		image.src = reader.result;
 		if (S.currentMedia === 'video')
 			S.switchMedia();
+		S.resizeImage();
 		document.getElementById('switch_button').classList.remove('media_buttons_disabled');
 		document.getElementById('switch_button').onclick = S.switchMedia;
 	};
 
 	if (input_file)
 		reader.readAsDataURL(input_file);
+};
+
+S.resizeImage = function () {
+	let image_id = (S.currentMedia === 'video') ? 'video' : 'upload_img';
+	const image = document.getElementById(image_id);
+	image.style.height = ((image.clientWidth * S.media_height) / S.media_width) + 'px';
+};
+
+S.resizeEmoji = function () {
+	let block_id = (S.currentMedia === 'video') ? 'video' : 'upload_img';
+	let block_width = document.getElementById(block_id).clientWidth;
+	let emoji_collection = document.getElementsByClassName('emoji');
+	let i = 0;
+	while (i < emoji_collection.length)
+	{
+		emoji_collection[i].style.width = ((block_width * emoji_collection[i].dataset.initial_width) / S.media_width) + 'px';
+		i++;
+	}
 };
 
 S.maxIndex = function () {
@@ -287,6 +311,7 @@ S.dragStart = function (event) {
 	{
 		let avatar = document.createElement('img');
 		avatar.src = S.target.src;
+		avatar.style.width = S.target.style.width;
 		avatar.className = S.target.className;
 		document.body.appendChild(avatar);
 		avatar.style.position = 'absolute';
@@ -391,9 +416,11 @@ S.loadPack = function (id, dir) {
 			{
 				let img = document.createElement('img');
 				img.src = array[i];
+				img.dataset.initial_width = parseInt(dir);
 				img.className = 'emoji';
 				container.appendChild(img);
 			}
+			S.resizeEmoji();
 		}
 		catch (error) {
 			console_error(error.message);

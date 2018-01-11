@@ -1,3 +1,7 @@
+body.selfie {
+    min-width: 500px;
+}
+
 div#media_container {
 	margin-top: 50px;
 }
@@ -25,13 +29,14 @@ div#media_div {
 	flex-direction: column;
 
 	position: absolute;
-	right:0;
+	right:-30px;
 	top:0;
 	bottom:0;
 }
 
 .text_button {
-	width: 200px;
+	height: 90px;
+	width: 90px;
 	font-size: 200%;
 	color: black;
 	font-family: Cabin, sans-serif;
@@ -61,7 +66,6 @@ div#media_div {
 	color: #999999;
 	cursor: default;
 }
-
 
 .tab_buttons_enabled {
 	background-color: green;
@@ -118,6 +122,7 @@ div.emoji_div {
 @media only screen and (max-width: 991px) {
 	div#button_div {
 		position: relative;
+		right: 0;
 		flex-direction: row;
 	}
 	div.text_button {

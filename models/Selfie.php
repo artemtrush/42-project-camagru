@@ -29,12 +29,13 @@ abstract class Selfie
         $img_encoded = substr($params['image'], 22);
         $img = imagecreatefromstring(base64_decode($img_encoded));
         $emj_list = json_decode($params['emoji_list'], true);
+        $multiplier = $params['multiplier'];
 
         for ($i = 0; $i < count($emj_list); $i++)
         {
             $emj = imagecreatefrompng($emj_list[$i]['src']);
-            $left =  $emj_list[$i]['left'];
-            $top = $emj_list[$i]['top'];
+            $left =  $emj_list[$i]['left'] * $multiplier;
+            $top = $emj_list[$i]['top'] * $multiplier;
             imagecopy($img, $emj, $left, $top, 0, 0, imagesx($emj), imagesy($emj));
         }
         if (self::saveImage($img))
