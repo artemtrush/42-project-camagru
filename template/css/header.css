@@ -1,53 +1,78 @@
 header {
-    /*position: fixed;*/
-    background-color: white;
-    border: 3px solid #535353;
-    border-radius: 20px;
-    width: 100%;
-    min-height: 100px;
+	margin: 0 auto;
+	background-color: white;
+	border: 3px solid #535353;
+	border-radius: 20px;
+	width: 85%;
+	min-height: 100px;
 
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    align-content: stretch;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: stretch;
 }
 header div {
-    flex-grow: 1;
-    font-size: 45px;
-    font-family: Gloria, cursive;
-    text-align: center;
-    min-width: 200px;
-    height: 95px;
-    line-height: 90px;
+	flex-grow: 1;
+	font-size: 45px;
+	font-family: Gloria, cursive;
+	text-align: center;
+	min-width: 185px;
+	height: 95px;
+	line-height: 90px;
 }
 
-input#search_input { display: none; }
+a.menu_link { text-decoration: none; }
+
+input#search_input {
+	display: none; 
+}
+
+input.header_input,
+input.header_input:focus,
+input.header_input:active,
+input.header_input:hover {
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+}
+
+input.header_input {
+	font-family: Cabin, sans-serif;
+	width: 185px;
+	margin: 0 auto;
+	padding: 0;
+	text-align: center;
+	height: 95px;
+	line-height: 90px;
+	font-size: 25px;
+}
 
 ul#search_drop_down {
-    display: none;
-    background-color: #a6a6a6;
-    border-radius: 0 0 5px 5px;
-    position: relative;
-    list-style-type: none !important;
-    cursor: pointer;
-    text-align: center;
-    font-size: 150%;
-    font-family: Cabin, sans-serif;
-    font-style: italic;
+	display: none;
+	background-color: #a6a6a6;
+	border-radius: 0 0 5px 5px;
+	position: relative;
+	list-style-type: none !important;
+	cursor: pointer;
+	text-align: center;
+	font-size: 150%;
+	font-family: Cabin, sans-serif;
+	font-style: italic;
 
-    padding: 0;
-    padding-bottom: 5px;
-    margin: 0 25%;
-    width: 50%;
-    line-height: 30px;
-    top: -1.3px;
-
+	padding: 0;
+	padding-bottom: 5px;
+	margin: 0 25%;
+	width: 50%;
+	line-height: 30px;
+	top: -1.3px;
 }
 
-ul#search_drop_down li span{ color: white; }
+ul#search_drop_down li span { color: white; }
 ul#search_drop_down li:hover span { color: black; }
 ul#search_drop_down li:hover {
-    color: black;
-    background-color: #cccccc;
+	color: black;
+	background-color: #cccccc;
 }

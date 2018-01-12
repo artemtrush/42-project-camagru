@@ -6,7 +6,7 @@ const S = (function () {
 		target_offset_top: 0,
 		media_width: 1600,
 		media_height: 1200,
-		sidebar_max_images: 6,
+		sidebar_max_images: 4,
 		video_active: false,
 		sidebar: false,
 		currentMedia: 'image',
@@ -34,7 +34,7 @@ S.initialization = function() {
 	S.loadPack('size128', '128');
 	S.loadPack('size256', '256');
 	document.getElementById('btn64').click();
-	document.getElementById('side_button').click();
+	document.getElementById('side_login').click();
 };
 
 S.handleFree = function () {
@@ -85,7 +85,7 @@ S.appendImage = function (path) {
 	div.className = 'side_image';
 	div.style.backgroundImage = 'url(' + path + ')';
 	div.onclick = function(){S.removeImage(this.style.backgroundImage.match(/url\(\"(.*)\"\)/)[1]);};
-    img.src = '/template/img/deletered.png';
+    img.src = '/template/img/deleteside.png';
     div.appendChild(img);
 	container.appendChild(div);
 };
@@ -131,10 +131,6 @@ S.getImages = function (number) {
 		catch (error) {
 			console_error(error.message);
 		}
-		if (document.getElementById('side_div').childNodes.length === 0)
-            document.getElementById('side_div').style.backgroundImage = 'url(/template/img/empty.jpg)';
-		else
-            document.getElementById('side_div').style.backgroundImage = '';
 	}
 };
 
@@ -276,6 +272,11 @@ S.resizeImage = function () {
 	let image_id = (S.currentMedia === 'video') ? 'video' : 'upload_img';
 	const image = document.getElementById(image_id);
 	image.style.height = ((image.clientWidth * S.media_height) / S.media_width) + 'px';
+	if (S.sidebar)
+	{
+		S.sidebar = false;
+		S.sidehide();
+	}
 };
 
 S.resizeEmoji = function () {
@@ -383,7 +384,7 @@ S.openPack = function(event, div_id) {
 	const emoji_containers = document.getElementsByClassName('emoji_div');
 	for (let i = 0; i < emoji_containers.length; i++)
 		emoji_containers[i].style.display = "none";
-	document.getElementById(div_id).style.display = "block";
+	document.getElementById(div_id).style.display = "flex";
 
 	const tab_buttons = document.getElementsByClassName('tab_buttons_enabled');
 	for (let i = 0; i < tab_buttons.length; i++)
@@ -429,10 +430,17 @@ S.loadPack = function (id, dir) {
 };
 
 S.sidehide = function () {
-  const side = document.getElementById('side_div');
-  S.sidebar = !S.sidebar;
-  if (S.sidebar)
-	  side.style.height = '800px';
-  else
-	  side.style.height = '0';
+	const media = document.getElementById('media_div');
+ 	const side = document.getElementById('side_div');
+ 	S.sidebar = !S.sidebar;
+ 	if (S.sidebar)
+ 	{
+ 		side.style.opacity = '1';
+		side.style.height = media.clientHeight + 'px';
+ 	}
+ 	else
+ 	{
+ 		side.style.opacity = '0';
+	 	side.style.height = '0';
+ 	}
 };

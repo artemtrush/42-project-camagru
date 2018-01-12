@@ -40,6 +40,7 @@ div#media_div {
 	font-size: 200%;
 	color: black;
 	font-family: Cabin, sans-serif;
+	font-weight: bold;
 	text-align: center;
 	cursor: pointer;
 	-webkit-user-select: none;
@@ -55,6 +56,38 @@ div#media_div {
 	width: 0;
 }
 
+.media_buttons_disabled {
+	color: #999999;
+	cursor: default;
+}
+
+div.emoji_div {
+	padding-top: 20px;
+	padding-bottom: 10px;
+	display: none;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
+	align-content: space-around;
+	flex-wrap: wrap;
+}
+
+div#emoji_tab {
+	padding-left: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	flex-direction: column;
+}
+
+img.emoji-img {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	cursor: pointer;
+	width: 100%;
+	border-radius: 30%;
+}
+
 .emoji {
 	cursor: pointer;
 	-webkit-user-select: none;
@@ -62,43 +95,49 @@ div#media_div {
 	user-select: none;
 }
 
-.media_buttons_disabled {
-	color: #999999;
+.tab_buttons_enabled {
+	background: white;
 	cursor: default;
 }
 
-.tab_buttons_enabled {
-	background-color: green;
-}
-.tab_buttons_disabled {
-	background-color: red;
-}
 
-div.emoji_div {
-	display: none;
+#side_login {
+	z-index: 999;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	text-align: center;
+	font-family: Gloria, cursive;
+	font-size: 250%;
+	background-color: #e9e9e9;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
 }
-
 #sidebar {
 	overflow: hidden;
-	/*width: 200px;*/
-	float: right;
-	background-color: orange;
-
+	background-color: transparent;
 }
 #side_div {
-	top: -20px;
-	/*width: 100%;*/
 	height: 0;
-
+	padding-top: 50px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
 	transition: all 2s ease-in-out;
 	-webkit-transition: all 2s ease-in-out;
 	-moz-transition: all 2s ease-in-out;
 }
 .side_image {
-	background-size: 160px 120px;
-	width: 160px;
-	height: 120px;
+	background-size: 100% 100%;
+	width: 60%;
+	height: auto;
+	border-radius: 5px;
   }
+
 .side_image img {
 	width: 100%;
 	height: 100%;
@@ -108,18 +147,17 @@ div.emoji_div {
 	-moz-transition: all 1s ease-out;
 }
 .side_image img:hover {
-	opacity: 0.7;
-}
-
-#side_button {
-	position: relative;
-
-	width: 100%;
-	height: 50px;
-	background-color: red;
+	opacity: 0.9;
 }
 
 @media only screen and (max-width: 991px) {
+	div#emoji_tab {
+		flex-direction: row;
+		padding-left: 0;
+	}
+	img.emoji-img {
+		width: 5%;
+	}
 	div#button_div {
 		position: relative;
 		right: 0;
