@@ -17,7 +17,9 @@
             Search
         </a>
         <input id="search_input" class="form-control header_input" maxlength="15" placeholder="Search" onblur="H.searchHide()">
-        <ul id="search_drop_down">
+        <ul id="search_drop_down" class="header_dd">
+            <li class="search_login" onmousedown="H.searchRedirect(this.innerHTML);"></li>
+            <li class="search_login" onmousedown="H.searchRedirect(this.innerHTML);"></li>
             <li class="search_login" onmousedown="H.searchRedirect(this.innerHTML);"></li>
             <li class="search_login" onmousedown="H.searchRedirect(this.innerHTML);"></li>
             <li class="search_login" onmousedown="H.searchRedirect(this.innerHTML);"></li>

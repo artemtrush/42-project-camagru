@@ -85,7 +85,7 @@ img.emoji-img {
 	margin-bottom: 10px;
 	cursor: pointer;
 	width: 100%;
-	border-radius: 30%;
+	border-radius: 10px;
 }
 
 .emoji {
@@ -96,7 +96,7 @@ img.emoji-img {
 }
 
 .tab_buttons_enabled {
-	background: white;
+	background: #FBBA00;
 	cursor: default;
 }
 

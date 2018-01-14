@@ -27,7 +27,7 @@ body {
 
 footer {
     position: absolute;
-    height: 60px;
+    height: 61px;
     line-height: 40px;
     width: 100%;
     left: 0; bottom: 0;
@@ -66,14 +66,13 @@ footer hr {
     -moz-transition: all 3s ease-out;
 }
 
-a.menu_link {
-    color: #5F5E5E;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    transition: all .6s ease;
+#error-image {
+    padding-top: 60px;
+    text-align: center;
+    width: 90%;
+    position: fixed;
 }
-a.menu_link:hover {color: #FBBA00;}
-
+#error-image img {
+    width: 60%;
+}
 

@@ -142,6 +142,7 @@ S.switchMedia = function() {
 	video.style.display = (S.currentMedia === 'video') ? 'block' : 'none';
 	image.style.display = (S.currentMedia === 'image') ? 'block' : 'none';
 	S.handleSnap();
+    S.resizeImage();
 };
 
 S.multipartConvert = function(data, boundary) {

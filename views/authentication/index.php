@@ -81,10 +81,9 @@
             </div>
 		</div>
 
-<!--		<div id="loading" class="col-md-6 col-md-offset-3 authentication_nav"</div>-->
-            <div id="loading" class="col-md-6 col-md-offset-3 authentication_nav">
-                <div class="loader"></div>
-            </div>
+        <div id="loading" class="col-md-6 col-md-offset-3 authentication_nav">
+            <div class="loader"></div>
+        </div>
 	</div>
 </div>
 
@@ -92,7 +91,6 @@
 <script>
     A.initialization();
     H.initialization();
-//    A.setDiv('loading');//!!!!!!
 </script>
 </body>
 </html>
