@@ -11,7 +11,7 @@
 	<script src="/template/js/selfie.js"></script>
 </head>
 <body class="selfie">
-<?php include_once (ROOT.'/views/_loader.php'); ?>
+<?php include_once (ROOT.'/views/_loader.php');?>
 <?php include_once (ROOT.'/views/_header.php');?>
 
 <div class="container-fluid" id="media_container">

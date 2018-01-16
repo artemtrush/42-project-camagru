@@ -43,7 +43,7 @@
 
 	<div id="view_box" class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
 		<div class="row">
-			<div id="image_box" class="col-md-8">
+			<div id="image_box" class="col-md-8 nopdg">
 				<img id="selected_image" src="#">
 				<img id="like_image" src="/template/img/like.png">
 				<div id="likemeter">
@@ -52,28 +52,35 @@
 				</div>
 			</div>
 
-			<div class="col-md-4">
-				<div id="comment_box"></div>
-				<div id="message_box">
-					<textarea id="comment_area" rows="5" cols="30" maxlength="300" placeholder="type comment"></textarea>
-					<a id="send_button" class="button">Send</a>
-					<a id="remove_button" class="button">Delete</a>
-					<span id="message_counter">0/300</span>
+			<div class="col-md-4 nopdg">
+				<div class="col-md-12 text-center nopdg">
+					<a id="remove_button">Delete this photo</a>
+				</div>
+				<div id="comment_box" class="col-md-12"></div>
+				<div id="message_box" class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+					<div class="row">
+						<div class="col-md-12 nopdg">
+							<textarea id="comment_area" maxlength="300" placeholder="Share your thoughts..."></textarea>
+						</div>
+						<div class="col-md-4 text-left nopdg">
+							<a id="send_button">Send</a>
+						</div>
+						<div class="col-md-4 col-md-offset-4 text-right nopdg">
+							<span id="message_counter">0/300</span>
+						</div>
+					</div>
 				</div>
 
-				<div id="social_box">
-					<a id="telegram" class="social_link" target="_blank">
-						<img class="social_icon" src="/template/img/telegram.png">
-					</a>
-					<a id="facebook" class="social_link" target="_blank">
+				<div id="social_box" class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1">
+					<a id="facebook" class="text-center" target="_blank">
 						<img class="social_icon" src="/template/img/facebook.png">  </a>
-					<a id="twitter" class="social_link" target="_blank">
+					<a id="twitter" class="text-center" target="_blank">
 						<img class="social_icon" src="/template/img/twitter.png">
 					</a>
-					<a id="linkedin" class="social_link" target="_blank">
+					<a id="linkedin" class="text-center" target="_blank">
 						<img class="social_icon" src="/template/img/linkedin.png">
 					</a>
-					<a id="google" class="social_link" target="_blank">
+					<a id="google" class="text-center" target="_blank">
 						<img class="social_icon" src="/template/img/google.png">
 					</a>
 				</div>

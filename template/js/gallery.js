@@ -7,7 +7,7 @@ const G = (function () {
         vote_status: false,
         last_key: 0,
         like_src: '/template/img/like.png',
-        dislike_src: '/template/img/dislike.png',
+        dislike_src: '/template/img/dis-like.png',
         deleted_src: '/template/img/deleted_image.png',
         ajax_router: '/template/js/ajax.router.php'
     };
@@ -25,6 +25,7 @@ G.initialization = function () {
         document.getElementById('send_button').onclick = G.sendComment;
         document.getElementById('like_image').style.display = 'block';
         document.getElementById('like_image').onclick = G.likeImage;
+        document.getElementById('social_box').style.display = 'flex';
 
         let area = document.getElementById('comment_area');
         area.onkeydown = function (event) {
@@ -101,10 +102,15 @@ G.countVotes = function (src) {
 
 G.appendComment = function (user, date, text) {
     const container = document.getElementById('comment_box');
-    let span = document.createElement('span');
-    span.className = 'comment_span';
-    span.innerText = text + '|' + date + '|' + user;
-    container.appendChild(span);
+    let box = document.createElement('div');
+    let title = document.createElement('span');
+    let message = document.createElement('p');
+    box.className = 'comment-message';
+    title.innerHTML = "[" + date.substr(date.indexOf(' ') + 1) + "] <span class=\"login-span\">" + user + "</span>:";
+    message.innerText = text;
+    box.appendChild(title);
+    box.appendChild(message);
+    container.appendChild(box);
 };
 
 G.getComments = function (callback) {
@@ -181,9 +187,8 @@ G.viewImage = function (image) {
     {
         document.getElementById('selected_image').src = image.src;
         G.getComments();
-        // let share_url = image.src;
+        /* let share_url = image.src; */
         let share_url = 'https://itc.ua/wp-content/uploads/2017/04/Unit-Factory.jpg';
-        document.getElementById('telegram').href = 'https://t.me/share/url?url=' + share_url;
         document.getElementById('facebook').href = 'http://www.facebook.com/sharer.php?u=' + share_url;
         document.getElementById('twitter').href = 'http://twitter.com/share?url=' + share_url;
         document.getElementById('linkedin').href = 'http://www.linkedin.com/shareArticle?url=' + share_url;
