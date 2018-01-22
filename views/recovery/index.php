@@ -40,7 +40,9 @@
             <a id="rec_back" class="btn button" style="min-width: 350px";> I've managed to recall my password </a>
         </div>
 
-        <div id="loading" class="col-md-6 col-md-offset-3 authentication_nav"></div>
+        <div id="loading" class="col-md-6 col-md-offset-3 authentication_nav">
+            <div class="loader"></div>
+        </div>
     </div>
 </div>
 

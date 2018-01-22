@@ -3,6 +3,6 @@
 function sendmail($email, $message, $subject = null)
 {
 	if (!$subject)
-		$subject = "PHP SERVER NOTIFICATION";
+		$subject = "Camagru";
 	return mail($email, $subject, $message);
 }

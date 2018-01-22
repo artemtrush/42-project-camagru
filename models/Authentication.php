@@ -26,7 +26,7 @@ abstract class Authentication
 
 	private static function sendMessage($email, $code)
 	{
-		$message = "Code: {$code}";
+		$message = "Use this code {$code} to complete registration.";
 		return sendmail($email, $message) ? 'true' : 'false';
 	}
 
@@ -35,7 +35,7 @@ abstract class Authentication
 		$usermail = trim($params['usermail']);
 		$username = $params['username'];
 		$userpass = $params['userpass'];
-		$code = rand(111111, 999999);			ChromePhp::log($code);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		$code = rand(111111, 999999);
 
         if (!isset($_SESSION))
 		    session_start();

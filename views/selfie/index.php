@@ -59,7 +59,6 @@
 			</div>
 		</div>
 
-
 		<div class="hidden-xs hidden-sm col-md-2 col-md-offset-1" id="sidebar">
 			<span id="side_login" onclick="S.sidehide();"><?php echo $login ?></span>
 			<div id="side_div"></div>

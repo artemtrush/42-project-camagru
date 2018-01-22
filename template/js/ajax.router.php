@@ -1,6 +1,5 @@
 <?php
-define('ROOT', dirname(dirname(__DIR__)));  
-include_once(ROOT.'/components/logger/ChromePhp.php');//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+define('ROOT', dirname(dirname(__DIR__)));
 include_once(ROOT.'/components/Sendmail.php');
 
 if (isset($_POST['function']) && !empty($_POST['function'])

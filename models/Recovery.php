@@ -7,10 +7,11 @@ abstract class Recovery
         if (!isset($_SESSION))
             session_start();
 
-        $code = rand(111111, 999999);			ChromePhp::log($code);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        $code = rand(111111, 999999);
         $_SESSION['recovery_code'] = sha1($code);
         $_SESSION['recovery_mail'] = $email;
-        $message = "RECOVERY Code: {$code}";
+
+        $message = "Use this code {$code} to recovery your password.";
         return sendmail($email, $message);
     }
 

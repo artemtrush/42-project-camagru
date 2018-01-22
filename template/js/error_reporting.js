@@ -1,4 +1,4 @@
-const console_reporting = true;
+const console_reporting = false;
 const window_reporting = true;
 
 function console_error(error_message)

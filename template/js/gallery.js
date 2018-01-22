@@ -8,7 +8,7 @@ const G = (function () {
         last_key: 0,
         like_src: '/template/img/like.png',
         dislike_src: '/template/img/dis-like.png',
-        deleted_src: '/template/img/deleted_image.png',
+        deleted_src: '/template/img/deleted.png',
         ajax_router: '/template/js/ajax.router.php'
     };
 }());
